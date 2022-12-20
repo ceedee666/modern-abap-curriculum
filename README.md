@@ -25,11 +25,21 @@ A detailed description on how to set up an ABAP development environment is given
 ### ABAP Programming Language
 
 This curriculum does not provide an introduction to the ABAP programming language. There are a large number
-of books, lectures, video tutorials online courses available on the ABAP programming language.
-This curriculum assumes a basic knowledge of the ABAP language.
+of books, lectures, video tutorials online courses available on the ABAP programming language. The following
+list contains just a few examples:
 
-The learning journey [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
-also provides a brief introduction to the ABAP programming language.
+- Books
+  -- Franz, T., & Kühnhauser, K.-H. (2019). Einstieg in ABAP (5., aktualisierte und erweiterte Auflage). Rheinwerk.
+  -- Hardy, P. (2022). ABAP to the future (4th edition). Rheinwerk Publishing, Inc.
+
+- Learning Journey
+  -- [Get Started with ABAP Development](https://developers.sap.com/mission.abap-dev-get-started.html)
+  -- [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
+
+- Other
+- [ABAP track on exercism](https://exercism.org/tracks/abap)
+
+This curriculum assumes a basic knowledge of the ABAP language.
 
 ### Other Technologies and Concepts
 
