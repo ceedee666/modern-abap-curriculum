@@ -37,7 +37,7 @@ list contains just a few examples:
   -- [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
 
 - Other
-- [ABAP track on exercism](https://exercism.org/tracks/abap)
+  -- [ABAP track on exercism](https://exercism.org/tracks/abap)
 
 This curriculum assumes a basic knowledge of the ABAP language.
 
@@ -55,9 +55,16 @@ In order to follow the curriculum a basic understanding of the following technol
 The curriculum consists of the following lessons:
 
 1. [Scenario Description](./docs/scenario_description.md)
-1. ...
+1. To Do
+1. [Creating a UI using Fiori Elements](./docs/fiori_ui.md)
 
 ## References
+
+- [Extend SAP S/4HANA in the cloud and on premise with ABAP based extensions](https://www.sap.com/documents/2022/10/52e0cd9b-497e-0010-bca6-c68f7e60039b.html)
+- Building Extensions for SAP S/4HANA Cloud using APIs and Events
+  -- [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
+  -- [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
+- [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
 
 ## Acknowledgements
 
