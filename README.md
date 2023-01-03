@@ -29,15 +29,17 @@ of books, lectures, video tutorials online courses available on the ABAP program
 list contains just a few examples:
 
 - Books
-  -- Franz, T., & Kühnhauser, K.-H. (2019). Einstieg in ABAP (5., aktualisierte und erweiterte Auflage). Rheinwerk.
-  -- Hardy, P. (2022). ABAP to the future (4th edition). Rheinwerk Publishing, Inc.
+
+  - Franz, T., & Kühnhauser, K.-H. (2019). Einstieg in ABAP (5., aktualisierte und erweiterte Auflage). Rheinwerk.
+  - Hardy, P. (2022). ABAP to the future (4th edition). Rheinwerk Publishing, Inc.
 
 - Learning Journey
-  -- [Get Started with ABAP Development](https://developers.sap.com/mission.abap-dev-get-started.html)
-  -- [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
+
+  - [Get Started with ABAP Development](https://developers.sap.com/mission.abap-dev-get-started.html)
+  - [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
 
 - Other
-  -- [ABAP track on exercism](https://exercism.org/tracks/abap)
+  - [ABAP track on exercism](https://exercism.org/tracks/abap)
 
 This curriculum assumes a basic knowledge of the ABAP language.
 
@@ -62,8 +64,8 @@ The curriculum consists of the following lessons:
 
 - [Extend SAP S/4HANA in the cloud and on premise with ABAP based extensions](https://www.sap.com/documents/2022/10/52e0cd9b-497e-0010-bca6-c68f7e60039b.html)
 - Building Extensions for SAP S/4HANA Cloud using APIs and Events
-  -- [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
-  -- [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
+  - [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
+  - [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
 - [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
 
 ## Acknowledgements
