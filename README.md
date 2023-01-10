@@ -56,9 +56,15 @@ In order to follow the curriculum a basic understanding of the following technol
 
 The curriculum consists of the following lessons:
 
+1. [The ABAP RESTful Application Programming Model](./docs/abap_rap.md)
+1. [Hello World](./docs/hello_world.md)
 1. [Scenario Description](./docs/scenario_description.md)
-1. To Do
+1. [Creating a Read-Only List Report](./docs/ro_list_report.md)
+1. [Creating a Transactional App](./docs/transactional_app.md)
 1. [Creating a UI using Fiori Elements](./docs/fiori_ui.md)
+1. [Adding Behaviour to the App](./docs/adding_behaviour.md)
+1. [Adding Fuzzy Search](./docs/common_capbilities.md)
+1. [Adding Authentication & Authorization](./docs/authentication.md)
 
 ## References
 
@@ -67,6 +73,7 @@ The curriculum consists of the following lessons:
   - [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
 - [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
+- [Build Apps with the ABAP RESTful Application Programming Model](https://open.sap.com/courses/cp13)
 
 ## Acknowledgements
 
