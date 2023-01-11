@@ -73,10 +73,10 @@ Cockpit is available at the following URLs:
 
 In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
 Development (Free-Tier)_ (cf. the following screen shot).
-![SAP ABAP Free Tier Booster](./img/btp_free_tier_abap_booster.png)
+![SAP ABAP Free Tier Booster](./imgs/btp_free_tier_abap_booster.png)
 
 In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_ (cf. the following screen shot).
-![SAP ABAP Free Tier Booster](./img/btp_trial_abap_booster.png)
+![SAP ABAP Free Tier Booster](./imgs/btp_trial_abap_booster.png)
 
 Select the suitable ABAP Booster and execute it. After the Booster is finished the
 SAP BTP account is prepared for ABAP development.
