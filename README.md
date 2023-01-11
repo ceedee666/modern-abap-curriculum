@@ -45,7 +45,7 @@ This curriculum assumes a basic knowledge of the ABAP language.
 
 ### Other Technologies and Concepts
 
-In order to follow the curriculum a basic understanding of the following technologies and concepts is also required:
+In order to follow the curriculum a basic understanding of the following technologies and concepts is required:
 
 - [Git](https://en.wikipedia.org/wiki/Git)
 - [HTML5](https://en.wikipedia.org/wiki/HTML5)
@@ -56,8 +56,8 @@ In order to follow the curriculum a basic understanding of the following technol
 
 The curriculum consists of the following lessons:
 
-1. [The ABAP RESTful Application Programming Model](./docs/abap_rap.md)
 1. [Hello World](./docs/hello_world.md)
+1. [The ABAP RESTful Application Programming Model](./docs/abap_rap.md)
 1. [Scenario Description](./docs/scenario_description.md)
 1. [Creating a Read-Only List Report](./docs/ro_list_report.md)
 1. [Creating a Transactional App](./docs/transactional_app.md)

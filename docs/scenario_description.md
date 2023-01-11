@@ -21,10 +21,14 @@ products and gets a list of all the reviews provided by the customers.
 The following image shows a mock up of the possible user interface for product managers.
 ![Product Manager User Interface](imgs/product_feedback_mock.png)
 
-OER Bike wants to implement the described functionality in their SAP S/4HANA systems.
+OER Bike wants to implement the described functionality as an extension to their SAP S/4HANA systems.
 
 ### Task 1
 
 In the previous lecture you learned about different extension technologies in SAP S/4HANA.
 Discuss how the functionality described above could be implemented using these technologies.
 What are the advantages and disadvantages of the different approaches?
+
+## References
+
+- [Sales Order (A2X) Service](https://api.sap.com/api/OP_API_SALES_ORDER_SRV_0001/overview)
