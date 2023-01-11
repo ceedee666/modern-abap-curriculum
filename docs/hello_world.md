@@ -36,10 +36,49 @@ image. If the installation was successful, there should be an ABAP Development T
 on the Welcome page. Note, that the Welcome page can always be open using the
 menu `Help > Welcome`.
 
-![Eclipse Welcome Screen](imgs/eclipse_welcome_screen)
+![Eclipse Welcome Screen](imgs/eclipse_welcome_screen.png)
 
 ## SAP BTP Free Tier
 
+In order to deploy the SAP Business Technology Platform ABAP Environment in the next step, first an
+account in the SAP Business Technology Platform (BTP) is required. The
+SAP BTP currently offers two possibilities to get a free account:
+
+- SAP BTP Free Tier
+- SAP BTP trial account.
+
+The SAP BTP free tier is a productive SAP BTP account without any costs. In contrast
+the SAP BTP trial account is a SAP BTP account with limited functionality. For this
+lecture the usage of the SAP free tier is recommended.
+
+Signing up for the SAP BTP free tier is described in this
+[tutorial](https://developers.sap.com/tutorials/btp-free-tier-account.html).
+The sign up requires a credit card for authentication.
+
+The sign up for an SAP BTP trial account does not require a credit card. The
+process is described in this [tutorial](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
+
 ## Deploying the SAP BTP ABAP Environment
+
+Deploying the SAP BTP ABAP environment is similar for both, the SAP BTP free tier and
+the SAP BTP trial. In both cases a _Booster_ is available to deploy the ABAP
+environment. A Booster is simply a wizard or script that executes the necessary
+set up steps in the SAP BTP.
+
+The respective Booster can be accessed from the SAP BTP Cockpit. The SAP BTP
+Cockpit is available at the following URLs:
+
+- SAP BTP Free Tier: https://account.hana.ondemand.com/
+- SAP BTP Trial: https://account.hanatrial.ondemand.com/trial/
+
+In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
+Development (Free-Tier)_ (cf. the following screen shot).
+![SAP ABAP Free Tier Booster](./img/btp_free_tier_abap_booster.png)
+
+In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_ (cf. the following screen shot).
+![SAP ABAP Free Tier Booster](./img/btp_trial_abap_booster.png)
+
+Select the suitable ABAP Booster and execute it. After the Booster is finished the
+SAP BTP account is prepared for ABAP development.
 
 ## ABAP Hello World
