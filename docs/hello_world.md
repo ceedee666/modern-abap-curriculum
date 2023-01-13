@@ -16,7 +16,8 @@ At the end of this lecture the usual [Hello World](https://en.wikipedia.org/wiki
 
 ## Installing Eclipse and the ABAP Development Tools
 
-The first step to set up the development environment is to install the Eclipse IDE. There are several possible options. Either download the [Eclipse Installer](https://www.eclipse.org/downloads/) and execute it or
+The first step to set up the development environment is to install the Eclipse IDE. There are several possible options.
+Either download the [Eclipse Installer](https://www.eclipse.org/downloads/) and execute it or
 install the suitable [package](https://www.eclipse.org/downloads/packages/) for your system.
 On macOS and Linux it is also possible to use a package manager like [Homebrew](https://brew.sh/) or
 [APT](<https://en.wikipedia.org/wiki/APT_(software)>).
@@ -36,7 +37,7 @@ image. If the installation was successful, there should be an ABAP Development T
 on the Welcome page. Note, that the Welcome page can always be open using the
 menu `Help > Welcome`.
 
-![Eclipse Welcome Screen](imgs/eclipse_welcome_screen.png)
+![Eclipse Welcome Screen](imgs/hello_world/eclipse_welcome_screen.png)
 
 ## SAP BTP Free Tier
 
@@ -73,12 +74,32 @@ Cockpit is available at the following URLs:
 
 In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
 Development (Free-Tier)_ (cf. the following screen shot).
-![SAP ABAP Free Tier Booster](./imgs/btp_free_tier_abap_booster.png)
+![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_free_tier_abap_booster.png)
 
 In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_ (cf. the following screen shot).
-![SAP ABAP Free Tier Booster](./imgs/btp_trial_abap_booster.png)
+![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_trial_abap_booster.png)
 
-Select the suitable ABAP Booster and execute it. After the Booster is finished the
-SAP BTP account is prepared for ABAP development.
+Select the suitable ABAP Booster and execute it. After the booster is finished the
+SAP BTP account is prepared for ABAP development. The booster created a new
+subaccount in the global account. The instances and subscriptions in this
+subaccount should look similar to the following screenshot. Note, that the
+names of the subaccount, the instance and the environment might differ
+depending on the parameters used in the booster.
+
+![Subaccount created by Booster](./img/hello_world/booster_result.png)
+
+> In some cases the creation of the instance fails. If this happens, the instances in the sub account
+> are either empty or show an error:
+> ![Erroneous instance](.imgs/hello_world/instance_error.png)
+> If this happens the erroneous environment can be deleted and created again using the _Create_ button.
+> In the instance creation dialog select _ABAP environment_ as Service and _free_ as the used Plan and
+> choose a name for the instance. In the second step of the dialog add the email address of the user.
+> Finally, click _Create_ to create the service.
 
 ## ABAP Hello World
+
+Once the ABAP environment is ready the next step is to write the hello world program. To do this the
+first step is to connect the ABAP Development to Eclipse to the ABAP environment. There are several
+possible options to to this. The easiest way is to use the service key of ABAP environment.
+
+![Copy Service Key](./imgs/hello_world/download_service_key.png)
