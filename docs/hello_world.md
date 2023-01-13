@@ -86,11 +86,11 @@ subaccount should look similar to the following screenshot. Note, that the
 names of the subaccount, the instance and the environment might differ
 depending on the parameters used in the booster.
 
-![Subaccount created by Booster](./img/hello_world/booster_result.png)
+![Subaccount created by Booster](./imgs/hello_world/booster_result.png)
 
 > In some cases the creation of the instance fails. If this happens, the instances in the sub account
 > are either empty or show an error:
-> ![Erroneous instance](.imgs/hello_world/instance_error.png)
+> ![Erroneous instance](./imgs/hello_world/instance_error.png)
 > If this happens the erroneous environment can be deleted and created again using the _Create_ button.
 > In the instance creation dialog select _ABAP environment_ as Service and _free_ as the used Plan and
 > choose a name for the instance. In the second step of the dialog add the email address of the user.
