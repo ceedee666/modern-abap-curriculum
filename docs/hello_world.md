@@ -74,10 +74,12 @@ Cockpit is available at the following URLs:
 
 In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
 Development (Free-Tier)_ (cf. the following screen shot).
+
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_free_tier_abap_booster.png)
 
 In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_
 (cf. the following screen shot).
+
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_trial_abap_booster.png)
 
 Select the suitable ABAP Booster and execute it. After the booster is finished the
@@ -89,18 +91,25 @@ depending on the parameters used in the booster.
 
 ![Subaccount created by Booster](./imgs/hello_world/booster_result.png)
 
-> In some cases the creation of the instance fails. If this happens, the instances
-> in the sub account
-> are either empty or show an error:
-> ![Erroneous instance](./imgs/hello_world/instance_error.png)
-> If this happens the erroneous environment can be deleted and created again using the _Create_ button.
-> In the instance creation dialogue select _ABAP environment_ as Service and _free_ as the used Plan and
-> choose a name for the instance. In the second step of the dialogue add the email address of the user.
-> Finally, click _Create_ to create the service.
->
-> If the instance is created manually it is also necessary to assign the development role to the
-> default user (CB_ADMIN) of the ABAP instance. The necessary steps are described
-> [here](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/13b2cfb49c8046d8a031e137b6142127.html).
+### Possible Errors
+
+**Error creating service instance**
+
+In some cases the creation of the instance fails. If this happens, the instances
+in the sub account are either empty or show an error:
+
+![Erroneous instance](./imgs/hello_world/instance_error.png)
+
+If this happens the erroneous environment can be deleted and created again using the _Create_ button.
+In the instance creation dialogue select _ABAP environment_ as Service and _free_ as the used Plan and
+choose a name for the instance. In the second step of the dialogue add the email address of the user.
+Finally, click _Create_ to create the service.
+
+**Missing Authorizations**
+
+If the instance is created manually it is also necessary to assign the development role to the
+default user (CB_ADMIN) of the ABAP instance. The necessary steps are described
+[here](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/13b2cfb49c8046d8a031e137b6142127.html).
 
 ## ABAP Hello World
 
@@ -129,11 +138,51 @@ ABAP perspective should look similar to the following screenshot.
 
 ### ABAP Hello World
 
+After the connection to the ABAP environment is established the next step is to write the ABAP Hello World program.
+In order to do this the first step is to create a [package](https://help.sap.com/docs/SAP_S4HANA_CLOUD/25cf71e63940453397a32dc2b7676947/4ec14bab6e391014adc9fffe4e204223.html?locale=en-US&q=abap%20package).
+The first package named `ZLOCAL` is already created in the ABAP environment. However, `ZLOCAL` is a [structure pacakge](https://help.sap.com/docs/SAP_S4HANA_CLOUD/25cf71e63940453397a32dc2b7676947/4ec14bab6e391014adc9fffe4e204223.html?locale=en-US&q=abap%20package#types).
+According to the SAP documentation a structure package is:
+
+> is the root container of a package hierarchy that defines the basic architecture of an application.
+> ...
+> Structure packages cannot contain any development objects except their own package interfaces and subpackages.
+
+As a structure package can not contain any development objects except other packages, the first step
+is to create a package for the Hello World program. In order to create a new package right click on
+the `ZLOCAL` package and select _New > ABAP Package_. This opens a dialogue to create
+a new package.
+
+In this dialogue enter `Z_HELLO_WORLD` as the package name and `ABAP Hello World` as the description. Click on _Next_.
+This open the _Select Transport Request_ view. Chose _Create Transport Request_, enter `ABAP Hello World` as the
+_Request Description_ and click _Finish_.
+
 ![Create Package](./imgs/hello_world/new_package.png)
+
+This create the package `Z_HELLO_WORLD` as a subpackage of `Z_LOCAL`.
+
+Now a class needs to be created in this package. To create the class right click on
+the `Z_HELLO_WORLD` package and select \_New > ABAP Class. This again opens a dialogue to create
+a new class.
+
+In this dialogue enter `zcl_hello_world` as the class name and `ABAP Hello World` as the description.
+In order for a ABAP class to be executable in the SAP BTP, the class needs to
+implement the [`if_oo_adt_classrun`](https://help.sap.com/docs/SAP_S4HANA_CLOUD/6aa39f1ac05441e5a23f484f31e477e7/6f0e26492b854627ac19a9a34205a546.html?locale=en-US) interface.
+This interface can be added either in the source code later on or in the current dialogue using the _Add_ button.
 
 ![Create Class](./imgs/hello_world/new_abap_class.png)
 
+Click on _Next_ and assign the class to the transport request created in the previous step. Finally, click on finish to create the class.
+
 ![Assign Class to Transport Request](./imgs/hello_world/new_abap_class_2.png)
+
+After the creation the class should automagically be opened in the source code editor.
+Add the following code to the `if_oo_adt_classrun~main` method:
+
+```ABAP
+out->write( |Hello ABAP running in SAP BTP| ).
+```
+
+This code uses the `write` method of the `out` interface to set the output of the program. The complete source code of the `zcl_hello_world` is shown below.
 
 ```abap
 CLASS zcl_hello_world DEFINITION
@@ -153,5 +202,9 @@ CLASS zcl_hello_world IMPLEMENTATION.
   ENDMETHOD.
 ENDCLASS.
 ```
+
+Before executing it the class needs to be activated using the button ![Activate Icon](./imgs/hello_world/activate_icon.png) or the menu _Edit > Activate_. After the class has been
+activated it can be executed by _Run > Run As > ABAP Application (Console)_ or by `<F9>`. If everything works the result should be similar to the following
+screen shot.
 
 ![Execute ABAP Hello World](./imgs/hello_world/hello_world_final.png)
