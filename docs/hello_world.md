@@ -76,7 +76,8 @@ In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
 Development (Free-Tier)_ (cf. the following screen shot).
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_free_tier_abap_booster.png)
 
-In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_ (cf. the following screen shot).
+In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_
+(cf. the following screen shot).
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_trial_abap_booster.png)
 
 Select the suitable ABAP Booster and execute it. After the booster is finished the
@@ -88,13 +89,18 @@ depending on the parameters used in the booster.
 
 ![Subaccount created by Booster](./imgs/hello_world/booster_result.png)
 
-> In some cases the creation of the instance fails. If this happens, the instances in the sub account
+> In some cases the creation of the instance fails. If this happens, the instances
+> in the sub account
 > are either empty or show an error:
 > ![Erroneous instance](./imgs/hello_world/instance_error.png)
 > If this happens the erroneous environment can be deleted and created again using the _Create_ button.
-> In the instance creation dialog select _ABAP environment_ as Service and _free_ as the used Plan and
-> choose a name for the instance. In the second step of the dialog add the email address of the user.
+> In the instance creation dialogue select _ABAP environment_ as Service and _free_ as the used Plan and
+> choose a name for the instance. In the second step of the dialogue add the email address of the user.
 > Finally, click _Create_ to create the service.
+>
+> If the instance is created manually it is also necessary to assign the development role to the
+> default user (CB_ADMIN) of the ABAP instance. The necessary steps are described
+> [here](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/13b2cfb49c8046d8a031e137b6142127.html).
 
 ## ABAP Hello World
 
@@ -102,4 +108,21 @@ Once the ABAP environment is ready the next step is to write the hello world pro
 first step is to connect the ABAP Development to Eclipse to the ABAP environment. There are several
 possible options to to this. The easiest way is to use the service key of ABAP environment.
 
+In the subaccount the service key can be found in the ABAP environment instance. If no service key is
+available simply create one using the _Create_ button. To view the service key click on _View_. In this dialogue
+the service key can be copied in JSON format.
+
 ![Copy Service Key](./imgs/hello_world/download_service_key.png)
+
+### Connect Eclipse to the ABAP environment
+
+To connect Eclipse to the ABAP environment open the ABAP perspective (using the menu
+Window > Perspective > Open Perspective > Other...).
+In the ABAP perspective click in the _Project Explorer_ view on the _Create an ABAP
+cloud project_. In the _New ABAP Cloud Project_ window select _SAP BTP ABAP Environment_
+and _Using a Service Key_ and click _Next >_. Now past the service key into the text
+field _Service Key in JSON Format_ and click _Next >_. To log in click on _Open Logon Page in Browser_.
+After the logon is successful click on _Finish_ to complete the connection. As a result the
+ABAP perspective should look similar to the following screenshot.
+
+![Eclipse Cloud Project](./imgs/hello_world/eclipse_cloud_project.png)
