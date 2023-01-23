@@ -27,7 +27,7 @@ are described [here](https://tools.hana.ondemand.com/#abap). Basically the follo
 performed:
 
 1. Inside the Eclipse IDE open the menu `Help > Install New Software...`
-1. Enter the following URL https://tools.hana.ondemand.com/latest and press `Enter`
+1. Enter the following URL https://tools.hana.ondemand.com/latest and press `<Enter>`
    to display the available features.
 1. Select ABAP Development Tools and install them.
 
@@ -203,8 +203,9 @@ CLASS zcl_hello_world IMPLEMENTATION.
 ENDCLASS.
 ```
 
-Before executing it the class needs to be activated using the button ![Activate Icon](./imgs/hello_world/activate_icon.png) or the menu _Edit > Activate_. After the class has been
-activated it can be executed by _Run > Run As > ABAP Application (Console)_ or by `<F9>`. If everything works the result should be similar to the following
-screen shot.
+Before executing it the class needs to be activated using the button ![Activate Icon](./imgs/hello_world/activate_icon.png)
+or the menu _Edit > Activate_. After the class has been
+activated it can be executed by _Run > Run As > ABAP Application (Console)_ or by `<F9>`.
+If everything works the result should be similar to the following screen shot.
 
 ![Execute ABAP Hello World](./imgs/hello_world/hello_world_final.png)
