@@ -9,7 +9,7 @@ The goal of the ABAP RAP is to provide a programming model to enable the creatio
 These OData services can be used to implement SAP Fiori Applications or to provide Web APIs. The ABAP RAP consists of the
 components shown in the following image.
 
-![ABAP RAP Components](imgs/abap_rap/rap_components.png)
+![ABAP RAP Components](imgs/abap_rap/rap_components.drawio.png)
 
 The data model of the application is the basis of the ABAP RAP. The data model is created using the Code Data Services (CDS).
 According to the SAP Help CDS

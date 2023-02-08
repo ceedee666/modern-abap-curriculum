@@ -23,11 +23,16 @@ The following image shows a mock up of the possible user interface for product m
 
 OER Bike wants to implement the described functionality as an extension to their SAP S/4HANA systems.
 
-### Task 1
+### Exercise 1
 
 In the previous lecture you learned about different extension technologies in SAP S/4HANA.
 Discuss how the functionality described above could be implemented using these technologies.
 What are the advantages and disadvantages of the different approaches?
+
+## Extension Architecture
+
+OER Bike decided to implement the functionality described above using a custom application in the
+SAP BTP ABAP environment.
 
 ## References
 
