@@ -12,7 +12,8 @@ curriculum developed as part of the [WiLMo](https://www.dh.nrw/kooperationen/OER
    a suitable extension approach in a give scenario.
 1. Students should be able to implement extension to a SAP S/4HANA system using state of the art ABAP in order to
    automate business processes not implemented in the SAP S/4HANA standard.
-1. ...
+1. Students are able to implement extensions using the ABAP RAP framework and Fiori Elements in order to enhance
+   SAP S/4HANA using the SAP best practices.
 
 ## Prerequisites
 
