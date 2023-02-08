@@ -39,7 +39,7 @@ menu `Help > Welcome`.
 
 ![Eclipse Welcome Screen](imgs/hello_world/eclipse_welcome_screen.png)
 
-## SAP BTP Free Tier
+## SAP BTP Free Tier and SAP BTP Trial
 
 In order to deploy the SAP Business Technology Platform ABAP Environment in the next step, first an
 account in the SAP Business Technology Platform (BTP) is required. The
@@ -49,8 +49,16 @@ SAP BTP currently offers two possibilities to get a free account:
 - SAP BTP trial account.
 
 The SAP BTP free tier is a productive SAP BTP account without any costs. In contrast
-the SAP BTP trial account is a SAP BTP account with limited functionality. For this
-lecture the usage of the SAP free tier is recommended.
+the SAP BTP trial account is a SAP BTP account with limited functionality. The following
+table lists some of the advantages and disadvantages of the different environments.
+
+|                                        | Free Tier | Trial Account |
+| :------------------------------------- | :-------: | :-----------: |
+| Credit Card required                   |    Yes    |      No       |
+| All services available                 |    Yes    |      No       |
+| Shared ABAP Environment                |    No     |      Yes      |
+| Production ready environment           |    Yes    |      No       |
+| Risk of activating chargeable services |    Yes    |      No       |
 
 Signing up for the SAP BTP free tier is described in this
 [tutorial](https://developers.sap.com/tutorials/btp-free-tier-account.html).
@@ -59,7 +67,11 @@ The sign up requires a credit card for authentication.
 The sign up for an SAP BTP trial account does not require a credit card. The
 process is described in this [tutorial](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
 
-## Deploying the SAP BTP ABAP Environment
+### Accessing the ABAP Environment in SAP BTP Trial
+
+Todo....
+
+### Deploying the SAP BTP ABAP Environment in SAP BTP Free Tier
 
 Deploying the SAP BTP ABAP environment is similar for both, the SAP BTP free tier and
 the SAP BTP trial. In both cases a _Booster_ is available to deploy the ABAP
@@ -91,7 +103,7 @@ depending on the parameters used in the booster.
 
 ![Subaccount created by Booster](./imgs/hello_world/booster_result.png)
 
-### Possible Errors
+#### Possible Errors
 
 **Error creating service instance**
 
@@ -158,7 +170,14 @@ _Request Description_ and click _Finish_.
 
 ![Create Package](./imgs/hello_world/new_package.png)
 
-This create the package `Z_HELLO_WORLD` as a subpackage of `Z_LOCAL`.
+> **Note on SAP BTP Trial**
+> As mentioned above the SAP BTP Trial offers a shared ABAP environment. In a shared environment the
+> names used for different development artefacts might not be available any more.
+> In this cases it is necessary to use and individual prefix for all development artefacts to
+> naming conflicts. For example, instead of `Z_HELLO_WORLD` and `ZCL_HELLO_WORLD` you could use
+> your initials as prefixes. My initials are CD. The objects would therefore be named `Z_CD_HELLO_WORLD` and `ZCL_CD_HELLO_WORLD`.
+
+This creates the package `Z_HELLO_WORLD` as a subpackage of `Z_LOCAL`.
 
 Now a class needs to be created in this package. To create the class right click on
 the `Z_HELLO_WORLD` package and select \_New > ABAP Class. This again opens a dialogue to create
