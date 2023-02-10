@@ -60,6 +60,7 @@ The curriculum consists of the following lessons:
 1. [Hello World](./docs/hello_world.md)
 1. [The ABAP RESTful Application Programming Model](./docs/abap_rap.md)
 1. [Scenario Description](./docs/scenario_description.md)
+1. [Creating the Data Model](./docs/data_model.md)
 1. [Creating a Read-Only List Report](./docs/ro_list_report.md)
 1. [Creating a Transactional App](./docs/transactional_app.md)
 1. [Creating a UI using Fiori Elements](./docs/fiori_ui.md)

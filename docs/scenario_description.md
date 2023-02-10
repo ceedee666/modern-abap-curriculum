@@ -37,6 +37,7 @@ the developed applications is simply
 called _the Rating App_.
 
 The basis for the Rating App is the data model shown in the following diagram.
+
 ![Data Model for the Rating Application](imgs/scenario/scenario_data_model.drawio.png)
 
 The data model consists of two tables:
@@ -47,7 +48,7 @@ The data model consists of two tables:
 There is a one to many relation between the entries in the product table and the entries in the rating table.
 Therefore, for every product multiple ratings can be stored.
 
-> Note that the data model of the Rating App is very simplified. It is only intended
+> Note that the data model of the Rating App is very simplistic. It is only intended
 > to provide a solid basis for introducing the SAP ABAP RAP framework.
 > In reality the data model of a Rating App would probably be much more complex.
 
