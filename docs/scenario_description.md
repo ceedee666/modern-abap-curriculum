@@ -36,11 +36,24 @@ SAP BTP ABAP environment using the SAP ABAP RAP framework. Withing OER Bike the 
 the developed applications is simply
 called _the Rating App_.
 
-The basis for the Rating App is the data model shown in the following diagram. The data model
-consists of two tables:
+The basis for the Rating App is the data model shown in the following diagram.
+![Data Model for the Rating Application](imgs/scenario/scenario_data_model.drawio.png)
 
-- ![Data Model for the Rating Application](imgs/scenario/scenarion_data_model.drawio.png)
+The data model consists of two tables:
 
-## References
+- Product: containing the basic information of OER Bike's products
+- Rating: containing the customer ratings of the products.
 
-- [Sales Order (A2X) Service](https://api.sap.com/api/OP_API_SALES_ORDER_SRV_0001/overview)
+There is a one to many relation between the entries in the product table and the entries in the rating table.
+Therefore, for every product multiple ratings can be stored.
+
+> Note that the data model of the Rating App is very simplified. It is only intended
+> to provide a solid basis for introducing the SAP ABAP RAP framework.
+> In reality the data model of a Rating App would probably be much more complex.
+
+### Exercise 2
+
+- Discuss which fields are necessary in the tables in the Rating App in order
+  to provide the described functionality.
+- Analyse the fields of different tables of an SAP S/4HANA system. Which fields are
+  present there? Would you add additional files to the tables after the analysis?
