@@ -18,7 +18,9 @@ package `ZLOCAL`:
 After creating these packages and adding `ZLOCAL` to the favorite packages the package structure should
 look similar to the following screenshot.
 
-![Package Structure](imgs/ro_list_repor7/package_structure.png)
+![Package Structure](imgs/ro_list_report/package_structure.png)
+
+## Creating Data Elements
 
 ## Creating the Database Tables
 
