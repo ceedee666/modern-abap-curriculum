@@ -11,7 +11,7 @@ is a feedback approach common to many well known e-commerce web sites. Customers
 only be allowed to rate products the ordered.
 
 The following images shows a mock up of possible user interface for the customers.
-![Customer User Interface](imgs/customer_feedback_mock.png)
+![Customer User Interface](imgs/scenario/customer_feedback_mock.drawio.png)
 
 In addition to that OER Bike wants to allow the product managers of the different products to review the
 feedback provided by the customers. Therefore, the product managers need a different user interface.
@@ -19,7 +19,7 @@ In order to analyse the user feedback for a given product the product manager en
 products and gets a list of all the reviews provided by the customers.
 
 The following image shows a mock up of the possible user interface for product managers.
-![Product Manager User Interface](imgs/product_feedback_mock.png)
+![Product Manager User Interface](imgs/scenario/product_feedback_mock.drawio.png)
 
 OER Bike wants to implement the described functionality as an extension to their SAP S/4HANA systems.
 
@@ -32,7 +32,14 @@ What are the advantages and disadvantages of the different approaches?
 ## Extension Architecture
 
 OER Bike decided to implement the functionality described above using a custom application in the
-SAP BTP ABAP environment.
+SAP BTP ABAP environment using the SAP ABAP RAP framework. Withing OER Bike the whole project as well
+the developed applications is simply
+called _the Rating App_.
+
+The basis for the Rating App is the data model shown in the following diagram. The data model
+consists of two tables:
+
+- ![Data Model for the Rating Application](imgs/scenario/scenarion_data_model.drawio.png)
 
 ## References
 
