@@ -22,7 +22,7 @@ look similar to the following screenshot.
 
 ## Creating Data Elements
 
-When creating the database tables in the [next step](#creating-the-database-tables.md) mostly
+When creating the database tables in the [next step](#creating-the-database-tables) mostly
 [build in ABAP types](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenddic_builtin_types.htm)
 are used. Custom data elements are used for two reasons:
 
@@ -35,8 +35,9 @@ right click on the `Z_RATING_DB` and select `New > Other ABAP Repository Object`
 select `Data Element` and click `Next`. Enter `ZE_PRODUCT_ID` as the name and `Product ID` as the description of the
 data element. Finally select a transport request and click `Finish`.
 
-This opens a editor to define the details of the data element. Defined `ZE_PRODUCT_ID` as a
+This opens a editor to define the details of the data element. Define `ZE_PRODUCT_ID` as a
 character field with the length of 10 characters as shown in the following screenshot.
+Finally, the changes need to be saved and activated.
 
 ![Data Element ZE_PRODUCT_ID](imgs/data_model/data_element_product_id.png)
 
@@ -46,16 +47,29 @@ domain right click on the package `Z_RATING_DB` again and select `New > Other AB
 In the dialog window select `Domain` and click `Next`. Enter `ZD_RATING` as the name and
 `Domain for Product Ratings` as the description of the domain. Finally select a transport request and click `Finish`.
 
-This again opens a editor, this time for creating domains. Set the data type of the domain to `INT1` (i.e.
+This opens a editor, this time for creating domains. Set the data type of the domain to `INT1` (i.e.
 1-byte integer with a value range of 0 to 255). To further restrict the possible values enter the range 0 to 5
-in the `Fixed Values` section as shown in the following screenshot.
+in the `Fixed Values` section as shown in the following screenshot. The changes need to be saved and
+activated.
 
 ![Domain ZD_RATING](imgs/data_model/domain_rating.png)
 
+Next, the data element `ZE_RATING` needs to be created. The description is `Customer Rating`. To use the
+domain created in the previous step the category `Domain` needs to be selected. As the type name `ZD_RATING`
+is used. Finally, the changes need to be saved and activated again.
+
+![Data Element ZE_RATING](imgs/data_model/data_element_rating.png)
+
 ## Creating the Database Tables
 
-The first step is the creation of the database tables. The data model for the Rating App consists
-of the two tables Product and Rating.
+Once the data elements are created the next step is to create the database tables.
+The data model for the Rating App consists of the two tables Product and Rating.
+
+The table for products contains only the product ID and a description of the product.
+To create the product table right click on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`.
+In the dialog window select `Database Table` and click `Next`. Enter `ZPRODUCT` as the table name and
+`Product` as the description of the table. Finally select a transport request and click `Finish`.
+Copy the following code into the editor, save and activate the table.
 
 ```abap
 @EndUserText.label : 'Product'
@@ -73,6 +87,24 @@ define table zproduct {
 }
 
 ```
+
+The previous program code consist of the following elements:
+
+- The definition of the table `ZPRODUCT` using the `define table` statement
+- The `key` keyword defines the primary key of the database table. The primary key consists of
+  two fields, the `client` and `the product_id`.
+- The key word `not null` defines that the primary key is not allowed to be null.
+- The data type of the `client` field is set to the build in type `abap.clnt`
+- The data type of the `product_id` is the data element `ZE_PRODUCT_ID`
+- The field `product_desc` is a character field with the length of 40 characters.
+
+In addition some annotations (staring with the `@`) are added to the table definition. The `@EndUserText.label`
+defines the short text label of the table. This will, for example, be shown in the IDE. The
+@ABAPCatalog.deliveryClass annotation identifies the table as a table containing application data
+(e.g. in contrast to customizing data). The ABAP documentation contains a detailed description of each
+of the used annotations.
+
+In addition some annotations (staring with the `@`) are added to the table definition. The
 
 ```abap
 @EndUserText.label : 'Rating'
