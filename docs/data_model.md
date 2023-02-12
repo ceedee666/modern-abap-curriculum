@@ -22,7 +22,7 @@ look similar to the following screenshot.
 
 ## Creating Data Elements
 
-When creating the database tables in the [next step](creating-the-database-tables.md) mostly
+When creating the database tables in the [next step](#creating-the-database-tables.md) mostly
 [build in ABAP types](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenddic_builtin_types.htm)
 are used. Custom data elements are used for two reasons:
 
