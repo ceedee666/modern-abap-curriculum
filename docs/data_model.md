@@ -38,7 +38,7 @@ data element. Finally select a transport request and click `Finish`.
 This opens a editor to define the details of the data element. Defined `ZE_PRODUCT_ID` as a
 character field with the length of 10 characters as shown in the following screenshot.
 
-![Data Element ZE_PRODUCT_ID](imgs/data_model/data_element_product.png)
+![Data Element ZE_PRODUCT_ID](imgs/data_model/data_element_product_id.png)
 
 The restriction of possible values for the rating of a product requires two steps. First a domain
 with a data range is created. Using this domain the data element is defined. To define a
