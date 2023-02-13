@@ -65,7 +65,7 @@ is used. Finally, the changes need to be saved and activated again.
 Once the data elements are created the next step is to create the database tables.
 The data model for the Rating App consists of the two tables Product and Rating.
 
-The table for products contains only the product ID and a description of the product.
+The table for products contains only the product ID and a description of the product (cf. the [scenario description](./scenario.md)).
 To create the product table right click on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`.
 In the dialog window select `Database Table` and click `Next`. Enter `ZPRODUCT` as the table name and
 `Product` as the description of the table. Finally select a transport request and click `Finish`.
@@ -92,7 +92,9 @@ The previous program code consist of the following elements:
 
 - The definition of the table `ZPRODUCT` using the `define table` statement
 - The `key` keyword defines the primary key of the database table. The primary key consists of
-  two fields, the `client` and `the product_id`.
+  two fields, the `client` and the `product_id`. The `client` is the unique identifier of a client
+  in the SAP S/4HANA system. It is usually added as a primary key to any table unless the table should
+  not be client dependent.
 - The key word `not null` defines that the primary key is not allowed to be null.
 - The data type of the `client` field is set to the build in type `abap.clnt`
 - The data type of the `product_id` is the data element `ZE_PRODUCT_ID`
@@ -100,11 +102,14 @@ The previous program code consist of the following elements:
 
 In addition some annotations (staring with the `@`) are added to the table definition. The `@EndUserText.label`
 defines the short text label of the table. This will, for example, be shown in the IDE. The
-@ABAPCatalog.deliveryClass annotation identifies the table as a table containing application data
+`@ABAPCatalog.deliveryClass` annotation identifies the table as a table containing application data
 (e.g. in contrast to customizing data). The ABAP documentation contains a detailed description of each
 of the used annotations.
 
-In addition some annotations (staring with the `@`) are added to the table definition. The
+The rating table contains the rating of a product, a review text, the customer name and a customer address. The product
+is a foreign key relation to the primary key `PRODCUT_ID` of the table `ZPRODUCT`. Additionally to those field from the scenario,
+the table should also contain some management data. For each entry the user and time that created and changed the entry should be
+stored. The following code snippet can be used to create the table.
 
 ```abap
 @EndUserText.label : 'Rating'
@@ -133,6 +138,21 @@ define table zrating {
 }
 
 ```
+
+The table created by the code snippet above consist of the following elements:
+
+- some annotations to set the end user label, the table category and so on.
+- The key consists of the `client` and the `rating_uuid` of type `sysuuid_x16`. The ID of a rating record is therefore not
+  some number from a numbering scheme (as e.g. the product id) but a [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+- The `product` is defined using the data element `ZE_PRODUCT_ID`. Furthermore, a foreign key relation to the table
+  `ZPRODUCT` is defined. This defines that exactly 1:n relation between the entries in table `ZPRODUCT` and the entries in table `ZRATING`. The
+  annotation `@AbapCatalog.foreignKey.screenCheck` is not relevant in the context of ABAP on the SAP BTP. However, it might still be added automatically
+  when activating the directory object.
+- The `name` and `email` fields are defined as character fields with the length of 128 characters.
+- The `rating` field is defined using the data element `ZE_RATING`.
+- The `review` field is a character field with the length of 512 characters.
+- The `created_by` and `last_changed_by` are fields to store the user that created or change an entry. The `syuname` data type is used for this element.
+- The `created_at` and `last_changed_at` fields are used to store the timestamp when the entry was created or changed. The `timestampl` data type is used for this element.
 
 ```abap
 CLASS zcl_generate_data DEFINITION
