@@ -59,6 +59,7 @@ table lists some of the advantages and disadvantages of the different environmen
 | Shared ABAP Environment                |    No     |      Yes      |
 | Production ready environment           |    Yes    |      No       |
 | Risk of activating chargeable services |    Yes    |      No       |
+| Limited availability (90 days)         |    No     |      Yes      |
 
 Signing up for the SAP BTP free tier is described in this
 [tutorial](https://developers.sap.com/tutorials/btp-free-tier-account.html).
