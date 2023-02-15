@@ -296,9 +296,9 @@ ENDCLASS.
 Create the class `ZCL_GENERATE_DATA` in the `Z_RATING_DB` package and execute it. After executing the class the
 data preview of the table `Z_RATING` should look similar to the screenshot below.
 
-![Data Preview of the `Z_RATING` Table](img/data_model/data_preview.png)
+![Data Preview of the `Z_RATING` Table](imgs/data_model/data_preview.png)
 
 Note that is possible to open a SQL console from the data preview. This SQL console enables the execution of
 complex `SELECT` statements on the tables in the database.
 
-![SQL Console](img/data_model/sql_console.png)
+![SQL Console](imgs/data_model/sql_console.png)
