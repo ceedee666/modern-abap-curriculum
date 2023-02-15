@@ -154,6 +154,19 @@ The table created by the code snippet above consist of the following elements:
 - The `created_by` and `last_changed_by` are fields to store the user that created or change an entry. The `syuname` data type is used for this element.
 - The `created_at` and `last_changed_at` fields are used to store the timestamp when the entry was created or changed. The `timestampl` data type is used for this element.
 
+## Adding the Data to the Database
+
+For each table in the database it is possible to show and browse the content using _Data Preview_ of the ABAP development tools.
+To open the data preview either right click on the table and select `Open With > Data Preview` or simply press `<F8>` in the editor
+window of the table. However, as the database tables where just created they do not contain any data yet. The next
+step is to write a litters program to create some data in the tables.
+
+The class `ZCL_GENERATE_DATA` shown below can be used to generate some data. It implements the `IF_OO_ADT_CLASSRUN` interface. This way
+the class can be execute. In the `main` method the two methods `create_products` and `create_ratings` are called. Both methods
+first empty the respective database table using a `DELETE FROM ...` statement. After that some dummy data is created and inserted
+using a `INSERT INTO ...` statement.
+Note that no `COMMIT WORK` statement is needed. The commit happens implicitly when executing the class.
+
 ```abap
 CLASS zcl_generate_data DEFINITION
   PUBLIC
@@ -279,3 +292,13 @@ CLASS zcl_generate_data IMPLEMENTATION.
 
 ENDCLASS.
 ```
+
+Create the class `ZCL_GENERATE_DATA` in the `Z_RATING_DB` package and execute it. After executing the class the
+data preview of the table `Z_RATING` should look similar to the screenshot below.
+
+![Data Preview of the `Z_RATING` Table](img/data_model/data_preview.png)
+
+Note that is possible to open a SQL console from the data preview. This SQL console enables the execution of
+complex `SELECT` statements on the tables in the database.
+
+![SQL Console](img/data_model/sql_console.png)
