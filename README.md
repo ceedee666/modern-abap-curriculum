@@ -1,11 +1,20 @@
 # Modern ABAP Curriculum
 
-This repository contains the documentation and source code for an [ABAP](https://en.wikipedia.org/wiki/ABAP)
+This repository contains the documentation and source code for an ABAP
 curriculum developed as part of the [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
 
 ## Overview
 
+ABAP is the proprietary
+programming language developed by [SAP SE](https://www.sap.com/). It is the basis of the ERP-Software offered by SAP. ABAP was initially
+introduced in 1976. This [blog post](https://blogs.sap.com/2022/09/01/evolution-of-abap/) by [Karl Kessler](https://people.sap.com/karl.kessler)
+gives a nice summary of the history of the ABAP programming language. The goal of this curriculum is to provide an
+introduction to modern ABAP programming in the context of [SAP S/4HANA](https://en.wikipedia.org/wiki/SAP_S/4HANA) and
+the SAP Business Technology Platform (BTP).
+
 ### Learning Objectives
+
+The curriculum has the following learning objectives:
 
 1. Students should be able to compare the advantages and disadvantages of using different extension technology for a given requirement
    based on a thorough understanding of the SAP S/4HANA architecture. This is required in order to select
@@ -76,6 +85,7 @@ The curriculum consists of the following lessons:
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
 - [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
 - [Build Apps with the ABAP RESTful Application Programming Model](https://open.sap.com/courses/cp13)
+- [ABAP Cloud FAQs](https://community.sap.com/topics/abap/abap-cloud-faq)
 
 ## Acknowledgements
 
