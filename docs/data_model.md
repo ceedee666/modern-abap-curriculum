@@ -318,6 +318,9 @@ To create a CDS view right click on the package `Z_RATING_DB` and select `New > 
 dialog window select `Data Definition` and click `Next >`. The name of the CDS view is `Z_I_Rating`, the description `Rating view`.
 Click `Next >` to select a transport request and `Next >` to select a template.
 
+The `_I_` in the name of the view is used to mark this view as a _Interface View_. The idea is to provide a stable interface to
+the underlying data model. More details on different views for the same database table are discussed later.
+
 The goal is to create business objects on the basis of these CDS views. Each business object needs a root node.
 In our case the business objects are simple an only consist of root nots. To create the correct CDS view for a root node
 select the template `Define Root View Entity` and click `Finish`.
@@ -387,8 +390,6 @@ The view `Z_I_Rating` again contains all the field of the underlying database ta
 defines a association to the view `Z_I_Product`, in this case a 1:1 relation. Each entry in the
 Rating view is related to exactly one Product.
 
-````abap
-
 ```abap
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Rating View'
@@ -409,9 +410,29 @@ define root view entity Z_I_Rating
       last_changed_at as LastChangedAt,
       _Product
 }
-````
+```
 
 After saving both views it is possible to activate them using the `Activate inactive ABAP dvelopment objects`
 button (![Activate inactive ABAP dvelopment objects Button](imgs/data_model/activate_all.png)).
 
 ## Navigate the Data using CDS Views
+
+The data preview of the `Z_I_Product` view looks similar to the data preview of the `ZPRODUCT` table.
+The main differences are:
+
+- The `client` field is not part of the view
+- The names of the fields are changed to more user friendly names
+
+![Data Preview of the `Z_I_Product` View](imgs/data_model/data_preview_cds.png)
+
+The main difference becomes obvious by right clicking on a entry and selecting `Follow association`. This opens a dialog window
+in which the association to follow can be select. By selection the `_Rating` association it is now possible to
+navigate to all the ratings of a certain product. Using the SQL console it is possible to analyse the SQL statement used
+to perform the selection of the associated entries.
+
+![Follow Associations in Data Preview](imgs/data_model/data_preview_associations.png)
+
+The opposite direction is also possible. From any rating it is possible to navigate to the product that was rated.
+
+This feature is possible because of the association information that was added to the view. In the next step the RAP framework
+uses this information to automatically creates a basic UI for the data in the tables.
