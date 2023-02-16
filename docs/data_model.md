@@ -430,7 +430,7 @@ in which the association to follow can be select. By selection the `_Rating` ass
 navigate to all the ratings of a certain product. Using the SQL console it is possible to analyse the SQL statement used
 to perform the selection of the associated entries.
 
-![Follow Associations in Data Preview](imgs/data_model/data_preview_associations.png)
+![Follow Associations in Data Preview](imgs/data_model/data_preview_association.png)
 
 The opposite direction is also possible. From any rating it is possible to navigate to the product that was rated.
 
