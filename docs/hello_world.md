@@ -232,7 +232,6 @@ If everything works the result should be similar to the following screen shot.
 
 Congratulations! You have successfully created and executed an ABAP Hello World program.
 
-##Navigation
+---
 
-[Next Chapter >](./abap_rap.md)
-[Overview 🏠](../README.md)
+[Next Chapter >](./abap_rap.md) | [Overview 🏠](../README.md)
