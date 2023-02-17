@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service for Read Only UI'
+define service Z_S_Rating_ReadOnly {
+  expose Z_C_Rating_ReadOnly;
+  expose Z_C_Product_ReadOnly;
+}
