@@ -447,3 +447,9 @@ The opposite direction is also possible. From any rating it is possible to navig
 
 This feature is possible because of the association information that was added to the view. In the next step the RAP framework
 uses this information to automatically creates a basic UI for the data in the tables.
+
+##Navigation
+
+[< Previous Chapter](./scenario_description.md)
+[Next Chapter >](./ro_list_report.md)
+[Overview 🏠](../README.md)

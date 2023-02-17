@@ -48,3 +48,9 @@ provides further details on the different aspects of the ABAP RAP mentioned abov
 
 Think of the product ratings customers can provide on e-commerce Web sites. What Business Objects are
 can be identified? What is the structure of these Business Objects and what is their behaviour?
+
+##Navigation
+
+[< Previous Chapter](./hello_world.md)
+[Next Chapter >](./scenario_description.md)
+[Overview 🏠](../README.md)

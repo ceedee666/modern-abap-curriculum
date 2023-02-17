@@ -58,3 +58,9 @@ Therefore, for every product multiple ratings can be stored.
   to provide the described functionality.
 - Analyse the fields of different tables of an SAP S/4HANA system. Which fields are
   present there? Would you add additional files to the tables after the analysis?
+
+##Navigation
+
+[< Previous Chapter](./abap_rap.md)
+[Next Chapter >](./data_model.md)
+[Overview 🏠](../README.md)
