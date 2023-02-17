@@ -390,6 +390,13 @@ The view `Z_I_Rating` again contains all the field of the underlying database ta
 defines a association to the view `Z_I_Product`, in this case a 1:1 relation. Each entry in the
 Rating view is related to exactly one Product.
 
+The `Z_I_Rating` contains additional semantic information. The annotations `@Semantics.user.createdBy` and
+`@Semantics.user.lastChangedBy` are used to identify the fields that store the user who created or changed the entry.
+Similar the `@Semantics.systemDateTime.createdAt` and `@Semantics.systemDateTime.lastChangedAt` are used to identify the
+fields that store the date and time when the entry was created or last changed. Currently these annotations have no
+visible effect. However, one a business object is create on the basis of this view, the annotations are used by
+the ABAP RAP framework to automatically fill and update those fields.
+
 ```abap
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Rating View'
@@ -404,9 +411,13 @@ define root view entity Z_I_Rating
       email           as Email,
       rating          as Rating,
       review          as Review,
+      @Semantics.user.createdBy: true
       created_by      as CreatedBy,
+      @Semantics.systemDateTime.createdAt: true
       created_at      as CreatedAt,
+      @Semantics.user.lastChangedBy: true
       last_changed_by as LastChangedBy,
+      @Semantics.systemDateTime.lastChangedAt: true
       last_changed_at as LastChangedAt,
       _Product
 }
