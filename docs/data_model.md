@@ -294,6 +294,7 @@ CLASS zcl_generate_data IMPLEMENTATION.
   ENDMETHOD.
 
 ENDCLASS.
+
 ```
 
 Create the class `ZCL_GENERATE_DATA` in the `Z_RATING_DB` package and execute it.
@@ -302,9 +303,9 @@ see the code completion features of Eclipse and the ADT. For example, it is poss
 get the fields of a table line using code completion.
 
 After executing the class the
-data preview of the table `Z_RATING` should look similar to the screenshot below.
+data preview of the table `ZRATING` should look similar to the screenshot below.
 
-![Data Preview of the `Z_RATING` Table](imgs/data_model/data_preview.png)
+![Data Preview of the `ZRATING` Table](imgs/data_model/data_preview.png)
 
 Note that is possible to open a SQL console from the data preview. This SQL console enables the execution of
 complex `SELECT` statements on the tables in the database.
@@ -425,6 +426,11 @@ define root view entity Z_I_Rating
 
 After saving both views it is possible to activate them using the `Activate inactive ABAP dvelopment objects`
 button (![Activate inactive ABAP dvelopment objects Button](imgs/data_model/activate_all.png)).
+
+The following figure shows the relation of the created development objects to the elements of
+the ABAP RAP. So far only the data model has been created.
+
+![RAP Components](imgs/data_model/rap_components_datamodel.drawio.png)
 
 ## Navigate the Data using CDS Views
 
