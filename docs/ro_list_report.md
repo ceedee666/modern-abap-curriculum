@@ -61,3 +61,23 @@ click `Finish` and activate the binding.
 The resulting binding is shown in the following screenshot.
 
 ![Service Binding](./imgs/ro_list_report/service_binding.png)
+
+Note that after creating a service binding, the service in not published, yet. This means that the
+service can not be accessed. To publish the service click on the `Publish local service endpoint` link. This
+generates the necessary artefacts for the service to be accessible. Once the publishing has completed active
+the service again.
+
+Publishing the service results in two changes in the service binging:
+
+- A `Service URL` is shown in the binding
+- The `Preview` button becomes active.
+
+![Published Service Binding](./imgs/ro_list_report/service_binding_published.png)
+
+Clicking on the `Service URL` opens the created OData service in the browser. It is now already possible
+to query this service using the OData protocol.
+
+### Exercise 1
+
+Read the example data from the database using the OData service. Try to read rating and product data. Try to filter the
+returned data e.g. only read reviews for a certain product.
