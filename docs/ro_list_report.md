@@ -94,13 +94,35 @@ contains the following recommendations when to use which option:
 > Currently, UI services are supported for OData and InA services.
 >
 > **Web API**
+>
 > A service that is exposed as Web API is used for all other use cases apart from UIs. Web APIs can be consumed by an unknown consumer via OData. Web APIs can be extended.
 > Currently, Web APIs are supported for OData and SQL services.
 
-#
+Whether to use OData v2 or OData v4 depends also on the focus of the service. Regarding OData v4 the SAP documentation states:
+
+> OData V4 services have a wider scope than OData V2 services. Use OData V4 wherever possible for transactional services.
+
+However, not all features of SAP Fiori elements are available for OData v2. Therefore the OData v2 option is used in this unit.
 
 ### Previewing the Service
 
 With the service published, it is now possible to preview the data using Fiori Elements.
+The screenshot below shows the result of executing the preview for `Z_C_Rating_ReadOnly`.
 
 ![Previewing the service](./imgs/ro_list_report/preview.png)
+
+The preview does not show any data. The reason is, that currently no definition exists which data of the
+entity should be displayed and which not. In one of the subsequent steps this information is added to the CDS view
+defining the entity. Until then it is possible to manually select the data to be displayed. This is done by clicking on the
+gear icon. This opens the `View Settings` dialog. Here the columns to display can be selected.
+
+![View Settings](./imgs/ro_list_report/view_settings.png)
+
+Selecting all available columns and also sorting the table by `Product ID` results in the data being displayed as shown below.
+
+![Preview containing all columns](./imgs/ro_list_report/preview_with_data.png)
+
+Note that the Fiori elements app already provides a number of nice features. For example, it is possible to
+resize the columns, to change the sort order and filtering by clicking on the column header or an export to MS Excel.
+
+## Adding UI Annotations
