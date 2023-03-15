@@ -82,6 +82,23 @@ to query this service using the OData protocol.
 Read the example data from the database using the OData service. Try to read rating and product data. Try to filter the
 returned data e.g. only read reviews for a certain product.
 
+### Different Service Binding Protocol Options
+
+When creating a service binding different protocol options are available. The
+[SAP documentation](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/service-binding)
+contains the following recommendations when to use which option:
+
+> **UI service**
+>
+> A UI service makes it possible to add a SAP Fiori elements UI or other UI clients to the service.
+> Currently, UI services are supported for OData and InA services.
+>
+> **Web API**
+> A service that is exposed as Web API is used for all other use cases apart from UIs. Web APIs can be consumed by an unknown consumer via OData. Web APIs can be extended.
+> Currently, Web APIs are supported for OData and SQL services.
+
+#
+
 ### Previewing the Service
 
 With the service published, it is now possible to preview the data using Fiori Elements.
