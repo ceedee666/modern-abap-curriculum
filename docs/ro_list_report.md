@@ -60,4 +60,4 @@ click `Finish` and activate the binding.
 
 The resulting binding is shown in the following screenshot.
 
-![Service Binding](./imgs/ro_list_report/service_binding.png
+![Service Binding](./imgs/ro_list_report/service_binding.png)
