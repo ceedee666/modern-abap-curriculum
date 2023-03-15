@@ -81,3 +81,9 @@ to query this service using the OData protocol.
 
 Read the example data from the database using the OData service. Try to read rating and product data. Try to filter the
 returned data e.g. only read reviews for a certain product.
+
+### Previewing the Service
+
+With the service published, it is now possible to preview the data using Fiori Elements.
+
+![Previewing the service](./imgs/ro_list_report/preview.png)
