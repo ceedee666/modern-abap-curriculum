@@ -51,7 +51,7 @@ list contains just a few examples:
 - Learning Journey
 
   - [Get Started with ABAP Development](https://developers.sap.com/mission.abap-dev-get-started.html)
-  - [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp)
+  - [Acquire Core ABAP Skills](https://learning.sap.com/learning-journey/acquire-core-abap-skills)
 
 - Other
   - [ABAP track on exercism](https://exercism.org/tracks/abap)
