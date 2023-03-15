@@ -29,7 +29,12 @@ The curriculum has the following learning objectives:
 ### ABAP Development Environment
 
 This curriculum does not provide any instruction on how to set up an ABAP development environment.
-A detailed description on how to set up an ABAP development environment is given in the learning journey
+For students and lecturers at universities different options exist for getting access to an ABAP development environment.
+The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the 
+[product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)). 
+A possible alternative is the usage of the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
+of the SAP Business Technology Platform (SAP BTP). 
+A detailed description on how to set up an ABAP development environment on the SAP BTP is given in the learning journey
 [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp).
 
 ### ABAP Programming Language
