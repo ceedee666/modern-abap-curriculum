@@ -14,8 +14,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_generate_data IMPLEMENTATION.
-
+CLASS ZCL_GENERATE_DATA IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
@@ -26,22 +25,6 @@ CLASS zcl_generate_data IMPLEMENTATION.
     out->write( |{ number_of_entries } ratings generated successfully!| ).
   ENDMETHOD.
 
-
-  METHOD generate_products.
-    DATA products TYPE TABLE OF zproduct.
-    DELETE FROM zproduct.
-
-    products = VALUE #(
-        ( product_id = |DXTR1000| product_desc = |Deluxe Touring Bike Black| )
-        ( product_id = |DXTR2000| product_desc = |Deluxe Touring Bike Silver| )
-        ( product_id = |DXTR3000| product_desc = |Deluxe Touring Bike Red| )
-        ( product_id = |EPAD1000| product_desc = |Ellbow Pad| )
-        ( product_id = |KPAD1000| product_desc = |Knee Pad| )
-    ).
-
-    INSERT zproduct FROM TABLE @products.
-    RETURN sy-dbcnt.
-  ENDMETHOD.
 
   METHOD generate_ratings.
     DATA ratings TYPE TABLE OF zrating.
@@ -122,4 +105,20 @@ CLASS zcl_generate_data IMPLEMENTATION.
 
   ENDMETHOD.
 
+
+  METHOD generate_products.
+    DATA products TYPE TABLE OF zproduct.
+    DELETE FROM zproduct.
+
+    products = VALUE #(
+        ( product_id = |DXTR1000| product_desc = |Deluxe Touring Bike Black| )
+        ( product_id = |DXTR2000| product_desc = |Deluxe Touring Bike Silver| )
+        ( product_id = |DXTR3000| product_desc = |Deluxe Touring Bike Red| )
+        ( product_id = |EPAD1000| product_desc = |Ellbow Pad| )
+        ( product_id = |KPAD1000| product_desc = |Knee Pad| )
+    ).
+
+    INSERT zproduct FROM TABLE @products.
+    RETURN sy-dbcnt.
+  ENDMETHOD.
 ENDCLASS.

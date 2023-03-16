@@ -1,0 +1,98 @@
+@Metadata.layer: #CORE
+annotate view Z_C_Rating_ReadOnly with
+{
+  @UI.facet: [ { targetQualifier: 'fHeader',
+                 purpose:  #HEADER,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 position: 20 },
+               { targetQualifier: 'Rating',
+                 purpose:  #HEADER,
+                 type:     #DATAPOINT_REFERENCE,
+                 label:    'Rating',
+                 position: 10 },
+
+               { targetQualifier: 'fCustomer',
+                 purpose:  #STANDARD,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 label:    'Customer',
+                 position: 10 },
+
+               { targetQualifier: 'fReview',
+                 purpose:  #STANDARD,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 label:    'Review',
+                 position: 20 }]
+  @UI.hidden: true
+  RatingUUID;
+  @UI:{
+    selectionField: [{position: 10 }],
+    lineItem: [{
+      position: 10,
+      importance: #HIGH,
+      type: #STANDARD,
+      label: 'Product'
+    }],
+      identification: [{
+        position: 10,
+        label: 'Product',
+        qualifier: 'fHeader'
+      }]
+  }
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold : 0.8
+  Product;
+  @UI:{
+    lineItem: [{
+      position: 30,
+      importance: #MEDIUM,
+      type: #STANDARD,
+      label: 'Name'
+    }],
+    identification: [{
+      position: 10,
+      label: 'Name',
+      qualifier: 'fCustomer'
+    }]
+  }
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold : 0.8
+  Name;
+  @UI:{
+    lineItem: [{
+      position: 40,
+      importance: #MEDIUM,
+      type: #STANDARD,
+      label: 'E-Mail'
+    }],
+      identification: [{
+        position: 20,
+        label: 'E-Mail',
+        qualifier: 'fCustomer'
+      }]
+  }
+  @Search.defaultSearchElement: true
+  Email;
+  @UI:{
+    lineItem: [{
+      position: 20,
+      importance: #HIGH,
+      type: #AS_DATAPOINT,
+      label: 'Rating'
+    }],
+    dataPoint: {
+      qualifier: 'Rating',
+      targetValue: 5,
+      visualization: #RATING
+    }
+  }
+  Rating;
+  @UI:{
+
+    identification: [{
+      position: 10,
+      label: 'Detailed Review',
+      qualifier: 'fReview'
+    }]
+  }
+  Review;
+}
