@@ -518,6 +518,36 @@ The resulting object page for a rating is shown in the following screenshot.
 
 ### Beautifying the App
 
+The last step is to display the customer rating of a product not as a number but as a rating indicator with little stars. A rating of 3 should
+be displayed as three stars, a rating of 5 as five stars.
+Doing this requires two steps :
+
+1. Definition of a data point
+1. Referencing the data point.
+
+First, the start rating should be displayed in the search result table of the list view. The data point for the `Rating` field is created using the
+following code. This creates a data point that is displayed as a rating. The maximum possible value of the rating is 5. And the data point is
+created for the `Rating` field (`qualifier: 'Rating').
+
+```abap
+@UI:{
+  ...
+  dataPoint: {
+    qualifier: 'Rating',
+    targetValue: 5,
+    visualization: #RATING
+  }
+}
+Rating,
+...
+```
+
+After adding this the data point annotation the result table of the list report is displayed as shown in the following screenshot.
+
+![Preview showing the rating as stars](./imgs/ro_list_report/preview_with_stars.png)
+
+## Extracting Metadata
+
 ## References
 
 - [SAP Fiori Element Feature Showcase App for the ABAP RESTful Application Programming Model](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase)
