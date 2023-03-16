@@ -126,3 +126,52 @@ Note that the Fiori elements app already provides a number of nice features. For
 resize the columns, to change the sort order and filtering by clicking on the column header or an export to MS Excel.
 
 ## Adding UI Annotations
+
+As mentioned before the Fiori App in this tutorial is build using they
+[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework. This framework offers
+different floorplans to create apps for different use cases. Currently SAP Fiori Elements offers the following floorplans:
+
+- List Report
+- Work list
+- Object Page
+- Overview Page
+- Analytics List Page.
+
+Examples of the different floorplans are shown [here](https://experience.sap.com/fiori-design-web/smart-templates/#supported-floorplans).
+In this unit a read-only list report to display the rating data is developed. Consequently, the list report floorplan is the basis for this app.
+
+Each of the different SAP Fiori elements floorplans offers a large number of features. Identifying the correct feature
+to implement a certain requirement is sometimes not easy. Fortunately SAP create the
+[SAP Fiori Element Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase). This app
+shows all the available features and also provides code examples for their usage. Furthermore, the
+[Wiki of the Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide) offers
+a very useful search functionality.
+
+In the following sections different features are added to the read-only list report using CDS annotations.
+
+### Defining Search Result Columns
+
+In the current state it is necessary to add the displayed columns to the list report manually each time the app preview is started.
+The first step is to define which columns are displayed in the search result table.
+To add a field of a CDS view as a column to the search result table the `@UI.lineItem` annotation can be used.
+With `@UI.lineItem.position` the position of the column can be defined. `@UI.lineItem.label` defines the label of the column.
+`@UI.lineItem.importance` defines which columns are less and which are more important. The less important columns are
+hidden first if the app is opened on a smaller screen e.g. a mobile phone. Finally `@UI.lineItem.type` defines the column is displayed.
+Possible values are `#STANDARD` for normal values or `#WITH_URL` if the column contains a external link.
+
+```abap
+@UI.lineItem.position: 10
+@UI.lineItem.label: 'Product'
+@UI.lineItem.importance = #HIGH
+@UI.lineItem.type = #STANDARD
+Product
+```
+
+### Adding Header Information to the Object Page
+
+The first step is to add a description tot h
+
+## References
+
+- [SAP Fiori Element Feature Showcase App for the ABAP RESTful Application Programming Model](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase)
+- [Searchable Wiki of the Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide)
