@@ -1,47 +1,46 @@
 # Modern ABAP Curriculum
 
 This repository contains the documentation and source code for an ABAP
-curriculum developed as part of the [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
+curriculum developed as part of the [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project,
+with a focus on modern ABAP programming in the context of [SAP S/4HANA](https://en.wikipedia.org/wiki/SAP_S/4HANA)
+and the SAP Business Technology Platform (BTP).
 
 ## Overview
 
 ABAP is the proprietary
-programming language developed by [SAP SE](https://www.sap.com/). It is the basis of the ERP-Software offered by SAP. ABAP was initially
-introduced in 1976. This [blog post](https://blogs.sap.com/2022/09/01/evolution-of-abap/) by [Karl Kessler](https://people.sap.com/karl.kessler)
-gives a nice summary of the history of the ABAP programming language. The goal of this curriculum is to provide an
-introduction to modern ABAP programming in the context of [SAP S/4HANA](https://en.wikipedia.org/wiki/SAP_S/4HANA) and
-the SAP Business Technology Platform (BTP).
+programming language developed by [SAP SE](https://www.sap.com/) and is the basis of the ERP-Software offered by SAP.
+Initially introduced in 1976, ABAP has evolved over the years.
+This [blog post](https://blogs.sap.com/2022/09/01/evolution-of-abap/) by [Karl Kessler](https://people.sap.com/karl.kessler)
+gives a nice summary of the history of the ABAP programming language.
+The aim of this curriculum is to provide an
+introduction to modern ABAP programming techniques and frameworks.
 
 ### Learning Objectives
 
-The curriculum has the following learning objectives:
+The curriculum aims to achieve the following learning objectives:
 
-1. Students should be able to compare the advantages and disadvantages of using different extension technology for a given requirement
-   based on a thorough understanding of the SAP S/4HANA architecture. This is required in order to select
-   a suitable extension approach in a give scenario.
-1. Students should be able to implement extension to a SAP S/4HANA system using state of the art ABAP in order to
-   automate business processes not implemented in the SAP S/4HANA standard.
-1. Students are able to implement extensions using the ABAP RAP framework and Fiori Elements in order to enhance
-   SAP S/4HANA using the SAP best practices.
+1. Enable students to compare the advantages and disadvantages of different extension
+   technologies for a given requirement based on a thorough understanding of the SAP S/4HANA architecture.
+1. Enable students to implement extensions to a SAP S/4HANA system using state-of-the-art
+   ABAP to automate business processes not implemented in the SAP S/4HANA standard.
+1. Enable students to implement extensions using the ABAP RAP framework and Fiori
+   Elements to enhance SAP S/4HANA using the SAP best practices.
 
 ## Prerequisites
 
 ### ABAP Development Environment
 
-This curriculum does not provide any instruction on how to set up an ABAP development environment.
 For students and lecturers at universities different options exist for getting access to an ABAP development environment.
 The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the
 [product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)).
-A possible alternative is the usage of the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
+Another option is to use the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
 of the SAP Business Technology Platform (SAP BTP).
-A detailed description on how to set up an ABAP development environment on the SAP BTP is given in the learning journey
-[Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp).
 
 ### ABAP Programming Language
 
-This curriculum does not provide an introduction to the ABAP programming language. There are a large number
-of books, lectures, video tutorials online courses available on the ABAP programming language. The following
-list contains just a few examples:
+This curriculum assumes a basic knowledge of the ABAP programming language. There
+are various resources available online for learning ABAP, such as books, lectures,
+video tutorials, and online courses. The following list contains just a few examples:
 
 - Books
 
@@ -56,18 +55,17 @@ list contains just a few examples:
 - Other
   - [ABAP track on exercism](https://exercism.org/tracks/abap)
 
-This curriculum assumes a basic knowledge of the ABAP language.
-
 ### Other Technologies and Concepts
 
-In order to follow the curriculum a basic understanding of the following technologies and concepts is required:
+In addition to basic knowledge of the ABAP programming language, a basic understanding
+of the following technologies and concepts is required to follow the curriculum:
 
 - [Git](https://en.wikipedia.org/wiki/Git)
 - [HTML5](https://en.wikipedia.org/wiki/HTML5)
 - [OData](https://www.odata.org/)
 - [ReST](https://en.wikipedia.org/wiki/Representational_state_transfer) and APIs.
 
-## Lectures
+## Curriculum
 
 The curriculum consists of the following lessons:
 
@@ -92,4 +90,4 @@ The curriculum consists of the following lessons:
 
 ## Acknowledgements
 
-The work on this material has been supported by [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
+The work on this curriculum has been supported by [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
