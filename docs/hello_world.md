@@ -236,11 +236,6 @@ CLASS zcl_hello_world IMPLEMENTATION.
 ENDCLASS.
 ```
 
-Before executing it the class needs to be activated using the button ![Activate Icon](./imgs/hello_world/activate_icon.png)
-or the menu _Edit > Activate_. After the class has been
-activated it can be executed by _Run > Run As > ABAP Application (Console)_ or by `<F9>`.
-If everything works the result should be similar to the following screen shot.
-
 To execute the class, you need to activate it first by clicking on the ![Activate Button](./imgs/hello_world/activate_icon.png)
 button or navigating to `Edit > Activate` in the menu. Once the class has been activated,
 you can run it by selecting `Run > Run As > ABAP Application (Console)` or simply
