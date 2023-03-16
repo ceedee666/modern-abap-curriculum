@@ -194,7 +194,7 @@ The listing below shows possible annotations for the fields of the `Z_C_Rating_R
 define root view entity Z_C_Rating_ReadOnly
   as projection on Z_I_Rating
 {
-  @UI.hidden: true
+    @UI.hidden: true
   key RatingUUID,
 
       @UI:{
@@ -249,9 +249,274 @@ With those annotations the preview of the read-only list report looks like shown
 
 ![Preview with UI.lineItem annotations](./imgs/ro_list_report/preview_with_annotations_01.png)
 
-### Adding Header Information to the Object Page
+### Adding Search Capabilities
 
-The first step is to add a description tot h
+Currently, the app offers no functionality to search for a certain review other then scrolling though the result list.
+In this step search capabilities are added to the list report.
+
+To enable search capabilities for a CDS entity the entity needs to be annotation with `@Search.searchable: true`.
+
+```abap
+@Search.searchable: true
+define root view entity Z_C_Rating_ReadOnly
+...
+```
+
+Next, all fields that should be searchable need to be annotated with `@Search.defaultSearchElement: true`. In
+addition it is possible to specify a threshold for the required similarity of the results to the search string.
+A similarity threshold of 1.0 means that the result and search term are identical.
+
+```abap
+...
+@Search.defaultSearchElement: true
+@Search.fuzzinessThreshold : 0.8
+Product,
+...
+```
+
+Finally, the is is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation. The following listing
+shows the resulting CDS entity including the annotations.
+
+```abap
+@Search.searchable: true
+define root view entity Z_C_Rating_ReadOnly
+  as projection on Z_I_Rating
+{
+      @UI.hidden: true
+  key RatingUUID,
+
+      @UI:{
+        selectionField: [{position: 10 }],
+        lineItem: [{
+          position: 10,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Product'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold : 0.8
+      Product,
+
+      @UI:{
+        lineItem: [{
+          position: 30,
+          importance: #MEDIUM,
+          type: #STANDARD,
+          label: 'Name'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold : 0.8
+      Name,
+
+      @UI:{
+        lineItem: [{
+          position: 40,
+          importance: #MEDIUM,
+          type: #STANDARD,
+          label: 'E-Mail'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      Email,
+
+      @UI:{
+        lineItem: [{
+          position: 20,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Rating'
+        }]
+      }
+      Rating,
+
+      Review,
+      /* Associations */
+      _Product
+}
+
+```
+
+The following screenshot shows the resulting Fiori App.
+
+![Preview including the @Search annotations](./imgs/ro_list_report/preview_with_annotations_02.png)
+
+#### Exercise 2
+
+Test different search string and different variants of search annotations (e.g. threshold value) to see the effect of these annotations.
+Which of the UI adaptation features (e.g. adding and removing result columns or reordering of columns) do still work?
+
+### Adding Object Page Annotations
+
+The current version of the app already allows to navigate to the details of a review.
+However, the object page (i.e. the page displaying the details) is currently completely empty. In the next step
+annotations are used to add information to the object page.
+
+The `@UI.headerInfo.typeName` and `@UI.headerInfo.typeNamePlural` annotations can be used to add a title to the result table and the
+object page.
+
+```abap
+@UI: {
+ headerInfo: { typeName: 'Rating',
+               typeNamePlural: 'Ratings' } }
+```
+
+Using `@UI.facet` sub-sections for the object page can be defined. The following code snippet shows the creation of a header and a standard facet.
+
+```abap
+ @UI.facet: [ { targetQualifier: 'fRating',
+                           purpose:  #HEADER,
+                           type:     #IDENTIFICATION_REFERENCE,
+                           label:    'Rating',
+                           position: 10 },
+
+                           { targetQualifier: 'fCustomer',
+                           purpose:  #STANDARD,
+                           type:     #IDENTIFICATION_REFERENCE,
+                           label:    'Customer',
+                           position: 20 }
+              }
+            ]
+```
+
+Using `@UI.identification` annotations, data can be added to these facets. For example, the following snippet shows how the `name` field
+can be added to the `fCustomer` facet.
+
+```abap
+@UI:{
+   ...
+      identification: [{
+        position: 10,
+        label: 'Name',
+        qualifier: 'fCustomer'
+      }]
+    }
+    ...
+Name
+```
+
+Adding addition annotation for the object page to `Z_C_Rating_ReadOnly` results in the following code.
+
+```abap
+@EndUserText.label: 'Rating view for RO UI'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+
+@UI: {
+ headerInfo: { typeName: 'Rating',
+               typeNamePlural: 'Ratings' } }
+
+@Search.searchable: true
+define root view entity Z_C_Rating_ReadOnly
+  as projection on Z_I_Rating
+{
+      @UI.facet: [ { targetQualifier: 'fRating',
+                     purpose:  #HEADER,
+                     type:     #IDENTIFICATION_REFERENCE,
+                     label:    'Rating',
+                     position: 10 },
+
+                     { targetQualifier: 'fCustomer',
+                     purpose:  #STANDARD,
+                     type:     #IDENTIFICATION_REFERENCE,
+                     label:    'Customer',
+                     position: 20 },
+
+                     { targetQualifier: 'fReview',
+                     purpose:  #STANDARD,
+                     type:     #IDENTIFICATION_REFERENCE,
+                     label:    'Review',
+                     position: 30 }]
+
+      @UI.hidden: true
+  key RatingUUID,
+
+      @UI:{
+        selectionField: [{position: 10 }],
+        lineItem: [{
+          position: 10,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Product'
+        }],
+        identification: [{
+          position: 10,
+          label: 'Product',
+          qualifier: 'fRating'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold : 0.8
+      Product,
+
+      @UI:{
+        lineItem: [{
+          position: 30,
+          importance: #MEDIUM,
+          type: #STANDARD,
+          label: 'Name'
+        }],
+        identification: [{
+          position: 10,
+          label: 'Name',
+          qualifier: 'fCustomer'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      @Search.fuzzinessThreshold : 0.8
+      Name,
+
+      @UI:{
+        lineItem: [{
+          position: 40,
+          importance: #MEDIUM,
+          type: #STANDARD,
+          label: 'E-Mail'
+        }],
+        identification: [{
+          position: 20,
+          label: 'E-Mail',
+          qualifier: 'fCustomer'
+        }]
+      }
+      @Search.defaultSearchElement: true
+      Email,
+
+      @UI:{
+        lineItem: [{
+          position: 20,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Rating'
+        }],
+        identification: [{
+          position: 20,
+          label: 'Rating',
+          qualifier: 'fRating'
+        }]
+      }
+      Rating,
+
+      @UI:{
+
+        identification: [{
+          position: 10,
+          label: 'Detailed Review',
+          qualifier: 'fReview'
+        }]
+      }
+
+      Review,
+      /* Associations */
+      _Product
+}
+```
+
+The resulting object page for a rating is shown in the following screenshot.
+
+![Preview showing the object page](./imgs/ro_list_report/object_page.png)
+
+### Beautifying the App
 
 ## References
 
