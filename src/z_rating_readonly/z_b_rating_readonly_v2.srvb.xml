@@ -4,7 +4,7 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>Z_RATING_READONLY_V2</NAME>
+     <NAME>Z_B_RATING_READONLY_V2</NAME>
      <TYPE>SRVB/SVB</TYPE>
      <DESCRIPTION>Rating Service - UI V2</DESCRIPTION>
      <LANGUAGE>EN</LANGUAGE>
@@ -15,7 +15,7 @@
        <TITLE>Historic versions</TITLE>
       </item>
       <item>
-       <HREF>/sap/bc/adt/businessservices/odatav2/Z_RATING_READONLY_V2</HREF>
+       <HREF>/sap/bc/adt/businessservices/odatav2/Z_B_RATING_READONLY_V2</HREF>
        <REL>http://www.sap.com/categories/odatav2</REL>
        <TYPE>application/vnd.sap.adt.businessservices.odatav2.v2+xml</TYPE>
        <TITLE>ODATAV2</TITLE>
@@ -44,13 +44,13 @@
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>Z_RATING_READONLY_V2</NAME>
+      <NAME>Z_B_RATING_READONLY_V2</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
      <BIND_TYPE_VERSION>V2</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>Z_RATING_READONLY_V2</SERVICE_NAME>
+       <SERVICE_NAME>Z_B_RATING_READONLY_V2</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
