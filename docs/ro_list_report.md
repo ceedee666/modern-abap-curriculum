@@ -159,12 +159,98 @@ With `@UI.lineItem.position` the position of the column can be defined. `@UI.lin
 hidden first if the app is opened on a smaller screen e.g. a mobile phone. Finally `@UI.lineItem.type` defines the column is displayed.
 Possible values are `#STANDARD` for normal values or `#WITH_URL` if the column contains a external link.
 
+The following listings show two variants of annotating the `Product` field with position 10, importance high and type `#STANDARD`.
+Note, that the code completion in the ABAP in Eclipse is very useful to create those annotations.
+
 ```abap
 @UI.lineItem.position: 10
 @UI.lineItem.label: 'Product'
 @UI.lineItem.importance = #HIGH
 @UI.lineItem.type = #STANDARD
 Product
+```
+
+```abap
+@UI:{
+  lineItem: [{
+    position: 10,
+    importance: #HIGH,
+    type: #STANDARD,
+    label: 'Product'
+  }]
+}
+```
+
+It might also be necessary to hide certain fields in the UI. For example, the `RatingUUID` in this example
+is not useful to any user and should therefore been hidden. Hiding a field can be achieved by using the `@UI.hidden: true` annotation.
+
+The listing below shows possible annotations for the fields of the `Z_C_Rating_ReadOnly` view.
+
+```abap
+
+@EndUserText.label: 'Rating view for RO UI'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+
+define root view entity Z_C_Rating_ReadOnly
+  as projection on Z_I_Rating
+{
+  @UI.hidden: true
+  key RatingUUID,
+
+      @UI:{
+        lineItem: [{
+          position: 10,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Product'
+        }]
+      }
+      Product,
+
+     @UI:{
+       lineItem: [{
+         position: 30,
+         importance: #MEDIUM,
+         type: #STANDARD,
+         label: 'Name'
+       }]
+      }
+      Name,
+
+      @UI:{
+        lineItem: [{
+          position: 40,
+          importance: #MEDIUM,
+          type: #STANDARD,
+          label: 'E-Mail'
+        }]
+      }
+      Email,
+
+      @UI:{
+        lineItem: [{
+          position: 20,
+          importance: #HIGH,
+          type: #STANDARD,
+          label: 'Rating'
+        }]
+      }
+      Rating,
+
+      @UI:{
+
+        identification: [{
+          position: 10,
+          label: 'Detailed Review',
+          qualifier: 'fReview'
+        }]
+      }
+      Review,
+
+      /* Associations */
+      _Product
+}
+
 ```
 
 ### Adding Header Information to the Object Page
