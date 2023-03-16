@@ -237,14 +237,6 @@ define root view entity Z_C_Rating_ReadOnly
       }
       Rating,
 
-      @UI:{
-
-        identification: [{
-          position: 10,
-          label: 'Detailed Review',
-          qualifier: 'fReview'
-        }]
-      }
       Review,
 
       /* Associations */
@@ -252,6 +244,10 @@ define root view entity Z_C_Rating_ReadOnly
 }
 
 ```
+
+With those annotations the preview of the read-only list report looks like shown the following screenshot.
+
+![Preview with UI.lineItem annotations](./imgs/ro_list_report/preview_with_annotations_01.png)
 
 ### Adding Header Information to the Object Page
 
