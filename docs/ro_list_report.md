@@ -527,7 +527,7 @@ Doing this requires two steps :
 
 First, the start rating should be displayed in the search result table of the list view. The data point for the `Rating` field is created using the
 following code. This creates a data point that is displayed as a rating. The maximum possible value of the rating is 5. And the data point is
-created for the `Rating` field (`qualifier: 'Rating').
+created for the `Rating` field (`qualifier: 'Rating'`).
 
 ```abap
 @UI:{
@@ -539,16 +539,51 @@ created for the `Rating` field (`qualifier: 'Rating').
   }
 }
 Rating,
-...
 ```
 
 After adding this the data point annotation the result table of the list report is displayed as shown in the following screenshot.
 
 ![Preview showing the rating as stars](./imgs/ro_list_report/preview_with_stars.png)
 
+#### Exercise 3
+
+Try to add annotations to also display the rating as stars on the object page. The
+[documentation on data points](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#data-points)
+from the Fiori Elements Feature Schowcase Wiki might be helpful.
+
 ## Extracting Metadata
+
+One issue with the current implementation of the CDS entity `Z_C_Rating_ReadOnly` is, that the definition of the business object and
+annotations specifying the presentation of the data on the UI are mixed. This contradicts the
+[Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) principle. Metadata extension offer the possibility to extract the
+UI annotations into a separate artefact.
+
+To create a metadata extension right click in the source code of the `Z_C_Rating_ReadOnly` entity and select `Source Code > Extract Metadata Extension`.
+Give the extension the same name as the CDS entity (i.e. `Z_C_Rating_ReadOnly`) and add `Metadata extension for Z_C_Rating_ReadOnly` as the description.
+On the subsequent screen of the dialogue select all element to extract the annotations for all of them and click `Finish`.
+The annotations are automatically extracted into the new metadata extension. Note that not all annotations are extracted. Only the
+annotations on the element level are extracted. The ones on the entity level (e.g. @Search.searchable) are not extracted.
+
+For the metadata extension a layer needs to be specified. Use `#CORE` for this example.
+The `#CUSTOMER` layer has the highest priority. The `#CORE` layer has the lowest priority. This can be used e.g. by customers to adapt the annotations
+to their needs.
+
+For the metadata extension to become active the annotation `@Metadata.allowExtensions` needs to be added to the CDS entity `Z_C_Rating_ReadOnly`. This
+annotation can, e.g. be added using a quick fix on the metadata extension.
+
+![Add annotation Metadata.allowExtension](./imgs/ro_list_report/allow_extension.png)
+
+Once this annotation is added, the entity and the metadata extension can be activated.
+Extracting the annotations into a metadata extension has the following effect:
+
+- The app works as before
+- The `Z_C_Rating_ReadOnly` entity does not contain any UI related annotations.
 
 ## References
 
 - [SAP Fiori Element Feature Showcase App for the ABAP RESTful Application Programming Model](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase)
 - [Searchable Wiki of the Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide)
+
+---
+
+[< Previous Chapter](./data_model.md) | [Next Chapter >](./transactional_app.md) | [Overview 🏠](../README.md)

@@ -30,10 +30,10 @@ The curriculum has the following learning objectives:
 
 This curriculum does not provide any instruction on how to set up an ABAP development environment.
 For students and lecturers at universities different options exist for getting access to an ABAP development environment.
-The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the 
-[product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)). 
+The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the
+[product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)).
 A possible alternative is the usage of the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
-of the SAP Business Technology Platform (SAP BTP). 
+of the SAP Business Technology Platform (SAP BTP).
 A detailed description on how to set up an ABAP development environment on the SAP BTP is given in the learning journey
 [Getting Started with ABAP Programming on SAP BTP](https://learning.sap.com/learning-journey/get-started-with-abap-programming-on-sap-btp).
 
@@ -77,9 +77,7 @@ The curriculum consists of the following lessons:
 1. [Creating the Data Model](./docs/data_model.md)
 1. [Creating a Read-Only List Report](./docs/ro_list_report.md)
 1. [Creating a Transactional App](./docs/transactional_app.md)
-1. [Creating a UI using Fiori Elements](./docs/fiori_ui.md)
 1. [Adding Behaviour to the App](./docs/adding_behaviour.md)
-1. [Adding Fuzzy Search](./docs/common_capbilities.md)
 1. [Adding Authentication & Authorization](./docs/authentication.md)
 
 ## References
