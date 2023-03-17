@@ -69,14 +69,15 @@ Finally, save and activate the changes again.
 
 ## Creating the Database Tables
 
-Once the data elements are created the next step is to create the database tables.
-The data model for the Rating App consists of the two tables Product and Rating.
+After defining the data elements, the next step involves creating database tables.
+The data model for the Rating App comprises two tables: Product and Rating.
 
-The table for products contains only the product ID and a description of the product (cf. the [scenario description](./scenario.md)).
-To create the product table right click on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`.
-In the dialog window select `Database Table` and click `Next`. Enter `ZPRODUCT` as the table name and
-`Product` as the description of the table. Finally select a transport request and click `Finish`.
-Copy the following code into the editor, save and activate the table.
+The Product table contains only the product ID and a description of the product,
+as specified in the [scenario description](./scenario.md). To create the Product table, right-click
+on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`. In the
+dialog window, choose _Database Table_ and click `Next`. Enter `ZPRODUCT` as the table
+name and `Product` as its description. Finally, select a transport request and click
+`Finish`. Copy the following code into the editor, save, and activate the table.
 
 ```abap
 @EndUserText.label : 'Product'
@@ -97,26 +98,26 @@ define table zproduct {
 
 The previous program code consist of the following elements:
 
-- The definition of the table `ZPRODUCT` using the `define table` statement
-- The `key` keyword defines the primary key of the database table. The primary key consists of
-  two fields, the `client` and the `product_id`. The `client` is the unique identifier of a client
-  in the SAP S/4HANA system. It is usually added as a primary key to any table unless the table should
-  not be client dependent.
-- The key word `not null` defines that the primary key is not allowed to be null.
-- The data type of the `client` field is set to the build in type `abap.clnt`
-- The data type of the `product_id` is the data element `ZE_PRODUCT_ID`
-- The field `product_desc` is a character field with the length of 40 characters.
+- The define table statement defines the `ZPRODUCT` table.
+- The `key` keyword specifies the primary key of the database table, comprising two fields: `client` and `product_id`.
+  The `client` is a unique identifier of a client in the SAP S/4HANA system and is typically added as a primary keys
+  to any table, except when the table should not be client-dependent.
+- The `not null` keyword indicates that the primary key cannot be null.
+- The data type of the `client` field is set to the built-in type `abap.clnt`.
+- The data type of the `product_id` is the data element `ZE_PRODUCT_ID`.
+- The `product_desc` field is a character field with a length of 40 characters.
 
-In addition some annotations (staring with the `@`) are added to the table definition. The `@EndUserText.label`
-defines the short text label of the table. This will, for example, be shown in the IDE. The
-`@ABAPCatalog.deliveryClass` annotation identifies the table as a table containing application data
-(e.g. in contrast to customizing data). The ABAP documentation contains a detailed description of each
-of the used annotations.
+Additionally, some annotations (starting with the `@` symbol) are added to the table
+definition. The `@EndUserText.label` defines the short text label of the table, which
+is displayed in the IDE, for example. The `@ABAPCatalog.deliveryClass` annotation identifies
+the table as one containing application data (as opposed to customizing data). The
+ABAP documentation offers a detailed description of each used annotation.
 
-The rating table contains the rating of a product, a review text, the customer name and a customer address. The product
-is a foreign key relation to the primary key `PRODCUT_ID` of the table `ZPRODUCT`. Additionally to those field from the scenario,
-the table should also contain some management data. For each entry the user and time that created and changed the entry should be
-stored. The following code snippet can be used to create the table.
+The Rating table stores the product rating, review text, customer name, and customer
+address. The product is a foreign key relation to the primary key `PRODUCT_ID` of the
+`ZPRODUCT` table. In addition to these fields from the scenario, the table should also
+contain management data. For each entry, the user and timestamp for creation and
+modification should be stored. The following code snippet can be used to create the table.
 
 ```abap
 @EndUserText.label : 'Rating'
@@ -146,36 +147,43 @@ define table zrating {
 
 ```
 
-The table created by the code snippet above consist of the following elements:
+The code snippet above creates a table containing the following elements:
 
-- some annotations to set the end user label, the table category and so on.
-- The key consists of the `client` and the `rating_uuid` of type `sysuuid_x16`. The ID of a rating record is therefore not
-  some number from a numbering scheme (as e.g. the product id) but a [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-- The `product` is defined using the data element `ZE_PRODUCT_ID`. Furthermore, a foreign key relation to the table
-  `ZPRODUCT` is defined. This defines that exactly 1:n relation between the entries in table `ZPRODUCT` and the entries in table `ZRATING`. The
-  annotation `@AbapCatalog.foreignKey.screenCheck` is not relevant in the context of ABAP on the SAP BTP. However, it might still be added automatically
-  when activating the directory object.
-- The `name` and `email` fields are defined as character fields with the length of 128 characters.
+- Annotations are included to set the end user label, table category, and so on.
+- The key consists of the `client` and the `rating_uuid` of type `sysuuid_x16`. A
+  rating record ID is not a simple number from a numbering scheme (such as a product
+  ID) but rather a [universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+- The `product` is defined using the data element `ZE_PRODUCT_ID`. Moreover, a foreign
+  key relation to the table `ZPRODUCT` is established. This defines a 1:n relation
+  between entries in the `ZPRODUCT` table and entries in the `ZRATING` table. The annotation
+  `@AbapCatalog.foreignKey.screenCheck` is not relevant in the context of ABAP on the
+  SAP BTP. However, it may still be added automatically when activating the directory object.
+- The `name` and `email` fields are defined as character fields with a length of 128 characters.
 - The `rating` field is defined using the data element `ZE_RATING`.
-- The `review` field is a character field with the length of 512 characters.
-- The `created_by` and `last_changed_by` are fields to store the user that created or change an entry. The `syuname` data type is used for this element.
-- The `created_at` and `last_changed_at` fields are used to store the timestamp when the entry was created or changed. The `timestampl` data type is used for this element.
+- The `review` field is a character field with a length of 512 characters.
+- The `created_by` and `last_changed_by` fields store the user who created or changed
+  an entry. The `syuname` data type is used for these elements.
+- The `created_at` and `last_changed_at` fields store the timestamp when the entry
+  was created or changed. The `timestampl` data type is used for these elements.
 
 ## Adding Data to the Database
 
-For each table in the database it is possible to show and browse the content using _Data Preview_ of the ABAP development tools.
-To open the data preview either right click on the table and select `Open With > Data Preview` or simply press `<F8>` in the editor
-window of the table. However, as the database tables where just created they do not contain any data yet. The next
-step is to write a litters program to create some data in the tables.
+For each table in the database, it is possible to display and browse the content
+using the _Data Preview_ feature of the ABAP development tools. To open the data preview,
+right-click on the table and select `Open With > Data Preview` or simply press
+`<F8>` in the editor window of the table. However, since the database tables have just
+been created, they do not contain any data yet. The next step is to write a small
+program to create some data in the tables.
 
-The class `ZCL_GENERATE_DATA` shown below can be used to generate some data. It implements the `IF_OO_ADT_CLASSRUN` interface. This way
-the class can be execute. In the `main` method the two methods `create_products` and `create_ratings` are called. Both methods
-first empty the respective database table using a `DELETE FROM ...` statement. After that some dummy data is created and inserted
-using a `INSERT INTO ...` statement. To create the dummy data a
-[VALUE constructor expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenconstructor_expression_value.htm)
-is used.
+The class `ZCL_GENERATE_DATA` shown below can be used to generate some data. It implements
+the `IF_OO_ADT_CLASSRUN` interface, allowing the class to be executed. In the main
+method, the two methods `create_products` and `create_ratings` are called. Both methods
+first empty the respective database table using a `DELETE FROM ...` statement. Afterwards,
+dummy data is created and inserted using an `INSERT INTO ...` statement.
+A [VALUE constructor expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenconstructor_expression_value.htm)
+is used to create the dummy data.
 
-Note that no `COMMIT WORK` statement is needed. The commit happens implicitly when executing the class.
+Note that no `COMMIT WORK` statement is needed, as the commit occurs implicitly when executing the class.
 
 ```abap
 CLASS zcl_generate_data DEFINITION
@@ -304,13 +312,12 @@ ENDCLASS.
 
 ```
 
-Create the class `ZCL_GENERATE_DATA` in the `Z_RATING_DB` package and execute it.
-Do not simply copy the code of the class but write the code in the editor instead. Use code completion (`<CTRL><SPACE>`) to
-see the code completion features of Eclipse and the ADT. For example, it is possible to
-get the fields of a table line using code completion.
+Create the class `ZCL_GENERATE_DATA` in the `Z_RATING_DB` package and execute it. Instead
+of simply copying the code of the class, write the code in the editor and use code
+completion (`<CTRL><SPACE>`) to explore the code completion features of Eclipse and
+the ADT. For example, it is possible to get the fields of a table line using code completion.
 
-After executing the class the
-data preview of the table `ZRATING` should look similar to the screenshot below.
+After executing the class, the data preview of the `ZRATING` table should look similar to the screenshot below.
 
 ![Data Preview of the `ZRATING` Table](imgs/data_model/data_preview.png)
 
@@ -321,19 +328,22 @@ complex `SELECT` statements on the tables in the database.
 
 ## Create CDS Views for the Database Tables
 
-The next step is to add some semantic information to the database tables. This is done using CDS views.
-To create a CDS view right click on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`. In the
-dialog window select `Data Definition` and click `Next >`. The name of the CDS view is `Z_I_Rating`, the description `Rating view`.
-Click `Next >` to select a transport request and `Next >` to select a template.
+The next step is to add semantic information to the database tables. This is done using CDS views.
 
-The `_I_` in the name of the view is used to mark this view as a _Interface View_. The idea is to provide a stable interface to
-the underlying data model. More details on different views for the same database table are discussed later.
+To create a CDS view, right-click on the package `Z_RATING_DB`, and select `New > Other 
+ABAP Repository Object`. Choose _Data Definition_ in the dialog window and click `Next >`.
+Name the CDS view `Z_I_Rating` and provide the description `Rating view`. Click `Next >`
+to select a transport request and `Next >` to choose a template.
 
-The goal is to create business objects on the basis of these CDS views. Each business object needs a root node.
-In our case the business objects are simple an only consist of root nots. To create the correct CDS view for a root node
-select the template `Define Root View Entity` and click `Finish`.
+The `_I_` in the view's name signifies that it is an _Interface View_, providing
+a stable interface to the underlying data model. Further discussion on different
+views for the same database table is available later in the text.
 
-Change the code generated by the template to the code below.
+Each business object needs a root node, which will be created based on these CDS
+views. Since the business objects are simple and only consist of root nodes, select
+the template _Define Root View Entity_ and click `Finish`.
+
+Modify the code generated by the template to match the code below:
 
 ```abap
 
@@ -346,14 +356,9 @@ define root view entity Z_I_Product
 }
 ```
 
-Next, place the cursor between the curly braces and use the code completion (`<CTRL><SPACE>`) to add all elements of the
-database table `Z_RATING` to the view. The result should be similar to the code below.
-
-Note, that the `client` field is not added to the view. The ABAP runtime takes care of handling the `client` field, i.e.
-allowing only access to the data of the current client. Therefore, this field is not needed in the view. Besides this simplification
-the view is the same as the table `Z_RATING`.
-
-Furthermore, the field names have been remanded to more user friendly names. These names are only a suggestion and can be changed if needed.
+Place the cursor between the curly braces and use code completion (`<CTRL><SPACE>`)
+to add all elements of the database table `Z_RATING` to the view. The result should
+resemble the following code:
 
 ```abap
 
@@ -368,13 +373,18 @@ define root view entity Z_I_Product
 }
 ```
 
-The next step is to add relation information to the view.
-The code snippet below shows the complete code of the view. The line starting with `association` defines a 0:n
-relation between the entries of the view `Z_I_Product` and the view `Z_I_Rating`. This relation is named `_Rating` and also
-added to the view. The `$projection.ProductId = _Rating.Product` defines the condition of the association. This can be
-seen as the `where` condition of a database join statement.
+Note, that the `client` field is not added to the view. The ABAP runtime takes care of handling the `client` field, i.e.
+allowing only access to the data of the current client. Therefore, this field is not needed in the view. Besides this simplification
+the view is the same as the table `Z_RATING`. Furthermore, the field names have been remanded to more user friendly names. These names are only a suggestion and can be changed if needed.
 
-Note that the view `Z_I_Rating` has not been defined so far. Therefore, it is not possible to activate the `Z_I_Product` view, yet.
+Next, add relationship information to the view with the code snippet below.
+The line starting with `association` defines a 0:n relationship between the entries
+of the view `Z_I_Product` and the view `Z_I_Rating`. This relationship is named `_Rating`
+and is also added to the view. The `$projection.ProductId = _Rating.Product` sets the
+condition of the association. This statement ns functioning similarly to the where condition of a database join statement.
+
+Please note that the view `Z_I_Rating` has not been defined yet, so it is not possible
+to activate the `Z_I_Product` view at this time.
 
 ```abap
 
@@ -391,19 +401,21 @@ define root view entity Z_I_Product
 }
 ```
 
-The next step is to create the CDS view `Z_I_Rating`. Below is the complete code of the view.
-Again try to create the view using a template and code completion instead of copy and paste.
+Now, create the CDS view `Z_I_Rating` using the complete code below. Instead of copying
+and pasting, attempt to create the view using a template and code completion.
 
-The view `Z_I_Rating` again contains all the field of the underlying database table. It also
-defines a association to the view `Z_I_Product`, in this case a 1:1 relation. Each entry in the
-Rating view is related to exactly one Product.
+The view `Z_I_Rating` includes all fields of the underlying database table and defines
+a 1:1 association to the view `Z_I_Product`. Each entry in the Rating view is related
+to exactly one Product.
 
-The `Z_I_Rating` contains additional semantic information. The annotations `@Semantics.user.createdBy` and
-`@Semantics.user.lastChangedBy` are used to identify the fields that store the user who created or changed the entry.
-Similar the `@Semantics.systemDateTime.createdAt` and `@Semantics.systemDateTime.lastChangedAt` are used to identify the
-fields that store the date and time when the entry was created or last changed. Currently these annotations have no
-visible effect. However, one a business object is create on the basis of this view, the annotations are used by
-the ABAP RAP framework to automatically fill and update those fields.
+The `Z_I_Rating` view contains additional semantic information through annotations.
+Annotations like `@Semantics.user.createdBy` and `@Semantics.user.lastChangedBy` identify
+the fields that store the user who created or changed the entry. Similarly,
+`@Semantics.systemDateTime.createdAt` and `@Semantics.systemDateTime.lastChangedAt` identify the
+fields that store the date and time when the entry was created or last changed. While
+these annotations currently have no visible effect, they will be utilized by the
+ABAP RAP framework to automatically populate and update those fields once a business
+object is created based on this view.
 
 ```abap
 @AccessControl.authorizationCheck: #NOT_REQUIRED
@@ -431,35 +443,37 @@ define root view entity Z_I_Rating
 }
 ```
 
-After saving both views it is possible to activate them using the `Activate inactive ABAP dvelopment objects`
+After saving both views, activate them using the `Activate inactive ABAP dvelopment objects`
 button (![Activate inactive ABAP dvelopment objects Button](imgs/data_model/activate_all.png)).
 
-The following figure shows the relation of the created development objects to the elements of
-the ABAP RAP. So far only the data model has been created.
+The following figure illustrates the relationship between the created development
+objects and the elements of the ABAP RAP. So far, only the data model has been created.
 
 ![RAP Components](imgs/data_model/rap_components_datamodel.drawio.png)
 
-## Navigate the Data using CDS Views
+## Explore Data using CDS Views
 
-The data preview of the `Z_I_Product` view looks similar to the data preview of the `ZPRODUCT` table.
-The main differences are:
+The data preview of the `Z_I_Product` view is similar to that of the `ZPRODUCT` table, with two main differences:
 
-- The `client` field is not part of the view
-- The names of the fields are changed to more user friendly names
+- The `client` field is not part of the view.
+- The field names have been changed to more user-friendly names.
 
 ![Data Preview of the `Z_I_Product` View](imgs/data_model/data_preview_cds.png)
 
-The main difference becomes obvious by right clicking on a entry and selecting `Follow association`. This opens a dialog window
-in which the association to follow can be select. By selection the `_Rating` association it is now possible to
-navigate to all the ratings of a certain product. Using the SQL console it is possible to analyse the SQL statement used
-to perform the selection of the associated entries.
+The primary distinction becomes apparent when right-clicking on an entry and selecting
+`Follow association.` This action opens a dialog window in which the association to
+follow can be chosen. By selecting the `_Rating` association, it becomes possible to
+navigate to all ratings for a particular product. The SQL console can be used to
+analyze the SQL statement employed to select the associated entries.
 
 ![Follow Associations in Data Preview](imgs/data_model/data_preview_association.png)
 
-The opposite direction is also possible. From any rating it is possible to navigate to the product that was rated.
+Navigation in the opposite direction is also feasible: from any rating, it is possible
+to navigate to the rated product.
 
-This feature is possible because of the association information that was added to the view. In the next step the RAP framework
-uses this information to automatically creates a basic UI for the data in the tables.
+This functionality is enabled by the association information added to the view. In
+the next step, the RAP framework will use this information to automatically create
+a basic UI for the data in the tables.
 
 ---
 
