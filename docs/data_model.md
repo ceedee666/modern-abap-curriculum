@@ -444,7 +444,7 @@ define root view entity Z_I_Rating
 ```
 
 After saving both views, activate them using the `Activate inactive ABAP dvelopment objects`
-button (![Activate inactive ABAP dvelopment objects Button](imgs/data_model/activate_all.png)).
+button (![Activate inactive ABAP development objects Button](imgs/data_model/activate_all.png)).
 
 The following figure illustrates the relationship between the created development
 objects and the elements of the ABAP RAP. So far, only the data model has been created.
