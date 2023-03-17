@@ -1,32 +1,29 @@
 # Creating a Read-Only List Report
 
-With the data model in place the next step is to create a read-only list report.
-A read-only list report enables displaying the data of the business objects using a
-Fiori-App. In this unit a read-only list report is created for the `Z_C_Rating_ReadOnly` entity.
-The Fiori-App is implemented using the [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/)
-framework.
+With the data model established, the next step involves creating a read-only list
+report. This report allows the data of the business objects to be displayed using
+a Fiori App. In this unit, a read-only list report is created for the `Z_C_Rating_ReadOnly`
+entity, with the Fiori App implemented using the [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
 
 ## The Business Service Provisioning Layer
 
-The following figure shows the components of the ABAP RAP again.
-In the figure the _Business Service Provisioning_ layer separates
-the business objects from the service consumption.
+As shown in the ABAP RAP components diagram, the _Business Service Provisioning_ layer
+separates the business objects from service consumption.
 
 ![ABAP RAP Components](imgs/abap_rap/rap_components.drawio.png)
 
 The business service provisioning layer contains two types of entities:
 
-- Service Definition
-- Service Binding.
+1. Service Definition
+1. Service Binding.
 
-The role of the _service definition_ is to specify which business objects of the data model
-are exposed. In particular,
-different service definitions can be created for the same
-business object to cater for different consumption scenarios.
+The \_service definition'\_s role is to specify which business objects from the data
+model are exposed. Different service definitions can be created for the same business
+object to accommodate various consumption scenarios.
 
-The _service binding_ binds a service (defined in a service definition) to a specific communication
-protocol. Examples of available bindings are OData V2 and OData V4. Again, it is possible to create
-different service bindings for different service definitions.
+The _service binding_ connects a service (defined in a _service definition_) to a specific
+communication protocol. Examples of available bindings include OData V2 and OData
+V4. It is also possible to create different service bindings for different service definitions.
 
 ## Creating a Service Definition and a Service Binding
 
@@ -35,8 +32,8 @@ right click on the entity and select `New Service Definition`.
 
 ![Creating a new service definition](./imgs/ro_list_report/create_service_def.png)
 
-In the dialogue enter `Z_S_RATING_READONLY` as the name of the service definition and
-`Service for Read-Only UI` as the description. In the next screen select a transport request and
+In the dialogue, enter `Z_S_RATING_READONLY` as the name of the service definition and
+`Service for Read-Only UI` as the description. In the next screen, select a transport request and
 click `Next>`. In the templates screen select the `Define Service`template and click `Finish`.
 
 Below is the code of the service definition.
@@ -50,12 +47,14 @@ define service Z_S_Rating_ReadOnly {
 ```
 
 The service [exposes](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abensrvd_define_service.htm)
-two entities from the data model, `Z_C_Rating_ReadOnly` and `Z_C_Product_ReadOnly`.
+two entities from the data model: `Z_C_Rating_ReadOnly` and `Z_C_Product_ReadOnly`.
 
 To create a service binding for the service definition, right click on the `Z_S_RATING_READONLY` service and
 select `New Service Binding`.
 In the dialogue enter `Z_B_RATING_READONLY_V2` as the name of the service definition and
-`Rating Service - UI V2` as the description. As the binding type select `OData V2 - UI`. In the next screen select a transport request and
+`Rating Service - UI V2` as the description. For the binding type select `OData V2
+
+- UI`. In the next screen select a transport request and
 click `Finish` and activate the binding.
 
 The resulting binding is shown in the following screenshot.
@@ -84,9 +83,9 @@ returned data e.g. only read reviews for a certain product.
 
 ### Different Service Binding Protocol Options
 
-When creating a service binding different protocol options are available. The
+When creating a service binding, different protocol options are available. The
 [SAP documentation](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/service-binding)
-contains the following recommendations when to use which option:
+provides the following recommendations choosing the appropriate option:
 
 > **UI service**
 >
@@ -95,7 +94,8 @@ contains the following recommendations when to use which option:
 >
 > **Web API**
 >
-> A service that is exposed as Web API is used for all other use cases apart from UIs. Web APIs can be consumed by an unknown consumer via OData. Web APIs can be extended.
+> A service that is exposed as Web API is used for all other use cases apart from
+> UIs. Web APIs can be consumed by an unknown consumer via OData. Web APIs can be extended.
 > Currently, Web APIs are supported for OData and SQL services.
 
 Whether to use OData v2 or OData v4 depends also on the focus of the service. Regarding OData v4 the SAP documentation states:
@@ -107,7 +107,7 @@ However, not all features of SAP Fiori elements are available for OData v2. Ther
 ### Previewing the Service
 
 With the service published, it is now possible to preview the data using Fiori Elements.
-The screenshot below shows the result of executing the preview for `Z_C_Rating_ReadOnly`.
+The screenshot below displays the result of executing the preview for `Z_C_Rating_ReadOnly`.
 
 ![Previewing the service](./imgs/ro_list_report/preview.png)
 
@@ -116,20 +116,28 @@ entity should be displayed and which not. In one of the subsequent steps this in
 defining the entity. Until then it is possible to manually select the data to be displayed. This is done by clicking on the
 gear icon. This opens the `View Settings` dialog. Here the columns to display can be selected.
 
+The preview does not show any data because there is currently no definition specifying
+which data of the entity should be displayed. This information will be added to the
+CDS view defining the entity in subsequent steps. Until then, it is possible to manually
+select the data to be displayed by clicking on the gear icon, which opens the _View
+Settings_ dialog. Here, you can choose the columns to display.
+
 ![View Settings](./imgs/ro_list_report/view_settings.png)
 
 Selecting all available columns and also sorting the table by `Product ID` results in the data being displayed as shown below.
 
 ![Preview containing all columns](./imgs/ro_list_report/preview_with_data.png)
 
-Note that the Fiori elements app already provides a number of nice features. For example, it is possible to
-resize the columns, to change the sort order and filtering by clicking on the column header or an export to MS Excel.
+Note that the Fiori elements app already provides several useful features, such as
+the ability to resize columns, change the sort order, filter by clicking on the column
+header, and export to MS Excel.
 
 ## Adding UI Annotations
 
-As mentioned before the Fiori App in this tutorial is build using they
-[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework. This framework offers
-different floorplans to create apps for different use cases. Currently SAP Fiori Elements offers the following floorplans:
+As previously mentioned, the Fiori App in this tutorial is built using the
+[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/)framework.
+This framework offers different floorplans to create apps for
+various use cases. Currently, SAP Fiori Elements provides the following floorplans:
 
 - List Report
 - Work list
@@ -137,30 +145,35 @@ different floorplans to create apps for different use cases. Currently SAP Fiori
 - Overview Page
 - Analytics List Page.
 
-Examples of the different floorplans are shown [here](https://experience.sap.com/fiori-design-web/smart-templates/#supported-floorplans).
-In this unit a read-only list report to display the rating data is developed. Consequently, the list report floorplan is the basis for this app.
+Examples of the different floorplans can be found [here](https://experience.sap.com/fiori-design-web/smart-templates/#supported-floorplans).
+In this unit, a read-only list report for displaying rating data is developed, so
+the list report floorplan serves as the basis for this app.
 
-Each of the different SAP Fiori elements floorplans offers a large number of features. Identifying the correct feature
-to implement a certain requirement is sometimes not easy. Fortunately SAP create the
-[SAP Fiori Element Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase). This app
-shows all the available features and also provides code examples for their usage. Furthermore, the
-[Wiki of the Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide) offers
-a very useful search functionality.
+Each of the SAP Fiori elements floorplans offers a wide range of features. Identifying
+the correct feature to implement a specific requirement can sometimes be challenging.
+Fortunately, SAP has created the [SAP Fiori Element Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase).
+This app demonstrates all available features and provides code examples for their usage. Moreover,
+the [Wiki of the Feature Showcase App](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide)
+offers a useful search functionality.
 
-In the following sections different features are added to the read-only list report using CDS annotations.
+In the following sections, various features are added to the read-only list report using CDS annotations.
 
 ### Defining Search Result Columns
 
-In the current state it is necessary to add the displayed columns to the list report manually each time the app preview is started.
-The first step is to define which columns are displayed in the search result table.
-To add a field of a CDS view as a column to the search result table the `@UI.lineItem` annotation can be used.
-With `@UI.lineItem.position` the position of the column can be defined. `@UI.lineItem.label` defines the label of the column.
-`@UI.lineItem.importance` defines which columns are less and which are more important. The less important columns are
-hidden first if the app is opened on a smaller screen e.g. a mobile phone. Finally `@UI.lineItem.type` defines the column is displayed.
-Possible values are `#STANDARD` for normal values or `#WITH_URL` if the column contains a external link.
+Currently, users must manually add the displayed columns to the list report each
+time the app preview starts. The first step is to define which columns appear in
+the search result table. To add a field of a CDS view as a column to the search result
+table, use the `@UI.lineItem` annotation. The position of the column can be defined
+with `@UI.lineItem.position`, while `@UI.lineItem.label` sets the column's label.
+`@UI.lineItem.importance` determines the importance of the columns, with less important
+columns hidden first when the app is opened on a smaller screen (e.g., a mobile phone
+). Finally, `@UI.lineItem.type` defines how the column is displayed, with possible
+values being `#STANDARD` for normal values or `#WITH_URL` for columns containing external
+links.
 
-The following listings show two variants of annotating the `Product` field with position 10, importance high and type `#STANDARD`.
-Note, that the code completion in the ABAP in Eclipse is very useful to create those annotations.
+The following listings show two variants of annotating the `Product` field with position
+10, importance high, and type `#STANDARD`. Note that code completion in ABAP in Eclipse
+is beneficial for creating these annotations.
 
 ```abap
 @UI.lineItem.position: 10
@@ -245,16 +258,18 @@ define root view entity Z_C_Rating_ReadOnly
 
 ```
 
-With those annotations the preview of the read-only list report looks like shown the following screenshot.
+With those annotations the preview of the read-only list report looks like shown in the following screenshot.
 
 ![Preview with UI.lineItem annotations](./imgs/ro_list_report/preview_with_annotations_01.png)
 
 ### Adding Search Capabilities
 
-Currently, the app offers no functionality to search for a certain review other then scrolling though the result list.
-In this step search capabilities are added to the list report.
+Currently, the app doesn't provide any search functionality to find specific reviews,
+other than manually scrolling through the result list. To address this, search
+capabilities are being added to the list report.
 
-To enable search capabilities for a CDS entity the entity needs to be annotation with `@Search.searchable: true`.
+To enable search capabilities for a CDS entity, the entity needs to be annotated
+with `@Search.searchable: true`.
 
 ```abap
 @Search.searchable: true
@@ -262,9 +277,10 @@ define root view entity Z_C_Rating_ReadOnly
 ...
 ```
 
-Next, all fields that should be searchable need to be annotated with `@Search.defaultSearchElement: true`. In
-addition it is possible to specify a threshold for the required similarity of the results to the search string.
-A similarity threshold of 1.0 means that the result and search term are identical.
+Next, all fields that should be searchable need to be annotated with `@Search.defaultSearchElement: true`.
+Additionally, you can specify a threshold for the required similarity of
+the search results to the search string. A similarity threshold of 1.0 means that
+the result and search term are identical.
 
 ```abap
 ...
@@ -274,8 +290,8 @@ Product,
 ...
 ```
 
-Finally, the is is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation. The following listing
-shows the resulting CDS entity including the annotations.
+Finally, the is is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation.
+The resulting CDS entity, including the annotations, is shown in the following listing.
 
 ```abap
 @Search.searchable: true
@@ -344,14 +360,15 @@ The following screenshot shows the resulting Fiori App.
 
 #### Exercise 2
 
-Test different search string and different variants of search annotations (e.g. threshold value) to see the effect of these annotations.
-Which of the UI adaptation features (e.g. adding and removing result columns or reordering of columns) do still work?
+Try testing different search strings and search annotation variants (e.g., threshold
+value) to see their effects. Also, check which UI adaptation features, such as adding
+or removing result columns or reordering columns, still work.
 
 ### Adding Object Page Annotations
 
-The current version of the app already allows to navigate to the details of a review.
-However, the object page (i.e. the page displaying the details) is currently completely empty. In the next step
-annotations are used to add information to the object page.
+Although the current version of the app allows users to navigate to the details of
+a review, the object page (i.e., the page that displays the details) is currently
+empty. In the next step, annotations are used to add information to the object page.
 
 The `@UI.headerInfo.typeName` and `@UI.headerInfo.typeNamePlural` annotations can be used to add a title to the result table and the
 object page.
@@ -396,7 +413,7 @@ can be added to the `fCustomer` facet.
 Name
 ```
 
-Adding addition annotation for the object page to `Z_C_Rating_ReadOnly` results in the following code.
+The resulting code, including the additional annotations for the object page, is shown in the following listing.
 
 ```abap
 @EndUserText.label: 'Rating view for RO UI'
@@ -518,16 +535,16 @@ The resulting object page for a rating is shown in the following screenshot.
 
 ### Beautifying the App
 
-The last step is to display the customer rating of a product not as a number but as a rating indicator with little stars. A rating of 3 should
-be displayed as three stars, a rating of 5 as five stars.
-Doing this requires two steps :
+The final step is to display the customer rating of a product not as a number, but
+as a rating indicator with little stars. This requires two steps:
 
 1. Definition of a data point
-1. Referencing the data point.
+1. Referencing the data point
 
-First, the start rating should be displayed in the search result table of the list view. The data point for the `Rating` field is created using the
-following code. This creates a data point that is displayed as a rating. The maximum possible value of the rating is 5. And the data point is
-created for the `Rating` field (`qualifier: 'Rating'`).
+To display the star rating in the search result table of the list view, a data point
+is created for the Rating field using the following code. This creates a data point
+that is displayed as a rating. The maximum possible value of the rating is 5, and
+the data point is created for the `Rating` field (`qualifier: 'Rating'`).
 
 ```abap
 @UI:{
@@ -541,35 +558,43 @@ created for the `Rating` field (`qualifier: 'Rating'`).
 Rating,
 ```
 
-After adding this the data point annotation the result table of the list report is displayed as shown in the following screenshot.
+After adding this data point annotation, the result table of the list report is displayed
+with the rating shown as stars, as shown in the following screenshot:
 
 ![Preview showing the rating as stars](./imgs/ro_list_report/preview_with_stars.png)
 
 #### Exercise 3
 
-Try to add annotations to also display the rating as stars on the object page. The
+To display the rating as stars on the object page as well, additional annotations need to be added.
+Try to add these annotations yourself. The
 [documentation on data points](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#data-points)
-from the Fiori Elements Feature Schowcase Wiki might be helpful.
+from the Fiori Elements Feature Showcase Wiki might be helpful.
 
 ## Extracting Metadata
 
-One issue with the current implementation of the CDS entity `Z_C_Rating_ReadOnly` is, that the definition of the business object and
-annotations specifying the presentation of the data on the UI are mixed. This contradicts the
-[Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) principle. Metadata extension offer the possibility to extract the
-UI annotations into a separate artefact.
+One issue with the current implementation of the CDS entity `Z_C_Rating_ReadOnly` is
+that the definition of the business object and annotations specifying the presentation
+of the data on the UI are mixed. This contradicts the [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) principle.
+Metadata extensions offer the possibility to extract the UI annotations into a
+separate artifact.
 
-To create a metadata extension right click in the source code of the `Z_C_Rating_ReadOnly` entity and select `Source Code > Extract Metadata Extension`.
-Give the extension the same name as the CDS entity (i.e. `Z_C_Rating_ReadOnly`) and add `Metadata extension for Z_C_Rating_ReadOnly` as the description.
-On the subsequent screen of the dialogue select all element to extract the annotations for all of them and click `Finish`.
-The annotations are automatically extracted into the new metadata extension. Note that not all annotations are extracted. Only the
-annotations on the element level are extracted. The ones on the entity level (e.g. @Search.searchable) are not extracted.
+To create a metadata extension, right-click the source code of the `Z_C_Rating_ReadOnly`
+entity and select `Source Code > Extract Metadata Extension`. Give the extension the
+same name as the CDS entity (i.e., `Z_C_Rating_ReadOnly`) and add `Metadata extension 
+for Z_C_Rating_ReadOnly` as the description. On the subsequent screen of the dialog,
+select all elements to extract the annotations for all of them, and click `Finish`.
+The annotations are automatically extracted into the new metadata extension. Note
+that not all annotations are extracted. Only the annotations on the element level
+are extracted; the ones on the entity level (e.g., `@Search.searchable`) are not extracted.
 
-For the metadata extension a layer needs to be specified. Use `#CORE` for this example.
-The `#CUSTOMER` layer has the highest priority. The `#CORE` layer has the lowest priority. This can be used e.g. by customers to adapt the annotations
-to their needs.
+For the metadata extension, a layer needs to be specified. Use `#CORE` for this example.
+The `#CUSTOMER` layer has the highest priority, while the `#CORE` layer has the lowest
+priority. This can be used, for example, by customers to adapt the annotations to
+their needs.
 
-For the metadata extension to become active the annotation `@Metadata.allowExtensions` needs to be added to the CDS entity `Z_C_Rating_ReadOnly`. This
-annotation can, e.g. be added using a quick fix on the metadata extension.
+For the metadata extension to become active, the annotation `@Metadata.allowExtensions`
+needs to be added to the CDS entity `Z_C_Rating_ReadOnly`. This annotation can be added
+using a quick fix on the metadata extension.
 
 ![Add annotation Metadata.allowExtension](./imgs/ro_list_report/allow_extension.png)
 
