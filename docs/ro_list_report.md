@@ -535,7 +535,8 @@ The resulting object page for a rating is shown in the following screenshot.
 
 ### Beautifying the App
 
-The final step is to display the customer rating of a product not as a number, but
+The aim of this step is to improve the usability of the app. This can also be achieved using
+annotation. First, the customer rating of a product should not be displayed as a number, but
 as a rating indicator with little stars. This requires two steps:
 
 1. Definition of a data point
@@ -569,6 +570,31 @@ To display the rating as stars on the object page as well, additional annotation
 Try to add these annotations yourself. The
 [documentation on data points](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#data-points)
 from the Fiori Elements Feature Showcase Wiki might be helpful.
+
+Now the value help for the `Product` search should be improved. Currently it is not possible to
+select values from the `ZPRODUCT` table. To enable this a
+[value help](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#value-help)
+annotation needs to be added. The following code snippet shows how to add a value help to the `Product` field
+of the `Z_C_Rating_ReadOnly` CDS view.
+
+This value help references the `Z_C_Product_ReadOnly` entity and uses `ProductId` element as the basis for possible values.
+
+Currently, it is not possible to select values from the `ZPRODUCT` table in the `Product`
+search. To enable this,
+a [value help](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#value-help)
+annotation needs to be added. The following
+code snippet shows how to add a value help to the `Product` field of the `Z_C_Rating_ReadOnly` CDS view:
+
+```abap
+@Consumption.valueHelpDefinition: [{
+   entity: {
+       name: 'Z_C_Product_ReadOnly',
+       element: 'ProductId'}}]
+ Product;
+```
+
+This value help references the `Z_C_Product_ReadOnly` entity and uses the `ProductId`
+element as the basis for possible values.
 
 ## Extracting Metadata
 
