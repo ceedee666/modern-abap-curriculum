@@ -24,8 +24,9 @@ annotate view Z_C_Rating_ReadOnly with
                  position: 20 }]
   @UI.hidden: true
   RatingUUID;
+  
   @UI:{
-    selectionField: [{position: 10 }],
+    selectionField: [{position: 10}],
     lineItem: [{
       position: 10,
       importance: #HIGH,
@@ -38,9 +39,17 @@ annotate view Z_C_Rating_ReadOnly with
         qualifier: 'fHeader'
       }]
   }
+
   @Search.defaultSearchElement: true
   @Search.fuzzinessThreshold : 0.8
+
+  @Consumption.valueHelpDefinition: [{ 
+    entity: { 
+        name: 'Z_C_Product_ReadOnly',
+        element: 'ProductId'}
+    }]
   Product;
+
   @UI:{
     lineItem: [{
       position: 30,
@@ -57,6 +66,7 @@ annotate view Z_C_Rating_ReadOnly with
   @Search.defaultSearchElement: true
   @Search.fuzzinessThreshold : 0.8
   Name;
+  
   @UI:{
     lineItem: [{
       position: 40,
@@ -72,6 +82,7 @@ annotate view Z_C_Rating_ReadOnly with
   }
   @Search.defaultSearchElement: true
   Email;
+
   @UI:{
     lineItem: [{
       position: 20,
@@ -86,8 +97,8 @@ annotate view Z_C_Rating_ReadOnly with
     }
   }
   Rating;
-  @UI:{
 
+  @UI:{
     identification: [{
       position: 10,
       label: 'Detailed Review',
