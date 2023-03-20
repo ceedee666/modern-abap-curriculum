@@ -204,7 +204,7 @@ The listing below shows possible annotations for the fields of the `Z_C_Rating_R
 @EndUserText.label: 'Rating view for RO UI'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 
-define root view entity Z_C_Rating_ReadOnly
+define view entity Z_C_Rating_ReadOnly
   as projection on Z_I_Rating
 {
     @UI.hidden: true
@@ -273,7 +273,7 @@ with `@Search.searchable: true`.
 
 ```abap
 @Search.searchable: true
-define root view entity Z_C_Rating_ReadOnly
+define view entity Z_C_Rating_ReadOnly
 ...
 ```
 
@@ -295,7 +295,7 @@ The resulting CDS entity, including the annotations, is shown in the following l
 
 ```abap
 @Search.searchable: true
-define root view entity Z_C_Rating_ReadOnly
+define view entity Z_C_Rating_ReadOnly
   as projection on Z_I_Rating
 {
       @UI.hidden: true
@@ -424,7 +424,7 @@ The resulting code, including the additional annotations for the object page, is
                typeNamePlural: 'Ratings' } }
 
 @Search.searchable: true
-define root view entity Z_C_Rating_ReadOnly
+define view entity Z_C_Rating_ReadOnly
   as projection on Z_I_Rating
 {
       @UI.facet: [ { targetQualifier: 'fRating',

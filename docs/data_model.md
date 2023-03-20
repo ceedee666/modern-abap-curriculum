@@ -406,7 +406,10 @@ and pasting, attempt to create the view using a template and code completion.
 
 The view `Z_I_Rating` includes all fields of the underlying database table and defines
 a 1:1 association to the view `Z_I_Product`. Each entry in the Rating view is related
-to exactly one Product.
+to exactly one Product. Note, that the `Z_I_Rating` is defined by `define view entity` instead
+of `define root view entity`. In any parent-child-relationship specified using the
+`composition` ans `association to parent` keywords, there is only one root entity. All other
+entities are dependent on this root entity.
 The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This
 statement is functioning similarly to the where condition of a database join statement.
 
@@ -423,7 +426,7 @@ object is created based on this view.
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Rating View'
 
-define root view entity Z_I_Rating
+define view entity Z_I_Rating
   as select from zrating
   association [1..1] to parent Z_I_Product as _Product on $projection.Product = _Product.ProductId
 {
