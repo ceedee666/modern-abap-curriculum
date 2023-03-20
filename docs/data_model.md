@@ -378,10 +378,10 @@ allowing only access to the data of the current client. Therefore, this field is
 the view is the same as the table `Z_RATING`. Furthermore, the field names have been remanded to more user friendly names. These names are only a suggestion and can be changed if needed.
 
 Next, add relationship information to the view with the code snippet below.
-The line starting with `association` defines a 0:n relationship between the entries
+The line starting with `composition` defines a 0:n relationship between the entries
 of the view `Z_I_Product` and the view `Z_I_Rating`. This relationship is named `_Rating`
-and is also added to the view. The `$projection.ProductId = _Rating.Product` sets the
-condition of the association. This statement ns functioning similarly to the where condition of a database join statement.
+and is also added to the view. The composition relation specifies also, that every rating is always related to exactly one
+condition of the association. This information is used by the SAP RAP framework to e.g. enable or disable certain features for an entity.
 
 Please note that the view `Z_I_Rating` has not been defined yet, so it is not possible
 to activate the `Z_I_Product` view at this time.
@@ -393,7 +393,7 @@ to activate the `Z_I_Product` view at this time.
 
 define root view entity Z_I_Product
   as select from zproduct
-  association [0..*] to Z_I_Rating as _Rating on $projection.ProductId = _Rating.Product
+  composition [0..*] of Z_I_Rating as _Rating
 {
   key product_id   as ProductId,
       product_desc as ProductDescription,
@@ -407,6 +407,8 @@ and pasting, attempt to create the view using a template and code completion.
 The view `Z_I_Rating` includes all fields of the underlying database table and defines
 a 1:1 association to the view `Z_I_Product`. Each entry in the Rating view is related
 to exactly one Product.
+The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This
+statement is functioning similarly to the where condition of a database join statement.
 
 The `Z_I_Rating` view contains additional semantic information through annotations.
 Annotations like `@Semantics.user.createdBy` and `@Semantics.user.lastChangedBy` identify
@@ -423,7 +425,7 @@ object is created based on this view.
 
 define root view entity Z_I_Rating
   as select from zrating
-  association [1..1] to Z_I_Product as _Product on $projection.Product = _Product.ProductId
+  association [1..1] to parent Z_I_Product as _Product on $projection.Product = _Product.ProductId
 {
   key rating_uuid     as RatingUUID,
       product         as Product,
