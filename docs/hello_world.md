@@ -246,6 +246,10 @@ the screenshot below.
 
 Congratulations! You have now created and successfully executed an ABAP Hello World program.
 
+## References
+
+- [DSAG ADT Leitfaden - ABAP in modern](https://1dsag.github.io/ADT-Leitfaden/)
+
 ---
 
 [Next Chapter >](./abap_rap.md) | [Overview 🏠](../README.md)
