@@ -67,7 +67,7 @@ of the following technologies and concepts is required to follow the curriculum:
 
 ## Curriculum
 
-The curriculum consists of the following lessons:
+The curriculum consists of the following units:
 
 1. [Hello World](./docs/hello_world.md)
 1. [The ABAP RESTful Application Programming Model](./docs/abap_rap.md)
