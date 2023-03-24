@@ -258,6 +258,20 @@ a business object consist of three elements:
 Unit this unit defining just the structure of the business object was enough. We did this by defining
 database tables and CDS views on top of these tables. In order to create a transactional app
 the behavior of a business object needs to be specified as well.
+The following figure shows the relation between the structure and the behavior of a business object.
+
+![Relation of structure and behavior](./imgs/transactional_app/rap_bo.drawio.png)
+
+The structure of a business object is defined using CDS. A Business object consists of
+exactly one root entity and optional child entities. It is also possible for a business object to consists of
+more than two levels. Child entities can again have child entities. As an example consider a purchase order. A purchase order
+consist of the purchase order head, which is modelled as the root entity. The purchase order items could be modelled as
+child entities of the root node. For each item there could be multiple schedule lines. These would be modelled as
+child entities of the item node.
+
+The behavior of a business object consist of the behaviour definition and the corresponding runtime implementation.
+A behaviour definition is always related to exactly one root entity. The behavior of the child entities is defined in
+the behavior definition of the root entity. The runtime implementation of the behavior is implemented using ABAP classes.
 
 ```abap
 managed implementation in class zbp_i_product unique;
