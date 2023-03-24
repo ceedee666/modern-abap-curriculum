@@ -271,7 +271,139 @@ child entities of the item node.
 
 The behavior of a business object consist of the behaviour definition and the corresponding runtime implementation.
 A behaviour definition is always related to exactly one root entity. The behavior of the child entities is defined in
-the behavior definition of the root entity. The runtime implementation of the behavior is implemented using ABAP classes.
+the behavior definition of the root entity. The behavior definition is implemented using one or many behavior implementations.
+A behavior implementation is a ABAP class that implements the necessary functionality.
+
+### Creating Behaviour Definitions
+
+To create the necessary behaviour definitions right click on the interface view of the root entity, i.e. `Z_I_PRODUCT`, and select `New Behavior Definition`.
+Chang the package to `Z_RATING_MANAGES` and the description to `Behavior derfinition for Z_I_Product`. Make sure that _Root Entity_ contains the name of the
+root entity, i.e. `Z_I_Product`in this example. Furthermore, the _Implementation Type_ need to be `Managed`. Click `Next >` to select a transport request and
+click `Finish` to create the behavior definition.
+
+As a result an initial behavior definition is created. From this behavior definition delete both lines starting wit `//etag`. In addition specify the alias
+`Product` for `Z_I_Product` and `Rating` for `Z_I_Rating`. The resulting behavior definition is shown below.
+Ignore the warnings for the time being and activate the behavior.
+
+```abap
+managed implementation in class zbp_i_product unique;
+strict ( 1 );
+
+define behavior for Z_I_Product alias Product
+persistent table zproduct
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+  association _Rating { create; }
+}
+
+define behavior for Z_I_Rating alias Rating
+persistent table zrating
+lock dependent by _Product
+authorization dependent by _Product
+{
+  update;
+  delete;
+  field ( readonly ) Product;
+  association _Product;
+}
+```
+
+Lets analyze the behavior definition.
+The first line states that the behavior is implemented in the ABAP class `ZBP_I_PRODUCT`. Note, that we did not create this class so far. Use the
+available quick fix (i.e. the little light bulb; it can also be invoked by pressing `<ctrl>-1`) to create this class. Activate is afterwards.
+
+The lines starting with `persistent table` define the database tables, in which the data is stored. This is needed for the create, update and delete operations.
+The lines staring with `lock` define the strategies for concurrency control. ABAP RAP supports optimistic and pessimistic concurrency control.
+Details of the different approaches are described in the
+[documentation](https://help.sap.com/docs/ABAP_PLATFORM_NEW/fc4c71aa50014fd1b43721701471913d/d315c13677d94a6891beb3418e3e02ed.html). In this example
+pessimistic concurrency control is used. This means that business objects are locked for modification. Only one user is able to change a business object at a time.
+The lines starting with `authorization` specify that the authorization for the business object is controlled by the root entity, the authorization master.
+
+The available operations for each entity are defined within the curly braces. The following code snippets specifies that:
+
+1. Create, update and delete operations are available for the `Z_I_Product` entity.
+1. Child entities can be created via the `_Rating` association.
+
+```abap
+...
+{
+  create;
+  update;
+  delete;
+  association _Rating { create; }
+}
+...
+
+```
+
+In contrast, only update and delete operations are available for the `Z_I_Rating` entity.
+Furthermore, the foreign key `Product` is marked as read only.
+
+Executing the app preview currently does not show the effect of creating the behavior definition. The reason is, that the service definition
+publishes the `Z_C_Product_M` entity, a projection of the underlying `Z_I_Product` entity.
+The ABAP RAP framework allows to have different behaviour definitions for different projections. Again the reason is to cater for different usage
+scenarios. In our example there might a projection that just allows viewing the ratings of a product, e.g. for a prospective customer. A
+second projection might allow changing and updating ratings, e.g. to cater for the needs of a product manager.
+
+To create the necessary projection of the behaviour definition right-click on the `Z_C_Product_M` entity and select `New Behavior Definition`.
+Make sure that the correct package is selected and that the _Implementation Definition_ is `Projection`. Again add the aliases and activate the behavior definition.
+The following listing shows the resulting behavior definition. The projection defines which of the available operations are used.
+
+```abap
+projection;
+strict ( 1 );
+
+define behavior for Z_C_Product_M alias Product
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Rating { create; }
+}
+
+define behavior for Z_C_Rating_M alias Rating
+{
+  use update;
+  use delete;
+
+  use association _Product;
+}
+```
+
+#### Exercise 1
+
+Once the behavior projection has been activated execute the app preview again.
+What do you notice? Is new functionality available? Does everything work as expected?
+
+### Extending the Behavior Definition
+
+With the current behavior implementation the app has a number of problems. Certain operations like deleting a rating
+lead to error messages. The most severe error is that the creation of new entries results in corrupted data.
+When creating a new product, the product id is not stored. As the product id is the primary key only one new product can be created.
+
+The reason for this error is, that a mapping of the field named of the database tables was added to CDS entities.
+Consider, for example, the entity `Z_I_Product`. The field `product_id` is renamed to `ProductId`, the field `product_desc` to `ProductDescription`.
+
+```abap
+define root view entity Z_I_Product
+  as select from zproduct
+  composition [0..*] of Z_I_Rating as _Rating
+{
+  key product_id   as ProductId,
+      product_desc as ProductDescription,
+      _Rating
+}
+
+```
+
+To enable the ABAP RAP framework, to save and update the database tables, the mapping information needs to be added to the behavior as well. Note, that
+a mapping is only necessary for the field where the name was changed by e.g. removing a underscore. Renaming `email` to `Email` does not require a mapping.
+The source code below show the behavior definition including the necessary mappings information.
 
 ```abap
 managed implementation in class zbp_i_product unique;
@@ -279,7 +411,43 @@ managed implementation in class zbp_i_product unique;
 define behavior for Z_I_Product alias Product
 persistent table zproduct
 lock master
-//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  association _Rating { create; }
+
+  mapping for zproduct corresponding {
+    ProductId = product_id;
+    ProductDescription = product_desc;
+  }
+}
+
+define behavior for Z_I_Rating alias Rating
+persistent table zrating
+lock dependent
+{
+  update;
+  delete;
+  field ( readonly ) Product;
+  association _Product;
+
+  mapping for zrating corresponding {
+    RatingUUID = rating_uuid;
+    LastChangedAt = last_changed_at;
+    LastChangedBy = last_changed_by;
+    CreatedAt = created_at;
+    CreatedBy = created_by;
+  }
+}
+```
+
+```abap
+managed implementation in class zbp_i_product unique;
+
+define behavior for Z_I_Product alias Product
+persistent table zproduct
+lock master
 {
   field ( readonly : update ) ProductId;
 
@@ -297,7 +465,6 @@ lock master
 define behavior for Z_I_Rating alias Rating
 persistent table zrating
 lock dependent
-etag master LastChangedAt
 {
   field ( readonly, numbering : managed ) RatingUUID;
   field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
@@ -329,9 +496,9 @@ define behavior for Z_C_PRODUCT_M alias Product
 }
 
 define behavior for Z_C_RATING_M alias Rating {
-	use update;
-    use delete;
-	use association _Product { }
+  use update;
+  use delete;
+  use association _Product { }
 }
 ```
 
