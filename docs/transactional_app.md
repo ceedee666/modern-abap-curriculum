@@ -380,7 +380,7 @@ define behavior for Z_C_Rating_M alias Rating
 Once the behavior projection has been activated execute the app preview again.
 What do you notice? Is new functionality available? Does everything work as expected?
 
-### Extending the Behavior Definition
+### Adding a Mapping to the Behavior Definition
 
 With the current behavior implementation the app has a number of problems. Certain operations like deleting a rating
 lead to error messages. The most severe error is that the creation of new entries results in corrupted data.
@@ -404,6 +404,7 @@ define root view entity Z_I_Product
 To enable the ABAP RAP framework, to save and update the database tables, the mapping information needs to be added to the behavior as well. Note, that
 a mapping is only necessary for the field where the name was changed by e.g. removing a underscore. Renaming `email` to `Email` does not require a mapping.
 The source code below show the behavior definition including the necessary mappings information.
+The `corresponding` key word defines, that components with the name (except some case changes like in the example above) are mapped automatically.
 
 ```abap
 managed implementation in class zbp_i_product unique;
@@ -441,6 +442,49 @@ lock dependent
   }
 }
 ```
+
+#### Exercise 2
+
+Test the resulting app again in the preview. Does creating and deleting record work now?
+Are there still any problems with the app?
+
+### Adding automatic numbering and additional field controls
+
+One possible issue with the app is currently, that the `ProductId` can be changed after
+the creation. The `ProductId` is the primary key in the `ZPRODUCT` table and should therefore never be changed after
+the initial creation. This can be achieved in SAP ABAP RAP using
+[field charachteristics](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=ABENBDL_FIELD_PROJECTION.htm).
+One field characteristic is already present in the current behavior definition. The field `Product` of the `Z_I_Rating`
+entity is marked as read only.
+
+To allow the `ProductId` to be specified during creation but not changed during a update the following field characteristic need to be added.
+
+```abap
+field ( readonly : update ) ProductId;
+```
+
+Another problem with the current version of the app is that the primary key of a review needs to be entered manually. The primary
+key is defined as a UUID. Entering UUIDs manually is obviously a very bad user experience.
+Using the [early numbering](https://help.sap.com/docs/ABAP_PLATFORM_NEW/fc4c71aa50014fd1b43721701471913d/399a5d5bd0d84c16a1cdc8c08e3ed701.html)
+feature of ABAP RAP, UUIDs can be created automatically. To do this the field needs to be:
+
+- read only
+- numbering is set to `managed`
+
+This can be achieved by the following code snippet:
+
+```abap
+field ( readonly, numbering : managed ) RatingUUID;
+```
+
+The automatic creation of UUIDs requires the database field has the type `raw(16)`. Verify in the ABAP Development Tools that this is the case
+for the `rating_uuid` field of table `ZRATING`.
+
+Finally, the field `CreatedBy`, `CreatedAt`, `LastChangedBy`, and `LastChangedAt` should not be editable by the user. The field should be
+filled automatically to always contain the correct information. The necessary annotations were added earlier to the `Z_I_Raring` entity. To
+disable manual editing of these fields they should be set to read only.
+
+The resulting behavior definition is shown below.
 
 ```abap
 managed implementation in class zbp_i_product unique;
@@ -484,23 +528,7 @@ lock dependent
 }
 ```
 
-```abap
-projection;
-
-define behavior for Z_C_PRODUCT_M alias Product
-{
-  use create;
-  use update;
-  use delete;
-  use association _Rating { create; }
-}
-
-define behavior for Z_C_RATING_M alias Rating {
-  use update;
-  use delete;
-  use association _Product { }
-}
-```
+With this behavior definition the app should no be working as expected.
 
 ---
 
