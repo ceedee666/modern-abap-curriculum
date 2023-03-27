@@ -75,8 +75,8 @@ The curriculum consists of the following units:
 1. [Creating the Data Model](./docs/data_model.md)
 1. [Creating a Read-Only List Report](./docs/ro_list_report.md)
 1. [Creating a Transactional App](./docs/transactional_app.md)
-1. [Adding Behaviour to the App](./docs/adding_behaviour.md)
-1. [Adding Authentication & Authorization](./docs/authentication.md)
+1. [Adding Behaviour to the App](./docs/adding_behavior.md)
+1. [Next Steps](./docs/next_steps.md)
 
 ## References
 
@@ -84,10 +84,12 @@ The curriculum consists of the following units:
 - Building Extensions for SAP S/4HANA Cloud using APIs and Events
   - [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
-- [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
-- [Build Apps with the ABAP RESTful Application Programming Model](https://open.sap.com/courses/cp13)
-- [ABAP Cloud FAQs](https://community.sap.com/topics/abap/abap-cloud-faq)
-- [Modern ABAP Development with the ABAP RESTful Application Programming Model (RAP)](https://community.sap.com/topics/abap/rap)
+- SAP ABAP RESTful Application Programming Model
+  - [Build an SAP Fiori App Using the ABAP RESTful Application Programming Model (RAP100)](https://developers.sap.com/group.sap-fiori-abap-rap100.html)
+  - [Build Apps with the ABAP RESTful Application Programming Model](https://open.sap.com/courses/cp13)
+  - [ABAP Cloud FAQs](https://community.sap.com/topics/abap/abap-cloud-faq)
+  - [Modern ABAP Development with the ABAP RESTful Application Programming Model (RAP)](https://community.sap.com/topics/abap/rap)
+  - [ABAP for RAP: Entity Manipulation Language (ABAP EML)](https://github.com/SAP-samples/abap-cheat-sheets/blob/main/08_EML_ABAP_for_RAP.md)
 
 ## Acknowledgements
 
