@@ -94,3 +94,6 @@ The curriculum consists of the following units:
 ## Acknowledgements
 
 The work on this curriculum has been supported by [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
+
+Additionally I want to thank [Sören Schlegel](https://people.sap.com/sschlegel) for patiently answering all my questions
+around RAP!
