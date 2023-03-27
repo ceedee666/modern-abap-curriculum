@@ -87,6 +87,7 @@ The curriculum consists of the following units:
 - [Develop Extensions Using SAP S/4HANA Cloud, ABAP Environment](https://learning.sap.com/learning-journey/develop-extensions-using-sap-s-4hana-cloud-abap-environment)
 - [Build Apps with the ABAP RESTful Application Programming Model](https://open.sap.com/courses/cp13)
 - [ABAP Cloud FAQs](https://community.sap.com/topics/abap/abap-cloud-faq)
+- [Modern ABAP Development with the ABAP RESTful Application Programming Model (RAP)](https://community.sap.com/topics/abap/rap)
 
 ## Acknowledgements
 
