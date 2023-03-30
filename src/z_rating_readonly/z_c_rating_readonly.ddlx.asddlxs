@@ -1,4 +1,5 @@
 @Metadata.layer: #CORE
+@Search.searchable: true
 annotate view Z_C_Rating_ReadOnly with
 {
   @UI.facet: [ { targetQualifier: 'fHeader',

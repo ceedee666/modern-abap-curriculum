@@ -7,7 +7,7 @@
 
 @Search.searchable: true
 @Metadata.allowExtensions: true
-define root view entity Z_C_Rating_ReadOnly
+define view entity Z_C_Rating_ReadOnly
   as projection on Z_I_Rating
 {
   key RatingUUID,

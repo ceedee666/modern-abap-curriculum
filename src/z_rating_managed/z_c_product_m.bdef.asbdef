@@ -1,0 +1,21 @@
+projection;
+strict ( 1 );
+
+define behavior for Z_C_Product_M alias Product
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Rating { create; }
+}
+
+define behavior for Z_C_Rating_M alias Rating
+{
+  use update;
+  use delete;
+
+  use action setStatusToCompleted;
+
+  use association _Product;
+}

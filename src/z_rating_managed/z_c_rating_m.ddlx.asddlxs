@@ -1,0 +1,87 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+annotate view Z_C_Rating_M with
+{
+
+  @UI.facet: [ { id:       'idRating',
+                 purpose:  #STANDARD,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 label:    'Rating',
+                 position: 10 } ]
+
+  @UI.identification: [{ position: 10 }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10 }]
+  RatingUUID;
+
+  @UI.identification: [{ position: 20 }]
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20 }]
+  @Search.defaultSearchElement: true
+  Product;
+
+  @UI.identification: [{ position: 30, label: 'Name' }]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem: [{ position: 30 }]
+  Name;
+
+  @UI.identification: [{ position: 40, label: 'Email' }]
+  @UI.selectionField: [{ position: 40 }]
+  @UI.lineItem: [{ position: 40 }]
+  Email;
+
+  @UI.identification: [{ position: 50, label: 'Rating' }]
+  @UI.selectionField: [{ position: 50 }]
+
+  @UI:{
+    lineItem: [{
+        position: 50,
+        type: #AS_DATAPOINT
+    }],
+    dataPoint: {
+      qualifier: 'Rating',
+      targetValue: 5,
+      visualization: #RATING
+    }
+  }
+  Rating;
+
+  @UI.identification: [{ position: 60, label: 'Review' }]
+  @UI.selectionField: [{ position: 60 }]
+  @UI.lineItem: [{ position: 60 }]
+  Review;
+
+  @UI.identification: [{ position: 70 }]
+  @UI.selectionField: [{ position: 70 }]
+  @UI.lineItem: [{ position: 70, label: 'Created By'}]
+  CreatedBy;
+
+  @UI.identification: [{ position: 80 }]
+  @UI.selectionField: [{ position: 80 }]
+  @UI.lineItem: [{ position: 80, label: 'Created At' }]
+  CreatedAt;
+
+  @UI.identification: [{ position: 90 }]
+  @UI.selectionField: [{ position: 90 }]
+  @UI.lineItem: [{ position: 90, label: 'Changed By' }]
+  LastChangedBy;
+
+  @UI.identification: [{ position: 100 }]
+  @UI.selectionField: [{ position: 100 }]
+  @UI.lineItem: [{ position: 100, label: 'Changed At' }]
+  LastChangedAt;
+
+
+  @UI.lineItem: [{ position: 45, label: 'Age (in days)' }]
+  @EndUserText.label: 'Age of Review in Days'
+  ReviewAge;
+  
+  @UI.lineItem: [{ position: 44 
+                   //criticality: 'StatusCriticality', 
+                   //criticalityRepresentation: #WITH_ICON},
+                 //{ type: #FOR_ACTION, 
+                  // dataAction: 'setStatusToCompleted', 
+                   //label: 'Set Completed'}]
+                   }]
+  Status;
+}

@@ -1,0 +1,53 @@
+managed implementation in class zbp_i_product unique;
+strict ( 1 );
+
+define behavior for Z_I_Product alias Product
+persistent table zproduct
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+  association _Rating { create; }
+
+  field ( readonly : update ) ProductId;
+
+  mapping for zproduct corresponding
+    {
+      ProductId          = product_id;
+      ProductDescription = product_desc;
+    }
+
+}
+
+define behavior for Z_I_Rating alias Rating
+persistent table zrating
+lock dependent by _Product
+authorization dependent by _Product
+{
+  update;
+  delete;
+  field ( readonly ) Product;
+  association _Product;
+
+  field ( readonly, numbering : managed ) RatingUUID;
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy;
+
+  validation checkEmail on save { field Email; }
+  validation checkRating on save { field Rating; }
+
+  determination setStatusNew on modify {create; }
+  determination setStatusCustomerFeedback on modify { field Rating; }
+
+  action setStatusToCompleted result [1] $self;
+
+  mapping for zrating corresponding
+    {
+      RatingUUID    = rating_uuid;
+      LastChangedAt = last_changed_at;
+      LastChangedBy = last_changed_by;
+      CreatedAt     = created_at;
+      CreatedBy     = created_by;
+    }
+ }

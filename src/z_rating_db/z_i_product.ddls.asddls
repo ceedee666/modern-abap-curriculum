@@ -3,7 +3,7 @@
 
 define root view entity Z_I_Product
   as select from zproduct
-  association [0..*] to Z_I_Rating as _Rating on $projection.ProductId = _Rating.Product
+  composition [0..*] of Z_I_Rating as _Rating
 {
   key product_id   as ProductId,
       product_desc as ProductDescription,
