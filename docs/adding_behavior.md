@@ -246,10 +246,90 @@ for the changed entities, the necessary table is created implicitly using a `VAL
    if still entries are left in the `ratings` table.
 1. The value of the `Status` field of the remaining entities is set to `rating_status-customer_feedback`. A `#VALUE` statement together with
    a [`FOR` expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenfor.htm) is used to build
-   the necessary update table (cf. table `ratings_for_update` in the previous listing). Again, any errors occuring during the update are reported and returned
+   the necessary update table (cf. table `ratings_for_update` in the previous listing). Again, any errors occurring during the update are reported and returned
    from the method.
 
-#### Exercise 2
+### Exercise 2
+
+Test the effect of the new behaviors on the app. To do so create a new rating and check the status after the creation. Next change the
+value of the Rating filed and check the status again. Also verify the data that is stored in the database table `ZRATING`.
+
+In order to understand how the behaviors work debug the code. When are the behaviors triggered? How many entities are passed via the `keys` parameter?
+
+## Adding Validations
+
+Currently, the values entered in the fields of the app are not validated. For example, there is no check if the entered email address is valid or
+if the entered rating value is between 0 and 5.
+The validation of field values is implemented in a business object using
+[validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations).
+
+The following listing show how to add the two validations `checkEmail` and `checkRating` to the business object `Z_I_Rating`.
+
+```abap
+...
+  validation checkEmail on save { field Email; }
+  validation checkRating on save { field Rating; }
+...
+```
+
+The validations are always executed when the business object is saved. A validation when the business object is changed is not possible.
+Again, different trigger conditions can be specified to trigger the validation. Possible trigger conditions are the CRUD operation
+`create`, `update` and `delete`, or the modification of a field. Both conditions in the previous listing are triggered by the modification
+of a field value.
+
+As before a quick fix can be used to create the implementation of the validations in the class `ZBP_I_Product`. Again rename the
+generated methods to `check_email` and `check_rating` respectively.
+
+```abap
+METHOD check_rating.
+    READ ENTITIES OF Z_I_Product IN LOCAL MODE
+        ENTITY Rating
+          FIELDS ( Rating )
+          WITH CORRESPONDING #( keys )
+        RESULT DATA(ratings).
+
+    LOOP AT ratings ASSIGNING FIELD-SYMBOL(<rating>).
+      IF <rating>-Rating < 0 OR <rating>-Rating > 5.
+        APPEND VALUE #( %key = <rating>-%key ) TO failed-rating.
+
+        APPEND VALUE #( %key = <rating>-%key
+                        %msg = new_message( id      = 'ZM_RATING_M'
+                                            number  = '002'
+                                            severity = if_abap_behv_message=>severity-error )
+                       %element-rating = if_abap_behv=>mk-on ) TO reported-rating.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+```
+
+```abap
+METHOD check_email.
+    READ ENTITIES OF Z_I_Product IN LOCAL MODE
+      ENTITY Rating
+        FIELDS ( Email )
+        WITH CORRESPONDING #( keys )
+      RESULT DATA(ratings).
+
+    DATA(email_regex) =
+      cl_abap_regex=>create_pcre(
+      pattern     = '^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$'
+      ignore_case = abap_true ).
+
+    LOOP AT ratings ASSIGNING FIELD-SYMBOL(<rating>).
+      DATA(matcher) = email_regex->create_matcher( text = <rating>-email ).
+      IF matcher->match(  ) IS INITIAL.
+        APPEND VALUE #( %key = <rating>-%key ) TO failed-rating.
+
+        APPEND VALUE #( %key = <rating>-%key
+                        %msg = new_message( id      = 'ZM_RATING_M'
+                                            number  = '001'
+                                            v1      = <rating>-email
+                                            severity = if_abap_behv_message=>severity-error )
+                       %element-email = if_abap_behv=>mk-on ) TO reported-rating.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+```
 
 ---
 
