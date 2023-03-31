@@ -280,27 +280,20 @@ of a field value.
 As before a quick fix can be used to create the implementation of the validations in the class `ZBP_I_Product`. Again rename the
 generated methods to `check_email` and `check_rating` respectively.
 
-```abap
-METHOD check_rating.
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-        ENTITY Rating
-          FIELDS ( Rating )
-          WITH CORRESPONDING #( keys )
-        RESULT DATA(ratings).
+The following listing shows the implementation of the `check_email` method. It uses the
+[regular expression](https://en.wikipedia.org/wiki/Regular_expression)
+`^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$`
+to perform a very simplistic validation of email addresses. The implementation performs the following steps:
 
-    LOOP AT ratings ASSIGNING FIELD-SYMBOL(<rating>).
-      IF <rating>-Rating < 0 OR <rating>-Rating > 5.
-        APPEND VALUE #( %key = <rating>-%key ) TO failed-rating.
-
-        APPEND VALUE #( %key = <rating>-%key
-                        %msg = new_message( id      = 'ZM_RATING_M'
-                                            number  = '002'
-                                            severity = if_abap_behv_message=>severity-error )
-                       %element-rating = if_abap_behv=>mk-on ) TO reported-rating.
-      ENDIF.
-    ENDLOOP.
-  ENDMETHOD.
-```
+1. Read the `Email` field for all `Rating` entities with a primary key in `keys` using the EML `READ ENTITIES` statement.
+1. Create an instance of `cl_abap_matcher` using one of the methods of `cl_abap_regex`.
+1. Loop through all `Rating` entities in `rating`. For each `Rating` entity check the `Email` field using the
+   regular expression. When the email conforms to the regular expression `match( )` returns `abap_ture`
+   (i.e. the result is `NOT INITIAL`).
+1. If the email does not conform to the regular expression the key of the entity is appended to the
+   `failed-rating` table. Furthermore, a error message is added to the `reported-rating` table. The error
+   message is created using the message class `ZM_RATING_M`. The message with the number `001`
+   contains the following text `&1 is not an email address. Please enter a valid email address.`.
 
 ```abap
 METHOD check_email.
@@ -331,6 +324,12 @@ METHOD check_email.
   ENDMETHOD.
 ```
 
----
+### Exercise 3
+
+Implement the `check_rating` method. The method should check if the rating value is between 0 and 5.
+If not, a suitable error message should be raised. After implementing the method test the app and make
+sure that the validations work as expected.
+
+## Adding Actions
 
 [< Previous Chapter](./transactional_app.md) | [Next Chapter >](./next_steps.md) | [Overview 🏠](../README.md)
