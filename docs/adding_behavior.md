@@ -206,8 +206,50 @@ example app are explained. The implementation of the `set_status_new` method per
    ...
    ```
 1. The `MODIFY ENTITIES` statement updated the transactional buffer for all changed ratings, i.e. the entries in
-   `ratings_for_update`. Any error messages occuring during the modification of the entites will be returned in the
+   `ratings_for_update`. Any error messages occurring during the modification of the entities will be returned in the
    `REPORTED` parameter. In this example these errors are returned form the method.
+
+The implementation for the determination `determination setStatusCustomerFeedback` is still missing. Create is using the quick fix
+of the behavior and rename the generated method to `set_status_customer_feedback`. The implementation of the method is shown
+in the following listing:
+
+```abap
+ METHOD set_status_customer_feedback.
+    READ ENTITIES OF Z_I_Product IN LOCAL MODE
+     ENTITY Rating
+       FIELDS ( Status Rating )
+       WITH CORRESPONDING #( keys )
+     RESULT DATA(ratings).
+
+    DELETE ratings WHERE Rating = 0.
+    CHECK ratings IS NOT INITIAL.
+
+    MODIFY ENTITIES OF Z_I_Product IN LOCAL MODE
+      ENTITY Rating
+        UPDATE FIELDS ( Status )
+        WITH VALUE #( for rating in ratings
+                          ( %tky = rating-%tky
+                            status = rating_status-customer_feedback ) )
+      REPORTED DATA(update_reported).
+
+    reported = CORRESPONDING #( DEEP update_reported ).
+  ENDMETHOD.
+```
+
+This implementation uses a different approach to the implementation of `set_status_new`. Instead of creating a auxiliary variables
+for the changed entities, the necessary table is created implicitly using a `VALUE` statements. Below is a explanation of the code.
+
+1. The `READ ENTITIES` EML statement is used to read the value of the `Status` and `Rating` fields for all elements in the importing parameter `keys`.
+   The result of the `READ ENTITIES` EML statement is stored in the variable `ratings`. Remember, that all EML operations are always executed
+   for multiple object.
+1. All entities with an initial value in the `Ratings` field (i.e. the value is 0) are deleted form the `ratings` table. The methods continues only
+   if still entries are left in the `ratings` table.
+1. The value of the `Status` field of the remaining entities is set to `rating_status-customer_feedback`. A `#VALUE` statement together with
+   a [`FOR` expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenfor.htm) is used to build
+   the necessary update table (cf. table `ratings_for_update` in the previous listing). Again, any errors occuring during the update are reported and returned
+   from the method.
+
+#### Exercise 2
 
 ---
 
