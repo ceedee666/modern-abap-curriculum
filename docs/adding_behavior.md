@@ -327,9 +327,98 @@ METHOD check_email.
 ### Exercise 3
 
 Implement the `check_rating` method. The method should check if the rating value is between 0 and 5.
-If not, a suitable error message should be raised. After implementing the method test the app and make
+If the rating value is outside the range, a suitable error message should be raised. After implementing the method test the app and make
 sure that the validations work as expected.
 
-## Adding Actions
+## Adding Operations and Feature Control
+
+To complete the behavior of the business object `Z_I_Rating` the following features are missing. First, it should be possible to set
+the status of one or several Ratings to `completed`. Currently this is only possible by editing the status field of the individual Rating entities.
+Furthermore, once the status of a Rating has been set to completed no change or deletion of the Rating entity should be allowed.
+
+To achieve this behavior custom operations and feature controls are required.
+
+### Adding Operations
+
+The business objects `Z_I_Product` and `Z_I_Rating` already support the
+[standard operations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/standard-operations)
+provided by SAP RAP. These standard operations are, for example, [create](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/create-operation),
+[update](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/update-operation) and
+[delete](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/delete-operation) operations. In addition to the
+standard operations custom business logic can be added to a business object using nonstandard operations. SAP RAP offers two types of nonstandard
+operations: [actions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/actions) and
+[functions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/functions). While actions enable the modification of
+the business object, functions provide custom read operations.
+
+To enable changing the status of a Rating entity using an action the following steps are necessary:
+
+1. Define the action in the behavior
+1. Implement the action
+1. Add the action to the app using an annotation.
+
+The following listing shows the definition of the action `setStatusToCompleted` in the behavior `Z_I_Rating`.
+The action specifies that one result is returned by the action and that the type of this result is the same as the entity (`$self`).
+
+```abap
+...
+action setStatusToCompleted result [1] $self;
+...
+```
+
+In addition to that, the usage of the action also needs to be defined in the behavior for `Z_C_Rating_M`.
+
+```abap
+...
+use action setStatusToCompleted;
+...
+```
+
+Next, the quick fix of the action can be used to generate an initial implementation of the action in `ZBP_I_Product`. Again, the definition
+of the method should be renamed to `set_status_to_completed`. The following listing shows the implementation of the action. Most of the code
+should look familiar by now. First, the rating entities are read using the `keys` table. Next, the status for each entity is set to
+`rating_status-completed`. Finally, the changed entities are read again an returned for the method.
+
+```abap
+METHOD set_status_to_completed.
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
+       FIELDS ( status )
+       WITH CORRESPONDING #( keys )
+     RESULT DATA(ratings).
+
+    MODIFY ENTITIES OF z_i_product IN LOCAL MODE
+       ENTITY rating
+         UPDATE FIELDS ( status )
+         WITH VALUE #( FOR rating IN ratings
+                       ( %tky = rating-%tky
+                         status = rating_status-completed ) ).
+
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
+       ALL FIELDS
+       WITH CORRESPONDING #( keys )
+     RESULT DATA(completed_ratings).
+
+    result = VALUE #( FOR rating IN completed_ratings ( %tky = rating-%tky
+                                                        %param = rating ) ).
+  ENDMETHOD.
+```
+
+To use the action it only need to be added to the UI. There are different options for triggering the action. To add the action
+to the table of ratings the following annotations can be used. This annotation adds a `Set Completed` action.
+
+```abap
+@UI.lineItem: [{ position: 44 },
+                 { type: #FOR_ACTION,
+                   dataAction: 'setStatusToCompleted',
+                  label: 'Set Completed'}]
+  Status;
+```
+
+The result of the previous steps is shown in the following screenshot.
+
+![Rating table with an action](./imgs/adding_bahvior/rating_action.png)
+
+## Adding Feature Control
 
 [< Previous Chapter](./transactional_app.md) | [Next Chapter >](./next_steps.md) | [Overview 🏠](../README.md)
