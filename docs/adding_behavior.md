@@ -481,4 +481,109 @@ using the constant `if_abap_behv=>fc-o-disabled`. Otherwise the status is set to
 
 After implementing the feature control the actions to change a rating are only available if the status of the rating is not `30`.
 Verify this by testing the app again.
+
+## Adding Virtual Elements
+
+On feature that is still missing is the calculation of an average rating for a product. Currently, only the
+individual ratings are stored but no average rating is calculated. To calculate a average rating
+different approaches are possible. For example, the average rating could be stored in the database and updated,
+whenever a new rating is added. The approach used here is to calculate the average rating when necessary.
+This can be achieved by adding a
+[virtual element](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/using-virtual-elements-in-cds-projection-views)
+to the business object.
+
+The following listing shows how to add the virtual element `Average Rating` to the business object projection `Z_C_Product_M`.
+The statement `virtual AverageRating: abap.dec( 2, 1 )` defines the virtual Element as a decimal number of length two and one decimal digit.
+The annotation `@ObjectModel.virtualElementCalculatedBy` defines that the virtual element is calculated in the ABAP class
+`ZCL_VE_AVERAGE_RATING`. This class needs to implement the interface ` if_sadl_exit_calc_element_read`.
+
+```abap
+define root view entity Z_C_Product_M
+  as projection on Z_I_Product
+{
+  key ProductId,
+      ProductDescription,
+
+      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZCL_VE_AVERAGE_RATING'
+      @EndUserText.label: 'Average Customer Rating'
+      virtual AverageRating: abap.dec( 2, 1 ),
+
+      /* Associations */
+      _Rating : redirected to composition child Z_C_Rating_M
+}
+```
+
+The implementation of the method `if_sadl_exit_calc_element_read~calculate` is shown in the listing below.
+The already familiar `READ ENTITIES` statement is used to read the Ratings of a Product. Note that the association
+`_Rating` is used to read all ratings of a product. Furthermore,
+the input parameter `it_original_data` of `if_sadl_exit_calc_element_read~calculate` does not have the right structure for the
+`READ ENTITIES` statement. Therefore, a mapping to the type `Z_C_Product_M` is performed at the beginning of the method.
+
+Once the ratings for the products are read a `SELECT` statement on the internal table `ratings` together with
+the aggregate function [`AVG`](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abensql_agg_func.htm)
+is used to calculate the average rating for each product.
+
+Finally, the average rating for each product is added to the internal table `products`. The changed data is returned in the
+changing parameter `ct_calculated_data`.
+
+```abap
+METHOD if_sadl_exit_calc_element_read~calculate.
+    DATA products TYPE STANDARD TABLE OF Z_C_Product_M.
+    products = CORRESPONDING #( it_original_data ).
+
+    READ ENTITIES OF Z_C_Product_M
+      ENTITY Product BY \_Rating
+      FIELDS ( Rating )
+      WITH CORRESPONDING #( products )
+      RESULT FINAL(ratings).
+
+    SELECT
+      Product,
+      AVG( rating AS DEC( 2, 1 ) ) AS average_rating
+      FROM @ratings AS r
+      GROUP BY Product
+      INTO TABLE @DATA(average_product_ratings).
+
+    LOOP AT products ASSIGNING FIELD-SYMBOL(<product>).
+      READ TABLE average_product_ratings
+        WITH KEY Product = <product>-ProductId
+        INTO DATA(average_product_rating).
+      IF sy-subrc = 0.
+        <product>-AverageRating = average_product_rating-average_rating.
+      ENDIF.
+    ENDLOOP.
+
+    ct_calculated_data = CORRESPONDING #( products ).
+  ENDMETHOD.
+```
+
+Using the following annotation in the `Z_C_Product_M` metadata extension, the virtual element can be added to the UI of the app.
+
+```abap
+@UI:{
+    lineItem: [{
+        position: 30,
+        importance: #HIGH,
+        type: #AS_DATAPOINT,
+        label: 'Average Rating'
+    }],
+    dataPoint: {
+      qualifier: 'AverageRating',
+      targetValue: 5,
+      visualization: #RATING
+    }
+  }
+  AverageRating;
+```
+
+The following screenshots show the app after adding the virtual element.
+
+![Products Overview](./imgs/adding_behavior/app_products.png)
+
+![Product Details](./imgs/adding_behavior/app_product.png)
+
+This concludes the unit. In the next unit a outlook to possible next steps is given.
+
+---
+
 [< Previous Chapter](./transactional_app.md) | [Next Chapter >](./next_steps.md) | [Overview 🏠](../README.md)
