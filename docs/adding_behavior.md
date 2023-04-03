@@ -124,7 +124,7 @@ authorization dependent by _Product
 ```
 
 Adding the determination to the behavior definition is only the first step.
-The implementation of these determinitions is still missing. The little light bulb icon
+The implementation of these determinations is still missing. The little light bulb icon
 in the editor shows, that a quick fix is available. By clicking on the light bulb icon
 or pressing `<ctrl> + 1` this quick fix can be applied.
 
@@ -419,6 +419,66 @@ The result of the previous steps is shown in the following screenshot.
 
 ![Rating table with an action](./imgs/adding_bahvior/rating_action.png)
 
-## Adding Feature Control
+#### Exercise 4
 
+Validate, that the newly implemented action has the desired effect.
+
+If this is the case also add a button to trigger the action to the object
+page of a rating.
+
+### Adding Feature Control
+
+Once a rating entity is in the status completed no change should be possible. This functionality can be achieved by
+adding [feature control](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/feature-control)
+to the business object.
+
+Dynamic feature control can be enabled for standard as well as nonstandard operations. The following listing shows
+how to extend the behavior `Z_I_Rating` to enable dynamic feature control for the `update`, `delete` and
+`setStatusToCompleted` actions.
+
+```abap
+...
+  update ( features : instance );
+  delete ( features : instance );
+
+  ...
+
+  action ( features : instance ) setStatusToCompleted result [1] $self;
+```
+
+Once `(features : instance)` is added to the operations a quick fix can be used
+to generate an implementation of the feature control in `ZBP_I_Product`.
+The following listing show the implementation of the feature control for the example.
+Again, the entities are read first using the keys table. For each operation the status of
+the entity is checked. If the status is `30` (i.e. completed) the operations are disabled
+using the constant `if_abap_behv=>fc-o-disabled`. Otherwise the status is set to `if_abap_behv=>fc-o-enabled`.
+
+```abap
+  METHOD get_instance_features.
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+       ENTITY rating
+         FIELDS ( status )
+         WITH CORRESPONDING #( keys )
+       RESULT DATA(ratings).
+
+    result = VALUE #( FOR rating IN ratings
+                    ( %tky = rating-%tky
+
+                      %features-%action-setStatusToCompleted =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled  )
+
+                      %features-%delete =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+
+                      %features-%update =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+                   ) ).
+  ENDMETHOD.
+```
+
+After implementing the feature control the actions to change a rating are only available if the status of the rating is not `30`.
+Verify this by testing the app again.
 [< Previous Chapter](./transactional_app.md) | [Next Chapter >](./next_steps.md) | [Overview 🏠](../README.md)
