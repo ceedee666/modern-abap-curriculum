@@ -1,8 +1,10 @@
 # Adding Behavior
 
-In the [previous unit](./transactional_app.md) the first functionality was added to the business object.
-In particular, it was defined which [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) are
-available. In this unit the functionality of the business object is extended by adding additional behaviours.  
+In the [previous unit](./transactional_app.md), we added the first functionality to the business object
+by defining the [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations
+available. In this unit, we will extend the functionality of the business object by adding additional behaviors
+such as validations, determinations, and actions.
+
 [Validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations) are
 implemented to check the data entered by the user. For example consider the email address of a user. A
 validation can be used to check if a valid email address was entered.
@@ -13,20 +15,19 @@ to allow the user to trigger an operation on the business object.
 
 ## Extending the Data Model
 
-Before adding additional behavior to the business object first the data model of the business object is extended.
-There are two reasons for that. First, a status field will be used to show how determinations and actions are
-implemented. Second, virtual elements are used extend the business object without changing the underlying data model.
+Before adding additional behavior to the business object, we need to extend its data model.
 
 ### Adding a Status Field
 
-The first step is to add a status field to the business object. This field will store the processing state of
-a rating. First, a rating is in the status _New_. Once the customer provided a rating, i.e. rating value and an
+To implement additional behaviors a status field is added to the rating business object. This field
+is used to indicate the processing status of a rating.
+First, a rating is in the status _New_. Once the customer provided a rating, i.e. rating value and an
 optional review, the status is _Customer Review_. If the review was checked by a product manager the status
 is changed to _Completed_.
 
 #### Exercise 1
 
-Extend the data model of the review business object. To do this perform the following steps:
+To add a status field to the business object, perform the following steps:
 
 1. Create a domain `ZD_STATUS` in the package `Z_RATING_DB`. The domain should allow the following values:
    | Fixed Values | Description |
@@ -41,14 +42,14 @@ Extend the data model of the review business object. To do this perform the foll
 1. Add the `Status` field to the `Z_C_Rating_M` view and the `Z_C_Rating_M` metadata extension. The `Status` should be
    displayed in the ratings list on a product's object page.
 
-If you completed exercise 1 the resulting object page for a product should look similar to the following
+If you completed Exercise 1, the resulting object page for a product should look similar to the following
 screenshot:
 
 ![Object Page with Status Field](./imgs/adding_behavior/object_page_with_status.png)
 
-Note that the status field contains the value `0` for all existing data in the app. In the next steps functionality
-to change this value will be added. Furthermore, the screenshot above shows the values in the `Customer Rating` column
-as a rating indicator. How to achieve this was discussed in a [previous unit](./ro_list_report.md#beautifying-the-app). The following
+Note that the status field contains the value `0` for all existing data in the app. In the next steps, we will add functionality
+to change this value. Furthermore, the screenshot above shows the values in the `Customer Rating` column
+as a rating indicator. We discussed how to achieve this in a [previous unit](./ro_list_report.md#beautifying-the-app). The following
 snippet shows the necessary additions to the metadata extension `Z_C_Rating_M`.
 
 ```abap
@@ -70,30 +71,25 @@ snippet shows the necessary additions to the metadata extension `Z_C_Rating_M`.
 
 ## Adding Determinations
 
-In this step functionality to automatically update the value of the status field is added.
-In SAP RAP
+In this step, we will add functionality to automatically update the value of the status field
+In SAP RAP, we use
 [determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
-are used to change the value of fields based on some trigger conditions.
-The [ABAP keyword documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenbdl_determinations.htm)
-shows that determinations can be execute `on save` and `on modify`. According to the documentations
-`on modify` specifies that:
+to change the value of fields based on trigger conditions.
 
-> the determination is executed immediately after data changes take place in the transactional buffer so that the result is available
-> during the transaction.
-
-In contrast to that `on save` specifies that:
-
-> the determination is executed during the save sequence at the end of an transaction, when change in
-> the transactional buffer are persistent on the database.
+Determinations can be executed on `save` or on `modify`.
+According to the [ABAP keyword documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenbdl_determinations.htm),
+`on modify` specifies that the determination is executed immediately after data changes take place
+in the transactional buffer so that the result is available during the transaction. In contrast,
+`on save` specifies that the determination is executed during the save sequence at the end of a transaction,
+when changes in the transactional buffer are persistent on the database.
 
 In both cases the trigger condition can be one of the CRUD operations `create`, `update` and `delete`. Furthermore, the changes
 of a field value can also be used as a trigger condition.
 
-The following snippet shows two determination as part of the behavior definition of `Z_I_Rating`.
-The determination `setStatusNew` is executed `on modify` whenever a new `Rating` is created. The idea is to
-use this determination to set the initial status value of a `Rating`.
+In the behavior definition of `Z_I_Rating`, we have two determinations (cf. the following listing).
+The determination `setStatusNew` is executed `on modify` whenever a new `Rating` is created to set the initial status value of a `Rating`.
 The determination `setStatusCustomerFeedback` is executed `on modify` whenever the value of the field `Rating` changes.
-In this case the idea is to set the status field to the value `20` whenever a rating value is provided.
+In this case, the status field is set to the value `20` whenever a rating value is provided.
 
 ```abap
 define behavior for Z_I_Rating alias Rating
@@ -125,13 +121,12 @@ authorization dependent by _Product
 
 Adding the determination to the behavior definition is only the first step.
 The implementation of these determinations is still missing. The little light bulb icon
-in the editor shows, that a quick fix is available. By clicking on the light bulb icon
-or pressing `<ctrl> + 1` this quick fix can be applied.
+in the editor shows, that a quick fix is available. Clicking on the light bulb icon
+or pressing `<ctrl> + 1` will apply the quick fix.
 
-Executing the quick fix for `determination setStatusNew...` creates a method `setstatusnew` in the local
-class `lhc_rating` inside the class `Z_BP_I_Product`, i.e. the global class implementing the behaviors for
-`Z_I_Product`. Before implementing the method I would recommend renaming it to `set_status_new` to
-conform with common ABAP naming conventions. Below is the resulting method declaration.
+After executing the quick fix for determination `setStatusNew...`, a method `SetStatusNew` is created in the local class `lhc_rating`
+inside the class `Z_BP_I_Product`, which implements the behaviors for `Z_I_Product`. Before implementing the method, we recommend
+renaming it to `set_status_new` to conform with common ABAP naming conventions. The resulting method declaration is as follows:
 
 ```abap
 ...
@@ -172,27 +167,29 @@ METHOD set_status_new.
   ENDMETHOD.
 ```
 
-It should obvious, that the implementation of `set_status_new` is not plain ABAP. Instead it contains
+It should be obvious that the implementation of `set_status_new` is not plain ABAP but instead contains
 [Entity Manipulation Language (EML)](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/entity-manipulation-language-eml)
-statements. EML is an extension to the ABAP language enabling access to RAP business object. A complete introduction to
-EML is beyond the scope of this curriculum. Instead, only the EML elements necessary to implement the requirement of the
-example app are explained. The implementation of the `set_status_new` method performs the following operations:
+statements. EML is an extension to the ABAP language that enables access to RAP business objects.
+While a complete introduction to EML is beyond the scope of this curriculum, we will
+explain the EML elements necessary to implement the requirement of the example app.
+The implementation of the `set_status_new` method performs the following operations:
 
 1. The variable `ratings_for_update` is defined as a `TABLE FOR UPDATE` with the structure `Z_I_Rating`.
    A `TABLE FOR UPDATE` is a table type with a special structure for working with ABAP RAP objects. The main features off
    these table types are:
    - Enabled for of data in RAP
    - Containing [special components](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abapderived_types_comp.htm) like
-     %tky. Details on these special components can be found in the
+     %tky.
+     Details on these special components can be found in the
      [ABAP documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abapderived_types_comp.htm)
      or in the [EML cheat sheet](https://github.com/SAP-samples/abap-cheat-sheets/blob/main/08_EML_ABAP_for_RAP.md).
 1. The `READ ENTITIES` EML statement is used to read the value of the `Status` field for all elements in the importing parameter `keys`.
-   This parameter contains the primary key of all created entites. Note, the design of ABAP RAP and EML focuses on mass data. Therefore all
+   This parameter contains the primary key of all created entities. Note that the design of ABAP RAP and EML focuses on mass data. Therefore all
    operations are always operations on multiple objects. Working with just one object is a special case. The result of the
    `READ ENTITIES` EML statement is stored in the variable `ratings`.
-1. All ratings that already have a `Status` value are deleted from `ratings`. This is done to ensure no values are overwritten with the
+1. All ratings that already have a `Status` value are deleted from the internal table `ratings`. This is done to ensure no values are overwritten with the
    default value. The `CHECK` statement ensure that the processing only continues if the are still entries in the variable `ratings`.
-1. In the `LOOP` the a new entry is added to `ratings_for_update`. This entry contains the values of the special component `%tky` and
+1. In the `LOOP`, a new entry is added to `ratings_for_update`. This entry contains the values of the special component `%tky` and
    the default value `rating_status-new` for the status. Setting the default value uses the following constant defined in the header of
    `lhc_rating`.
    ```abap
@@ -209,9 +206,9 @@ example app are explained. The implementation of the `set_status_new` method per
    `ratings_for_update`. Any error messages occurring during the modification of the entities will be returned in the
    `REPORTED` parameter. In this example these errors are returned form the method.
 
-The implementation for the determination `determination setStatusCustomerFeedback` is still missing. Create is using the quick fix
-of the behavior and rename the generated method to `set_status_customer_feedback`. The implementation of the method is shown
-in the following listing:
+The implementation for the determination `determination setStatusCustomerFeedback` is still missing. Create it using the quick fix
+of the behavior and rename the generated method to `set_status_customer_feedback`. The implementation of the method
+should be as follows:
 
 ```abap
  METHOD set_status_customer_feedback.
@@ -240,30 +237,30 @@ This implementation uses a different approach to the implementation of `set_stat
 for the changed entities, the necessary table is created implicitly using a `VALUE` statements. Below is a explanation of the code.
 
 1. The `READ ENTITIES` EML statement is used to read the value of the `Status` and `Rating` fields for all elements in the importing parameter `keys`.
-   The result of the `READ ENTITIES` EML statement is stored in the variable `ratings`. Remember, that all EML operations are always executed
+   The result of the `READ ENTITIES` EML statement is stored in the variable `ratings`. Note that all EML operations are always executed
    for multiple object.
-1. All entities with an initial value in the `Ratings` field (i.e. the value is 0) are deleted form the `ratings` table. The methods continues only
+1. All entities with an initial value of `0`in the `Ratings` field are deleted form the `ratings` table. The methods continues only
    if still entries are left in the `ratings` table.
 1. The value of the `Status` field of the remaining entities is set to `rating_status-customer_feedback`. A `#VALUE` statement together with
    a [`FOR` expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenfor.htm) is used to build
-   the necessary update table (cf. table `ratings_for_update` in the previous listing). Again, any errors occurring during the update are reported and returned
+   the necessary update table (cf. table `ratings_for_update` in the previous listing). Any errors occurring during the update are reported and returned
    from the method.
 
 ### Exercise 2
 
-Test the effect of the new behaviors on the app. To do so create a new rating and check the status after the creation. Next change the
-value of the Rating filed and check the status again. Also verify the data that is stored in the database table `ZRATING`.
+To test the effect of the new behaviors on the app, create a new rating and check the status after the creation. Next, change the
+value of the Rating filed and check the status again. Also, verify the data that is stored in the database table `ZRATING`.
 
-In order to understand how the behaviors work debug the code. When are the behaviors triggered? How many entities are passed via the `keys` parameter?
+In order to understand how the behavior implementations work, debug the code. When are the behaviors triggered? How many entities are passed via the `keys` parameter?
 
 ## Adding Validations
 
-Currently, the values entered in the fields of the app are not validated. For example, there is no check if the entered email address is valid or
-if the entered rating value is between 0 and 5.
-The validation of field values is implemented in a business object using
+Currently, there is no validation in place for the values entered in the fields of the app,
+such as checking whether the entered email address is valid or if the entered rating value is between 0 and 5.
+However, we can implement validations in a business object using
 [validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations).
 
-The following listing show how to add the two validations `checkEmail` and `checkRating` to the business object `Z_I_Rating`.
+The following code snippet can be used to add two validations, `checkEmail` and `checkRating`, to the business object `Z_I_Rating`.
 
 ```abap
 ...
@@ -272,26 +269,25 @@ The following listing show how to add the two validations `checkEmail` and `chec
 ...
 ```
 
-The validations are always executed when the business object is saved. A validation when the business object is changed is not possible.
-Again, different trigger conditions can be specified to trigger the validation. Possible trigger conditions are the CRUD operation
-`create`, `update` and `delete`, or the modification of a field. Both conditions in the previous listing are triggered by the modification
-of a field value.
+The validations are executed when the business object is saved. A validation when the business object is changed is not possible.
+Trigger conditions can be specified on the CRUD operation
+`create`, `update` and `delete`, or the modification of a field. In the code snippet above, both conditions are triggered by the modification of a field value.
 
-As before a quick fix can be used to create the implementation of the validations in the class `ZBP_I_Product`. Again rename the
-generated methods to `check_email` and `check_rating` respectively.
+To create the implementation of the validations in the class `ZBP_I_Product`, we can use a quick fix again.
+Once generated, we can rename the generated methods to `check_email` and `check_rating` respectively.
 
-The following listing shows the implementation of the `check_email` method. It uses the
+The following listing shows the implementation of the `check_email` method. It performs a simple validation of email addresses using the
 [regular expression](https://en.wikipedia.org/wiki/Regular_expression)
-`^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$`
-to perform a very simplistic validation of email addresses. The implementation performs the following steps:
+`^[\w\.=-]+@[\w\.-]+\.[\w]{2,3}$`.
+The implementation performs the following steps:
 
 1. Read the `Email` field for all `Rating` entities with a primary key in `keys` using the EML `READ ENTITIES` statement.
 1. Create an instance of `cl_abap_matcher` using one of the methods of `cl_abap_regex`.
 1. Loop through all `Rating` entities in `rating`. For each `Rating` entity check the `Email` field using the
-   regular expression. When the email conforms to the regular expression `match( )` returns `abap_ture`
-   (i.e. the result is `NOT INITIAL`).
+   regular expression. When the email conforms to the regular expression `match( )` returns `abap_true`
+   (i.e., the result is `NOT INITIAL`).
 1. If the email does not conform to the regular expression the key of the entity is appended to the
-   `failed-rating` table. Furthermore, a error message is added to the `reported-rating` table. The error
+   `failed-rating` table and a error message is added to the `reported-rating` table. The error
    message is created using the message class `ZM_RATING_M`. The message with the number `001`
    contains the following text `&1 is not an email address. Please enter a valid email address.`.
 
@@ -333,7 +329,7 @@ sure that the validations work as expected.
 ## Adding Operations and Feature Control
 
 To complete the behavior of the business object `Z_I_Rating` the following features are missing. First, it should be possible to set
-the status of one or several Ratings to `completed`. Currently this is only possible by editing the status field of the individual Rating entities.
+the status of one or several Ratings to `completed`. Currently, this is only possible by editing the status field of the individual Rating entities.
 Furthermore, once the status of a Rating has been set to completed no change or deletion of the Rating entity should be allowed.
 
 To achieve this behavior custom operations and feature controls are required.
@@ -352,8 +348,8 @@ the business object, functions provide custom read operations.
 
 To enable changing the status of a Rating entity using an action the following steps are necessary:
 
-1. Define the action in the behavior
-1. Implement the action
+1. Define the action in the behavior.
+1. Implement the action.
 1. Add the action to the app using an annotation.
 
 The following listing shows the definition of the action `setStatusToCompleted` in the behavior `Z_I_Rating`.
@@ -404,7 +400,7 @@ METHOD set_status_to_completed.
   ENDMETHOD.
 ```
 
-To use the action it only need to be added to the UI. There are different options for triggering the action. To add the action
+To use the action in the app, it also needs to be added to the UI. There are different options for triggering the action. To add the action
 to the table of ratings the following annotations can be used. This annotation adds a `Set Completed` action.
 
 ```abap
@@ -423,16 +419,16 @@ The result of the previous steps is shown in the following screenshot.
 
 Validate, that the newly implemented action has the desired effect.
 
-If this is the case also add a button to trigger the action to the object
+Additionally, Add a button to trigger the action to the object
 page of a rating.
 
 ### Adding Feature Control
 
-Once a rating entity is in the status completed no change should be possible. This functionality can be achieved by
-adding [feature control](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/feature-control)
+To prevent changes to a rating entity once its status is set to `completed`
+we can implement [feature control](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/feature-control)
 to the business object.
 
-Dynamic feature control can be enabled for standard as well as nonstandard operations. The following listing shows
+Dynamic feature control can be enabled for standard as well as nonstandard operations. The following example demonstrates
 how to extend the behavior `Z_I_Rating` to enable dynamic feature control for the `update`, `delete` and
 `setStatusToCompleted` actions.
 
@@ -446,11 +442,11 @@ how to extend the behavior `Z_I_Rating` to enable dynamic feature control for th
   action ( features : instance ) setStatusToCompleted result [1] $self;
 ```
 
-Once `(features : instance)` is added to the operations a quick fix can be used
+After adding `(features : instance)` to the operations, you can use a quick fix
 to generate an implementation of the feature control in `ZBP_I_Product`.
-The following listing show the implementation of the feature control for the example.
-Again, the entities are read first using the keys table. For each operation the status of
-the entity is checked. If the status is `30` (i.e. completed) the operations are disabled
+The following listing show the feature control implementation for this case.
+First, the entities are read first using the keys table. For each operation the status of
+the entity is checked. If the status is `30` (i.e., completed) the operations are disabled
 using the constant `if_abap_behv=>fc-o-disabled`. Otherwise the status is set to `if_abap_behv=>fc-o-enabled`.
 
 ```abap
@@ -484,15 +480,14 @@ Verify this by testing the app again.
 
 ## Adding Virtual Elements
 
-On feature that is still missing is the calculation of an average rating for a product. Currently, only the
-individual ratings are stored but no average rating is calculated. To calculate a average rating
-different approaches are possible. For example, the average rating could be stored in the database and updated,
-whenever a new rating is added. The approach used here is to calculate the average rating when necessary.
-This can be achieved by adding a
+One missing feature is the calculation of an average rating for a product. Currently, only the
+individual ratings are stored, but no average rating is calculated.
+Several approaches are possible, such as storing the average rating in the database and updating it whenever a new rating is added.
+The approach used here calculates the average rating when necessary by adding a
 [virtual element](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/using-virtual-elements-in-cds-projection-views)
 to the business object.
 
-The following listing shows how to add the virtual element `Average Rating` to the business object projection `Z_C_Product_M`.
+The following listing demonstrates how to add the virtual element called `Average Rating` to the business object projection `Z_C_Product_M`.
 The statement `virtual AverageRating: abap.dec( 2, 1 )` defines the virtual Element as a decimal number of length two and one decimal digit.
 The annotation `@ObjectModel.virtualElementCalculatedBy` defines that the virtual element is calculated in the ABAP class
 `ZCL_VE_AVERAGE_RATING`. This class needs to implement the interface ` if_sadl_exit_calc_element_read`.
@@ -513,14 +508,14 @@ define root view entity Z_C_Product_M
 }
 ```
 
-The implementation of the method `if_sadl_exit_calc_element_read~calculate` is shown in the listing below.
-The already familiar `READ ENTITIES` statement is used to read the Ratings of a Product. Note that the association
-`_Rating` is used to read all ratings of a product. Furthermore,
-the input parameter `it_original_data` of `if_sadl_exit_calc_element_read~calculate` does not have the right structure for the
-`READ ENTITIES` statement. Therefore, a mapping to the type `Z_C_Product_M` is performed at the beginning of the method.
+The implementation of the method `if_sadl_exit_calc_element_read~calculate` is presented in the listing below.
+The familiar `READ ENTITIES` statement is used to read the Ratings of a Product. Note that the association
+`_Rating` is utilized to read all ratings of a product. Additionally,
+the input parameter `it_original_data` of `if_sadl_exit_calc_element_read~calculate` does not posses the right structure for the
+`READ ENTITIES` statement. Consequently, a mapping to the type `Z_C_Product_M` is performed at the beginning of the method.
 
-Once the ratings for the products are read a `SELECT` statement on the internal table `ratings` together with
-the aggregate function [`AVG`](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abensql_agg_func.htm)
+After reading the Ratings for a Product, a `SELECT` statement on the internal table `ratings`, combined with
+the aggregate function [`AVG`](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abensql_agg_func.htm),
 is used to calculate the average rating for each product.
 
 Finally, the average rating for each product is added to the internal table `products`. The changed data is returned in the
