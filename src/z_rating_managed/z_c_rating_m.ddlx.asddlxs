@@ -76,12 +76,14 @@ annotate view Z_C_Rating_M with
   @EndUserText.label: 'Age of Review in Days'
   ReviewAge;
   
-  @UI.lineItem: [{ position: 44 
+  @UI.lineItem: [{ position: 44 },
                    //criticality: 'StatusCriticality', 
                    //criticalityRepresentation: #WITH_ICON},
-                 //{ type: #FOR_ACTION, 
-                  // dataAction: 'setStatusToCompleted', 
-                   //label: 'Set Completed'}]
-                   }]
+                 { type: #FOR_ACTION, 
+                   dataAction: 'setStatusToCompleted', 
+                   label: 'Set Completed'}]
+  @UI.identification: [{ type: #FOR_ACTION,
+                         dataAction: 'setStatusToCompleted',
+                         label: 'Set Completed' }]
   Status;
 }

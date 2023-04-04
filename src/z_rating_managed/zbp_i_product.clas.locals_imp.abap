@@ -11,26 +11,28 @@ CLASS lhc_rating DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
 
     METHODS check_email FOR VALIDATE ON SAVE
-      IMPORTING keys FOR Rating~checkEmail.
+      IMPORTING keys FOR rating~checkemail.
     METHODS check_rating FOR VALIDATE ON SAVE
-      IMPORTING keys FOR Rating~checkRating.
+      IMPORTING keys FOR rating~checkrating.
     METHODS set_status_new FOR DETERMINE ON MODIFY
-      IMPORTING keys FOR Rating~setStatusNew.
-    METHODS set_Status_To_Completed FOR MODIFY
-      IMPORTING keys FOR ACTION Rating~setStatusToCompleted RESULT result.
+      IMPORTING keys FOR rating~setstatusnew.
+    METHODS set_status_to_completed FOR MODIFY
+      IMPORTING keys FOR ACTION rating~setstatustocompleted RESULT result.
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
-      IMPORTING keys REQUEST requested_authorizations FOR Rating RESULT result.
+      IMPORTING keys REQUEST requested_authorizations FOR rating RESULT result.
     METHODS set_status_customer_feedback FOR DETERMINE ON MODIFY
       IMPORTING keys FOR rating~setstatuscustomerfeedback.
+    METHODS get_instance_features FOR INSTANCE FEATURES
+      IMPORTING keys REQUEST requested_features FOR rating RESULT result.
 
 ENDCLASS.
 
 CLASS lhc_rating IMPLEMENTATION.
 
   METHOD check_email.
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-      ENTITY Rating
-        FIELDS ( Email )
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+      ENTITY rating
+        FIELDS ( email )
         WITH CORRESPONDING #( keys )
       RESULT DATA(ratings).
 
@@ -55,14 +57,14 @@ CLASS lhc_rating IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD check_rating.
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-        ENTITY Rating
-          FIELDS ( Rating )
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+        ENTITY rating
+          FIELDS ( rating )
           WITH CORRESPONDING #( keys )
         RESULT DATA(ratings).
 
     LOOP AT ratings ASSIGNING FIELD-SYMBOL(<rating>).
-      IF <rating>-Rating < 0 OR <rating>-Rating > 5.
+      IF <rating>-rating < 0 OR <rating>-rating > 5.
         APPEND VALUE #( %key = <rating>-%key ) TO failed-rating.
 
         APPEND VALUE #( %key = <rating>-%key
@@ -75,15 +77,15 @@ CLASS lhc_rating IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD set_status_new.
-    DATA ratings_for_update TYPE TABLE FOR UPDATE Z_I_Rating.
+    DATA ratings_for_update TYPE TABLE FOR UPDATE z_i_rating.
 
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-     ENTITY Rating
-       FIELDS ( Status )
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
+       FIELDS ( status )
        WITH CORRESPONDING #( keys )
      RESULT DATA(ratings).
 
-    DELETE ratings WHERE Status IS NOT INITIAL.
+    DELETE ratings WHERE status IS NOT INITIAL.
     CHECK ratings IS NOT INITIAL.
 
     LOOP AT ratings ASSIGNING FIELD-SYMBOL(<rating>).
@@ -92,9 +94,9 @@ CLASS lhc_rating IMPLEMENTATION.
              TO ratings_for_update.
     ENDLOOP.
 
-    MODIFY ENTITIES OF Z_I_Product IN LOCAL MODE
-      ENTITY Rating
-        UPDATE FIELDS ( Status )
+    MODIFY ENTITIES OF z_i_product IN LOCAL MODE
+      ENTITY rating
+        UPDATE FIELDS ( status )
         WITH ratings_for_update
       REPORTED DATA(update_reported).
 
@@ -103,21 +105,21 @@ CLASS lhc_rating IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD set_status_to_completed.
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-     ENTITY Rating
-       FIELDS ( Status )
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
+       FIELDS ( status )
        WITH CORRESPONDING #( keys )
      RESULT DATA(ratings).
 
-    MODIFY ENTITIES OF Z_I_Product IN LOCAL MODE
-       ENTITY Rating
-         UPDATE FIELDS ( Status )
+    MODIFY ENTITIES OF z_i_product IN LOCAL MODE
+       ENTITY rating
+         UPDATE FIELDS ( status )
          WITH VALUE #( FOR rating IN ratings
                        ( %tky = rating-%tky
                          status = rating_status-completed ) ).
 
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-     ENTITY Rating
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
        ALL FIELDS
        WITH CORRESPONDING #( keys )
      RESULT DATA(completed_ratings).
@@ -130,19 +132,19 @@ CLASS lhc_rating IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD set_status_customer_feedback.
-    READ ENTITIES OF Z_I_Product IN LOCAL MODE
-     ENTITY Rating
-       FIELDS ( Status Rating )
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+     ENTITY rating
+       FIELDS ( status rating )
        WITH CORRESPONDING #( keys )
      RESULT DATA(ratings).
 
-    DELETE ratings WHERE Rating = 0.
+    DELETE ratings WHERE rating = 0.
     CHECK ratings IS NOT INITIAL.
 
-    MODIFY ENTITIES OF Z_I_Product IN LOCAL MODE
-      ENTITY Rating
-        UPDATE FIELDS ( Status )
-        WITH VALUE #( for rating in ratings
+    MODIFY ENTITIES OF z_i_product IN LOCAL MODE
+      ENTITY rating
+        UPDATE FIELDS ( status )
+        WITH VALUE #( FOR rating IN ratings
                           ( %tky = rating-%tky
                             status = rating_status-customer_feedback ) )
       REPORTED DATA(update_reported).
@@ -150,17 +152,38 @@ CLASS lhc_rating IMPLEMENTATION.
     reported = CORRESPONDING #( DEEP update_reported ).
   ENDMETHOD.
 
+  METHOD get_instance_features.
+    READ ENTITIES OF z_i_product IN LOCAL MODE
+       ENTITY rating
+         FIELDS ( status )
+         WITH CORRESPONDING #( keys )
+       RESULT DATA(ratings).
+
+    result = VALUE #( FOR rating IN ratings
+                    ( %tky                           = rating-%tky
+                      %features-%action-setStatusToCompleted =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled  )
+                      %features-%delete =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+                      %features-%update =
+                        COND #( WHEN rating-Status = 30
+                                THEN if_abap_behv=>fc-o-disabled ELSE if_abap_behv=>fc-o-enabled   )
+                   ) ).
+  ENDMETHOD.
+
 ENDCLASS.
 
-CLASS lhc_Product DEFINITION INHERITING FROM cl_abap_behavior_handler.
+CLASS lhc_product DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
-      IMPORTING keys REQUEST requested_authorizations FOR Product RESULT result.
+      IMPORTING keys REQUEST requested_authorizations FOR product RESULT result.
 
 ENDCLASS.
 
-CLASS lhc_Product IMPLEMENTATION.
+CLASS lhc_product IMPLEMENTATION.
 
   METHOD get_instance_authorizations.
   ENDMETHOD.

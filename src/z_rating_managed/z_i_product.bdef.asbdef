@@ -12,12 +12,12 @@ authorization master ( instance )
   association _Rating { create; }
 
   field ( readonly : update ) ProductId;
-
   mapping for zproduct corresponding
     {
       ProductId          = product_id;
       ProductDescription = product_desc;
     }
+
 
 }
 
@@ -26,8 +26,8 @@ persistent table zrating
 lock dependent by _Product
 authorization dependent by _Product
 {
-  update;
-  delete;
+  update ( features : instance );
+  delete ( features : instance );
   field ( readonly ) Product;
   association _Product;
 
@@ -37,11 +37,10 @@ authorization dependent by _Product
   validation checkEmail on save { field Email; }
   validation checkRating on save { field Rating; }
 
-  determination setStatusNew on modify {create; }
+  determination setStatusNew on modify { create; }
   determination setStatusCustomerFeedback on modify { field Rating; }
 
-  action setStatusToCompleted result [1] $self;
-
+  action ( features : instance ) setStatusToCompleted result [1] $self;
   mapping for zrating corresponding
     {
       RatingUUID    = rating_uuid;
@@ -50,4 +49,5 @@ authorization dependent by _Product
       CreatedAt     = created_at;
       CreatedBy     = created_by;
     }
- }
+
+}

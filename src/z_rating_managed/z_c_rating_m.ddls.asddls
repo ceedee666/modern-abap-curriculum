@@ -23,10 +23,7 @@ define view entity Z_C_Rating_M
       LastChangedAt,
       Status, 
       StatusCriticality,
-       
-      @ObjectModel.virtualElementCalculatedBy: 'ABAP:ZCL_VE_RATING_AGE'
-      virtual ReviewAge: abap.int2,
-  
+
       /* Associations */
       _Product : redirected to parent Z_C_Product_M
 }
