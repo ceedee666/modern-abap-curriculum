@@ -27,7 +27,7 @@ IDE. There are several possible options to do this: you can download the
 [Eclipse Installer](https://www.eclipse.org/downloads/) and execute it, or install the suitable
 [package](https://www.eclipse.org/downloads/packages/) for your system. On macOS
 and Linux, you can also use a package manager like [Homebrew](https://brew.sh/) or
-[APT](<https://en.wikipedia.org/wiki/APT_(software)>).
+[APT](<https://en.wikipedia.org/wiki/APT_(software)>). 
 
 Once the Eclipse IDE is installed, you need to add the ABAP Developer Tools plug-ins. Follow these steps:
 
@@ -43,6 +43,9 @@ entry on the Welcome page. Note that the Welcome page can always be accessed via
 the Help menu (`Help > Welcome`).
 
 ![Eclipse Welcome Screen](imgs/hello_world/eclipse_welcome_screen.png)
+
+A complehensive reference for the installation and usage of the ABAP Development Tools
+can be found in the [DSAG ADT Leitfaden](https://1dsag.github.io/ADT-Leitfaden/). 
 
 ## SAP BTP Free Tier and SAP BTP Trial
 
