@@ -44,8 +44,8 @@ the Help menu (`Help > Welcome`).
 
 ![Eclipse Welcome Screen](imgs/hello_world/eclipse_welcome_screen.png)
 
-A complehensive reference for the installation and usage of the ABAP Development Tools
-can be found in the [DSAG ADT Leitfaden](https://1dsag.github.io/ADT-Leitfaden/). 
+If you need guidance on installing and using the ABAP Development Tools, you can refer 
+to the [DSAG ADT Leitfaden](https://1dsag.github.io/ADT-Leitfaden/), which provides a comprehensive reference.
 
 ## SAP BTP Free Tier and SAP BTP Trial
 
