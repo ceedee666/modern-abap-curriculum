@@ -2,17 +2,82 @@
 
 With the data model established, the next step involves creating a read-only list
 report. This report allows the data of the business objects to be displayed using
-a Fiori App. In this unit, a read-only list report is created for the `Z_C_Rating_ReadOnly`
-entity, with the Fiori App implemented using the [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
+a Fiori App. To create a read-only list report two steps are necessary.
+First, _consumption views_ are created for the existing CDS views `Z_I_Product` and `Z_I_Rating`.
+On the basis of the consumption views a business service is created. Finally, the read-only list report
+is created as a Fiori App implemented using the
+[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
+
+## Creating Consumption View
+
+We will see later in this curriculum, that CDS view are the basis of business objects in SAP ABAP RAP.
+To enable flexibility the business objects are not created on the basis of the interface views `Z_I_Product` and
+`Z_I_Rating`. Instead, _consumption views_ are used to only expose the parts of the data model relevant in a
+certain scenario.
+
+While the _interface views_ provide a stable interface to the data model, the _consumption views_ provide
+a use case specific projection of the data model.
+
+The artifacts of the read-only list report from the data model will be stored in the package `Z_RATING_READONLY`.
+Create this package as a sub-package of `Z_RATING`. Inside this package the two consumption views
+`Z_C_Product_ReadOnly` and `Z_C_Rating_ReadOnly` will be created. To create the consumption view
+`Z_C_Product_ReadOnly` create a new data definition. Provide `Z_C_Product_ReadOnly` as the name and
+`Product View for the RO UI` as the description. Select `Z_I_Product` as the referenced object.
+In the subsequent screen select `Data Projection View` as the template and click `Finish`. This creates a
+initial version of the consumption view. Use code completion (i.e. `<ctrl> - <space>`) to add all elements
+of the interface view to the consumption view. The resulting source code of the view `Z_C_Product_ReadOnly` is
+shown in the listing below.
+
+```abap
+@EndUserText.label: 'Product View for RO UI'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+
+define root view entity Z_C_Product_ReadOnly
+  as projection on Z_I_Product
+{
+  key ProductId,
+      ProductDescription,
+
+      /* Associations */
+      _Rating
+}
+```
+
+The consumption view is defined as a `projection on Z_I_Product`. The projection specifies, which parts of the interface view
+`Z_I_Product` should be available in the consumption view. In this example all elements of the interface view are
+added to the consumption view.
+
+Similarly, the consumption view `Z_C_Rating_ReadOnly` can be created. The listing below shows the resulting consumption view.
+As before, all elements of the interface view are added to the consumption view.
+
+```abap
+@EndUserText.label: 'Rating view for RO UI'
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+
+define view entity Z_C_Rating_ReadOnly
+  as projection on Z_I_Rating
+{
+  key RatingUUID,
+      Product,
+      Name,
+      Email,
+      Rating,
+      Review,
+      /* Associations */
+      _Product
+}
+
+```
+
+The following figure illustrates the relationship between the development objects and the layers
+of the ABAP RAP.
+
+![Development Objects and the ABAP RAP Layers](./imgs/ro_list_report/rap_components_consumption.drawio.png)
 
 ## The Business Service Provisioning Layer
 
 As shown in the ABAP RAP components diagram, the _Business Service Provisioning_ layer
-separates the business objects from service consumption.
-
-![ABAP RAP Components](imgs/abap_rap/rap_components.drawio.png)
-
-The business service provisioning layer contains two types of entities:
+separates the business objects from service consumption. The business service provisioning layer contains two types of entities:
 
 1. Service Definition
 1. Service Binding.
@@ -32,7 +97,7 @@ right click on the entity and select `New Service Definition`.
 
 ![Creating a new service definition](./imgs/ro_list_report/create_service_def.png)
 
-In the dialogue, enter `Z_S_RATING_READONLY` as the name of the service definition and
+In the dialogue, enter `Z_S_Rating_ReadOnly` as the name of the service definition and
 `Service for Read-Only UI` as the description. In the next screen, select a transport request and
 click `Next>`. In the templates screen select the `Define Service`template and click `Finish`.
 
@@ -102,7 +167,12 @@ Whether to use OData v2 or OData v4 depends also on the focus of the service. Re
 
 > OData V4 services have a wider scope than OData V2 services. Use OData V4 wherever possible for transactional services.
 
-However, not all features of SAP Fiori elements are available for OData v2. Therefore the OData v2 option is used in this unit.
+However, not all features of SAP Fiori elements are available for OData v4. Therefore the OData v2 option is used in this unit.
+
+The following diagram illustrates the different development objects and their relation to the SAP ABAP RAP layers.
+Obviously, the service definition and service binding belong to the _Business Service Provisioning_ layer.
+
+![Development Objects and the ABAP RAP Layers](./imgs/ro_list_report/rap_components_ro_list.drawio.png)
 
 ### Previewing the Service
 

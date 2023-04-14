@@ -1,0 +1,94 @@
+<mxfile host="Electron" modified="2023-04-14T21:22:43.459Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="P4mdJ4hMK5sCfkXBX9_9" version="21.1.2" type="device">
+  <diagram name="Page-1" id="O5uBvAX4eoEhG9-NWiZ3">
+    <mxGraphModel dx="1026" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-1" value="Business Objects&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="420" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-3" value="Queries&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="420" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-4" value="Service Definition &amp;amp; Service Binding&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#f5f5f5;" parent="1" vertex="1">
+          <mxGeometry x="20" y="300" width="350" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-5" value="SAP Fiori UI" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="20" y="249" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-6" value="Web APIs" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="249" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-7" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" y="410" as="sourcePoint" />
+            <mxPoint x="510" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-8" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" y="289" as="sourcePoint" />
+            <mxPoint x="510" y="289" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-9" value="Data Modelling &amp;amp; Behavious Definition&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="545" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-10" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="720" as="sourcePoint" />
+            <mxPoint x="390" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-12" value="Business Service Provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="335" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-13" value="Service Consumption&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="400" y="249" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="coRS0ZhkJ7FDkwAaj9oY-12" value="Z_S_Rating_ReadOnly" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="113.75" y="360" width="162.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="coRS0ZhkJ7FDkwAaj9oY-13" value="&lt;code&gt;&lt;font face=&quot;Helvetica&quot;&gt;Z_B_Rating_ReadOnly_V2&lt;/font&gt;&lt;/code&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="113.75" y="324" width="162.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-2" value="Datamodel" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="20" y="470" width="350" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="5ukcD1NVXQ0pOEfuJebw-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="5ukcD1NVXQ0pOEfuJebw-2" target="5ukcD1NVXQ0pOEfuJebw-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-4" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="40" y="627" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-3" value="Database Tables" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="xe2K_mK-dfjaz_KrOQmi-4" vertex="1">
+          <mxGeometry width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-1" value="ZRATING" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-4" vertex="1">
+          <mxGeometry x="10" y="25" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-2" value="ZPRODUCT" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-4" vertex="1">
+          <mxGeometry x="180" y="25" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-12" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="40" y="500" width="310" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-5" value="CDS-Views" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry width="310" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-10" value="Z_I_Rating" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="10" y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xe2K_mK-dfjaz_KrOQmi-11" value="Z_I_Product" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="180" y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eseh26PKGZZb0qquZgIW-5" value="Z_C_Rating" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="eseh26PKGZZb0qquZgIW-6" value="Z_C_Product" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="180" y="30" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
