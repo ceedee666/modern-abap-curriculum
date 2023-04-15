@@ -528,7 +528,10 @@ lock dependent
 }
 ```
 
-With this behavior definition the app should no be working as expected.
+With this behavior definition the app should no be working as expected. The following figure details
+the elements comprising the rating app.
+
+![Components of a Managed Transaction App](./imgs/transactional_app/rap_components_managed.drawio.png)
 
 ---
 
