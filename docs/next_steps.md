@@ -9,7 +9,7 @@ regarding SAP RAP.
 With the knowledge from this curriculum there are still many improvements possible for the rating app.
 The following list contains just a few of them.
 
-- _Implement the customer part of the Rating App_:
+- **Implement the customer part of the Rating App**:
   Currently only the app to manage products ratings is implemented. The app for customers to
   add ratings is still missing. This app should allow customers to provide a rating. Possible by
   only allowing changes to the rating and review fields. This functionality could be achieved by:
@@ -18,7 +18,7 @@ The following list contains just a few of them.
   - Creating a specific behavior projection
   - Creating the necessary service definition and binding.
 
-- _Improve the UI_:
+- **Improve the UI**:
   Numerous usability improvements are possible for the app. For example
 
 ## Deploying the Rating App
@@ -62,7 +62,7 @@ section of the documentation.
 The links above should provide enough content to get started with developing business applications
 using the SAP ABAP RAP framework.
 
-_Happy RAPping_ 🎤!
+**Happy RAPping** 🎤!
 
 ---
 
