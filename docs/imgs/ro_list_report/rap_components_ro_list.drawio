@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-04-14T21:22:43.459Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="P4mdJ4hMK5sCfkXBX9_9" version="21.1.2" type="device">
+<mxfile host="Electron" modified="2023-04-18T13:40:04.071Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="6DQvDFNU9MFJKbwMThrP" version="21.1.2" type="device">
   <diagram name="Page-1" id="O5uBvAX4eoEhG9-NWiZ3">
-    <mxGraphModel dx="1026" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1219" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -65,10 +65,10 @@
           <mxGeometry width="310" height="60" as="geometry" />
         </mxCell>
         <mxCell id="xe2K_mK-dfjaz_KrOQmi-1" value="ZRATING" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-4" vertex="1">
-          <mxGeometry x="10" y="25" width="120" height="30" as="geometry" />
+          <mxGeometry x="10" y="25" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="xe2K_mK-dfjaz_KrOQmi-2" value="ZPRODUCT" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-4" vertex="1">
-          <mxGeometry x="180" y="25" width="120" height="30" as="geometry" />
+          <mxGeometry x="160" y="25" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="xe2K_mK-dfjaz_KrOQmi-12" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="40" y="500" width="310" height="120" as="geometry" />
@@ -77,16 +77,16 @@
           <mxGeometry width="310" height="120" as="geometry" />
         </mxCell>
         <mxCell id="xe2K_mK-dfjaz_KrOQmi-10" value="Z_I_Rating" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
-          <mxGeometry x="10" y="70" width="120" height="30" as="geometry" />
+          <mxGeometry x="10" y="70" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="xe2K_mK-dfjaz_KrOQmi-11" value="Z_I_Product" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
-          <mxGeometry x="180" y="70" width="120" height="30" as="geometry" />
+          <mxGeometry x="160" y="70" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="eseh26PKGZZb0qquZgIW-5" value="Z_C_Rating" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
-          <mxGeometry x="10" y="30" width="120" height="30" as="geometry" />
+        <mxCell id="eseh26PKGZZb0qquZgIW-5" value="Z_C_Rating_ReadOnly" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="10" y="30" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="eseh26PKGZZb0qquZgIW-6" value="Z_C_Product" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
-          <mxGeometry x="180" y="30" width="120" height="30" as="geometry" />
+        <mxCell id="eseh26PKGZZb0qquZgIW-6" value="Z_C_Product_ReadOnly" style="rounded=0;whiteSpace=wrap;html=1;" parent="xe2K_mK-dfjaz_KrOQmi-12" vertex="1">
+          <mxGeometry x="160" y="30" width="140" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
