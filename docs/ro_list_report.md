@@ -205,7 +205,7 @@ header, and export to MS Excel.
 ## Adding UI Annotations
 
 As previously mentioned, the Fiori App in this tutorial is built using the
-[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/)framework.
+[SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
 This framework offers different floorplans to create apps for
 various use cases. Currently, SAP Fiori Elements provides the following floorplans:
 
@@ -241,8 +241,8 @@ columns hidden first when the app is opened on a smaller screen (e.g., a mobile 
 values being `#STANDARD` for normal values or `#WITH_URL` for columns containing external
 links.
 
-The following listings show two variants of annotating the `Product` field with position
-10, importance high, and type `#STANDARD`. Note that code completion in ABAP in Eclipse
+The following listings show the annotation of the `Product` field with position
+`10`, importance `#HIGH`, and type `#STANDARD`. Note that code completion in ABAP in Eclipse
 is beneficial for creating these annotations.
 
 ```abap
