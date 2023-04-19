@@ -246,14 +246,6 @@ The following listings show the annotation of the `Product` field with position
 is beneficial for creating these annotations.
 
 ```abap
-@UI.lineItem.position: 10
-@UI.lineItem.label: 'Product'
-@UI.lineItem.importance = #HIGH
-@UI.lineItem.type = #STANDARD
-Product
-```
-
-```abap
 @UI:{
   lineItem: [{
     position: 10,
