@@ -608,10 +608,19 @@ To display the star rating in the search result table of the list view, a data p
 is created for the Rating field using the following code. This creates a data point
 that is displayed as a rating. The maximum possible value of the rating is 5, and
 the data point is created for the `Rating` field (`qualifier: 'Rating'`).
+In addition, the `type` attribute of the `lineItem` annotation needs to be changed to
+`#AS_DATAPOINT` to used the data point in the result list.
 
 ```abap
 @UI:{
   ...
+  lineItem: [{
+      position: 20,
+      importance: #HIGH,
+      type: #AS_DATAPOINT,
+      label: 'Rating'
+    }],
+  }
   dataPoint: {
     qualifier: 'Rating',
     targetValue: 5,
