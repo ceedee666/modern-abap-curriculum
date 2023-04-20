@@ -577,6 +577,11 @@ The following screenshots show the app after adding the virtual element.
 
 ![Product Details](./imgs/adding_behavior/app_product.png)
 
+The following figure summarizes
+the elements comprising the rating after the last step.
+
+![Components of a Managed Transaction App](./imgs/adding_behavior/rap_components_managed.drawio.png)
+
 This concludes the unit. In the next unit a outlook to possible next steps is given.
 
 ---
