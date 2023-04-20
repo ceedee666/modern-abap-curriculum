@@ -529,7 +529,7 @@ lock dependent
 ```
 
 With this behavior definition the app should no be working as expected. The following figure details
-the elements comprising the rating app.
+the elements comprising the rating app so far. In the next unit additional behaviour is added to the app.
 
 ![Components of a Managed Transaction App](./imgs/transactional_app/rap_components_managed.drawio.png)
 
