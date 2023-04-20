@@ -612,22 +612,27 @@ In addition, the `type` attribute of the `lineItem` annotation needs to be chang
 `#AS_DATAPOINT` to used the data point in the result list.
 
 ```abap
-@UI:{
-  ...
-  lineItem: [{
+...
+  @UI:{
+    identification: [{
+      position: 20,
+      label: 'Rating',
+      qualifier: 'fRating'
+    }],
+    lineItem: [{
       position: 20,
       importance: #HIGH,
       type: #AS_DATAPOINT,
-      label: 'Rating'
+      label: 'Bewertung'
     }],
+    dataPoint: {
+      qualifier: 'Rating',
+      targetValue: 5,
+      visualization: #RATING
+    }
   }
-  dataPoint: {
-    qualifier: 'Rating',
-    targetValue: 5,
-    visualization: #RATING
-  }
-}
-Rating,
+  Rating,
+...
 ```
 
 After adding this data point annotation, the result table of the list report is displayed
