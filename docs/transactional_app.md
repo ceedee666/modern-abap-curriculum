@@ -533,6 +533,16 @@ the elements comprising the rating app so far. In the next unit additional behav
 
 ![Components of a Managed Transaction App](./imgs/transactional_app/rap_components_managed.drawio.png)
 
+#### Exercise 3
+
+One possible improvement to the current functionality of the app is to add mandatory fields. When creating a
+rating the fields `Name` and `Email`should be mandatory. Furthermore, these fields should not be changeable
+after a rating was created. The rational of this functionality is, that a rating is create automatically once
+a order is completed and send to the customer. The customer only needs to provide the rating and a optional review.
+
+With the knowledge from the previous sections you should be able to implement this requirements now. The necessary information
+to make a filed mandatory is available in the [ABAP Documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenbdl_field_char.htm).
+
 ---
 
 [< Previous Chapter](./ro_list_report.md) | [Next Chapter >](./adding_behavior.md) | [Overview 🏠](../README.md)
