@@ -29,7 +29,7 @@ ABAP RAP provides concepts for modelling the structure and the relations of Busi
 
 Besides the structure a Business Object also has a behaviour. The behaviour defines which operations are possible for a
 business object. A sales order could, for example, be created. After the creation it might be changed until it is released. Once it
-is released it is only possible to chancel the whole sales order or to create a delivery for the sales order. ABAP RAP also provides
+is released it is only possible to cancel the whole sales order or to create a delivery for the sales order. ABAP RAP also provides
 functionality for modelling and implementing the behaviour of Business Objects.
 
 In contrast to the Business Object a Query provides read only access to the underlying data model. This access is used
