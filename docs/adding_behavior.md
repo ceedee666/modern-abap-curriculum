@@ -413,7 +413,7 @@ to the table of ratings the following annotations can be used. This annotation a
 
 The result of the previous steps is shown in the following screenshot.
 
-![Rating table with an action](./imgs/adding_bahvior/rating_action.png)
+![Rating table with an action](./imgs/adding_behavior/rating_action.png)
 
 #### Exercise 4
 
