@@ -6,7 +6,7 @@ available. In this unit, we will extend the functionality of the business object
 such as validations, determinations, and actions.
 
 [Validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations) are
-implemented to check the data entered by the user. For example, consider the email address of a user. A validation can be used to check if a valid email address was entered.
+implemented to check the data entered by the user. For example, consider the email address of a user. Validation can be used to check if a valid email address was entered.
 [Determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
 are used to change the business object data based on trigger conditions. Finally
 [actions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/actions) are added
