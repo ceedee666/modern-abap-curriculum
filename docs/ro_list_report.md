@@ -2,28 +2,28 @@
 
 With the data model established, the next step involves creating a read-only list
 report. This report allows the data of the business objects to be displayed using
-a Fiori App. To create a read-only list report two steps are necessary.
+an SAP Fiori App. To create a read-only list report two steps are necessary.
 First, _consumption views_ are created for the existing CDS views `Z_I_Product` and `Z_I_Rating`.
 On the basis of the consumption views a business service is created. Finally, the read-only list report
-is created as a Fiori App implemented using the
+is created as an SAP Fiori App implemented using the
 [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
 
 ## Creating Consumption View
 
-We will see later in this curriculum, that CDS view are the basis of business objects in SAP ABAP RAP.
+We will see later in this curriculum, that CDS views are the basis of business objects in SAP ABAP RAP.
 To enable flexibility the business objects are not created on the basis of the interface views `Z_I_Product` and
 `Z_I_Rating`. Instead, _consumption views_ are used to only expose the parts of the data model relevant in a
 certain scenario.
 
 While the _interface views_ provide a stable interface to the data model, the _consumption views_ provide
-a use case specific projection of the data model.
+a use case-specific projection of the data model.
 
 The artifacts of the read-only list report from the data model will be stored in the package `Z_RATING_READONLY`.
 Create this package as a sub-package of `Z_RATING`. Inside this package the two consumption views
 `Z_C_Product_ReadOnly` and `Z_C_Rating_ReadOnly` will be created. To create the consumption view
 `Z_C_Product_ReadOnly` create a new data definition. Provide `Z_C_Product_ReadOnly` as the name and
 `Product View for the RO UI` as the description. Select `Z_I_Product` as the referenced object.
-In the subsequent screen select `Data Projection View` as the template and click `Finish`. This creates a
+In the subsequent screen select `Data Projection View` as the template and click `Finish`. This creates an
 initial version of the consumption view. Use code completion (i.e. `<ctrl> - <space>`) to add all elements
 of the interface view to the consumption view. The resulting source code of the view `Z_C_Product_ReadOnly` is
 shown in the listing below.
@@ -44,7 +44,7 @@ define root view entity Z_C_Product_ReadOnly
 ```
 
 The consumption view is defined as a `projection on Z_I_Product`. The projection specifies, which parts of the interface view
-`Z_I_Product` should be available in the consumption view. In this example all elements of the interface view are
+`Z_I_Product` should be available in the consumption view. In this example, all elements of the interface view are
 added to the consumption view.
 
 Similarly, the consumption view `Z_C_Rating_ReadOnly` can be created. The listing below shows the resulting consumption view.
@@ -114,7 +114,7 @@ define service Z_S_Rating_ReadOnly {
 The service [exposes](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abensrvd_define_service.htm)
 two entities from the data model: `Z_C_Rating_ReadOnly` and `Z_C_Product_ReadOnly`.
 
-To create a service binding for the service definition, right click on the `Z_S_RATING_READONLY` service and
+To create a service binding for the service definition, right-click on the `Z_S_RATING_READONLY` service and
 select `New Service Binding`.
 In the dialogue enter `Z_B_RATING_READONLY_V2` as the name of the service definition and
 `Rating Service - UI V2` as the description. For the binding type select `OData V2
@@ -126,9 +126,9 @@ The resulting binding is shown in the following screenshot.
 
 ![Service Binding](./imgs/ro_list_report/service_binding.png)
 
-Note that after creating a service binding, the service in not published, yet. This means that the
+Note that after creating a service binding, the service is not published, yet. This means that the
 service can not be accessed. To publish the service click on the `Publish local service endpoint` link. This
-generates the necessary artefacts for the service to be accessible. Once the publishing has completed active
+generates the necessary artefacts for the service to be accessible. Once the publishing has been completed active
 the service again.
 
 Publishing the service results in two changes in the service binging:
@@ -149,12 +149,12 @@ returned data e.g. only read reviews for a certain product.
 ### Different Service Binding Protocol Options
 
 When creating a service binding, different protocol options are available. The
-[SAP documentation](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/service-binding)
-provides the following recommendations choosing the appropriate option:
+[RAP documentation](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/service-binding)
+provides the following recommendations for choosing the appropriate option:
 
 > **UI service**
 >
-> A UI service makes it possible to add a SAP Fiori elements UI or other UI clients to the service.
+> A UI service makes it possible to add an SAP Fiori elements UI or other UI clients to the service.
 > Currently, UI services are supported for OData and InA services.
 >
 > **Web API**
@@ -163,11 +163,11 @@ provides the following recommendations choosing the appropriate option:
 > UIs. Web APIs can be consumed by an unknown consumer via OData. Web APIs can be extended.
 > Currently, Web APIs are supported for OData and SQL services.
 
-Whether to use OData v2 or OData v4 depends also on the focus of the service. Regarding OData v4 the SAP documentation states:
+Whether to use OData V2 or OData V4 depends also on the focus of the service. Regarding OData v4 the SAP documentation states:
 
 > OData V4 services have a wider scope than OData V2 services. Use OData V4 wherever possible for transactional services.
 
-However, not all features of SAP Fiori elements are available for OData v4. Therefore the OData v2 option is used in this unit.
+However, not all features of SAP Fiori elements are available for OData V4. Therefore the OData V2 option is used in this unit.
 
 The following diagram illustrates the different development objects and their relation to the SAP ABAP RAP layers.
 Obviously, the service definition and service binding belong to the _Business Service Provisioning_ layer.
@@ -176,13 +176,13 @@ Obviously, the service definition and service binding belong to the _Business Se
 
 ### Previewing the Service
 
-With the service published, it is now possible to preview the data using Fiori Elements.
+With the service published, it is now possible to preview the data using SAP Fiori Elements.
 The screenshot below displays the result of executing the preview for `Z_C_Rating_ReadOnly`.
 
 ![Previewing the service](./imgs/ro_list_report/preview.png)
 
-The preview does not show any data. The reason is, that currently no definition exists which data of the
-entity should be displayed and which not. In one of the subsequent steps this information is added to the CDS view
+The preview does not show any data. The reason is, that currently, no definition exists on which data of the
+entity should be displayed and which not. In one of the subsequent steps, this information is added to the CDS view
 defining the entity. Until then it is possible to manually select the data to be displayed. This is done by clicking on the
 gear icon. This opens the `View Settings` dialog. Here the columns to display can be selected.
 
@@ -198,13 +198,13 @@ Selecting all available columns and also sorting the table by `Product ID` resul
 
 ![Preview containing all columns](./imgs/ro_list_report/preview_with_data.png)
 
-Note that the Fiori elements app already provides several useful features, such as
+Note that the SAP Fiori elements app already provides several useful features, such as
 the ability to resize columns, change the sort order, filter by clicking on the column
 header, and export to MS Excel.
 
 ## Adding UI Annotations
 
-As previously mentioned, the Fiori App in this tutorial is built using the
+As previously mentioned, the SAP Fiori App in this tutorial is built using the
 [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
 This framework offers different floorplans to create apps for
 various use cases. Currently, SAP Fiori Elements provides the following floorplans:
@@ -241,7 +241,7 @@ columns hidden first when the app is opened on a smaller screen (e.g., a mobile 
 values being `#STANDARD` for normal values or `#WITH_URL` for columns containing external
 links.
 
-The following listings show the annotation of the `Product` field with position
+The following listings show the annotation of the `Product` field with the position
 `10`, importance `#HIGH`, and type `#STANDARD`. Note that code completion in ABAP in Eclipse
 is beneficial for creating these annotations.
 
@@ -257,7 +257,7 @@ is beneficial for creating these annotations.
 ```
 
 It might also be necessary to hide certain fields in the UI. For example, the `RatingUUID` in this example
-is not useful to any user and should therefore been hidden. Hiding a field can be achieved by using the `@UI.hidden: true` annotation.
+is not useful to any user and should therefore be hidden. Hiding a field can be achieved by using the `@UI.hidden: true` annotation.
 
 The listing below shows possible annotations for the fields of the `Z_C_Rating_ReadOnly` view.
 
@@ -320,7 +320,7 @@ define view entity Z_C_Rating_ReadOnly
 
 ```
 
-With those annotations the preview of the read-only list report looks like shown in the following screenshot.
+With those annotations, the preview of the read-only list report looks like shown in the following screenshot.
 
 ![Preview with UI.lineItem annotations](./imgs/ro_list_report/preview_with_annotations_01.png)
 
@@ -352,7 +352,7 @@ Product,
 ...
 ```
 
-Finally, the is is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation.
+Finally, the it is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation.
 The resulting CDS entity, including the annotations, is shown in the following listing.
 
 ```abap
@@ -416,7 +416,7 @@ define view entity Z_C_Rating_ReadOnly
 
 ```
 
-The following screenshot shows the resulting Fiori App.
+The following screenshot shows the resulting SAP Fiori App.
 
 ![Preview including the @Search annotations](./imgs/ro_list_report/preview_with_annotations_02.png)
 
@@ -609,7 +609,7 @@ is created for the Rating field using the following code. This creates a data po
 that is displayed as a rating. The maximum possible value of the rating is 5, and
 the data point is created for the `Rating` field (`qualifier: 'Rating'`).
 In addition, the `type` attribute of the `lineItem` annotation needs to be changed to
-`#AS_DATAPOINT` to used the data point in the result list.
+`#AS_DATAPOINT` to use the data point in the result list.
 
 ```abap
 ...
@@ -645,9 +645,9 @@ with the rating shown as stars, as shown in the following screenshot:
 To display the rating as stars on the object page as well, additional annotations need to be added.
 Try to add these annotations yourself. The
 [documentation on data points](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#data-points)
-from the Fiori Elements Feature Showcase Wiki might be helpful.
+from the SAP Fiori Elements Feature Showcase Wiki might be helpful.
 
-Now the value help for the `Product` search should be improved. Currently it is not possible to
+Now the value help for the `Product` search should be improved. Currently, it is not possible to
 select values from the `ZPRODUCT` table. To enable this a
 [value help](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#value-help)
 annotation needs to be added. The following code snippet shows how to add a value help to the `Product` field
@@ -658,8 +658,7 @@ This value help references the `Z_C_Product_ReadOnly` entity and uses `ProductId
 Currently, it is not possible to select values from the `ZPRODUCT` table in the `Product`
 search. To enable this,
 a [value help](https://github.com/SAP-samples/abap-platform-fiori-feature-showcase/wiki/Feature-Showcase-App-Guide#value-help)
-annotation needs to be added. The following
-code snippet shows how to add a value help to the `Product` field of the `Z_C_Rating_ReadOnly` CDS view:
+annotation needs to be added. The following code snippet shows how to add a value help to the `Product` field of the `Z_C_Rating_ReadOnly` CDS view:
 
 ```abap
 @Consumption.valueHelpDefinition: [{
@@ -704,7 +703,7 @@ Once this annotation is added, the entity and the metadata extension can be acti
 Extracting the annotations into a metadata extension has the following effect:
 
 - The app works as before
-- The `Z_C_Rating_ReadOnly` entity does not contain any UI related annotations.
+- The `Z_C_Rating_ReadOnly` entity does not contain any UI-related annotations.
 
 ## References
 
