@@ -1,7 +1,6 @@
 # Data Model of the Rating App
 
-To begin the development of the Rating App, the data model must be created. This
-model consists of two parts: table definitions and CDS views based on those tables.
+To begin the development of the Rating App, the data model must be created. This model consists of two parts: table definitions and CDS views based on those tables.
 CDS views provide additional semantic information on top of the database tables,
 such as explicitly defining the relationship between tables (e.g. the 1:N relationship
 between products and ratings, cf. [scenario description](./scenario.md)).
@@ -15,8 +14,7 @@ the `ZLOCAL` package:
 - `Z_RATING`: The package containing all development artifacts for the Rating App.
   - `Z_RATING_DB`: The database model of the Rating App. It should be created inside the `Z_RATING` package.
 
-After creating these packages and adding `ZLOCAL` to the favorite packages, the package
-structure should resemble the following screenshot:
+After creating these packages and adding `ZLOCAL` to the favorite packages, the package structure should resemble the following screenshot:
 
 ![Package Structure](imgs/data_model/package_structure.png)
 
@@ -36,8 +34,8 @@ Repository Object`. In the dialog window, select _Data Element_ and click `Next`
 `ZE_PRODUCT_ID` as the name and `Product ID` as the description of the data element.
 Finally, select a transport request and click `Finish`.
 
-This opens a editor to define the details of the data element. Define `ZE_PRODUCT_ID` as a
-character field with the length of 10 characters as shown in the following screenshot.
+This opens an editor to define the details of the data element. Define `ZE_PRODUCT_ID` as a
+character field with a length of 10 characters as shown in the following screenshot.
 Finally, save and activate the changes.
 
 ![Data Element ZE_PRODUCT_ID](imgs/data_model/data_element_product_id.png)
@@ -47,15 +45,14 @@ create a domain with a data range. Second, define a data element using this doma
 To define a domain, right-click on the `Z_RATING_DB` package again and select `New
 
 > Other ABAP Repository Object`. In the dialog window, select _Domain_ and click `Next`.
-Enter `ZD_RATING`as the name and`Domain for Product Ratings`as the description of 
-the domain. Finally, select a transport request and click`Finish`.
+Enter `ZD_RATING` as the name and `Domain for Product Ratings` as the description of 
+the domain. Finally, select a transport request and click `Finish`.
 
 This opens an editor for creating domains. In this editor perform the following steps:
 
 1. Set the data type of the domain to `INT1`, which is a 1-byte integer with a value
    range of 0 to 255.
-1. To restrict the possible values of the domain, enter the range 0 to 5 in the `Fixed 
-Values` section. Refer to the following screenshot for help.
+1. To restrict the possible values of the domain, enter the range 0 to 5 in the `Fixed Values` section. Refer to the following screenshot for help.
 1. Save and activate the changes.
 
 ![Domain ZD_RATING](imgs/data_model/domain_rating.png)
@@ -77,7 +74,7 @@ as specified in the [scenario description](./scenario.md). To create the Product
 on the package `Z_RATING_DB` and select `New > Other ABAP Repository Object`. In the
 dialog window, choose _Database Table_ and click `Next`. Enter `ZPRODUCT` as the table
 name and `Product` as its description. Finally, select a transport request and click
-`Finish`. Copy the following code into the editor, save, and activate the table.
+`Finish`. Copy the following code into the editor, save it, and activate the table.
 
 ```abap
 @EndUserText.label : 'Product'
@@ -96,7 +93,7 @@ define table zproduct {
 
 ```
 
-The previous program code consist of the following elements:
+The previous program code consists of the following elements:
 
 - The define table statement defines the `ZPRODUCT` table.
 - The `key` keyword specifies the primary key of the database table, comprising two fields: `client` and `product_id`.
@@ -178,7 +175,7 @@ program to create some data in the tables.
 The class `ZCL_GENERATE_DATA` shown below can be used to generate some data. It implements
 the `IF_OO_ADT_CLASSRUN` interface, allowing the class to be executed. In the main
 method, the two methods `create_products` and `create_ratings` are called. Both methods
-first empty the respective database table using a `DELETE FROM ...` statement. Afterwards,
+first empty the respective database table using a `DELETE FROM ...` statement. Afterward,
 dummy data is created and inserted using an `INSERT INTO ...` statement.
 A [VALUE constructor expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenconstructor_expression_value.htm)
 is used to create the dummy data.
@@ -374,8 +371,8 @@ define root view entity Z_I_Product
 ```
 
 Note, that the `client` field is not added to the view. The ABAP runtime takes care of handling the `client` field, i.e.
-allowing only access to the data of the current client. Therefore, this field is not needed in the view. Besides this simplification
-the view is the same as the table `Z_RATING`. Furthermore, the field names have been remanded to more user friendly names. These names are only a suggestion and can be changed if needed.
+allowing only access to the data of the current client. Therefore, this field is not needed in the view. Besides this simplification,
+the view is the same as the table `Z_RATING`. Furthermore, the field names have been remanded to more user-friendly names. These names are only a suggestion and can be changed if needed.
 
 Next, add relationship information to the view with the code snippet below.
 The line starting with `composition` defines a 0:n relationship between the entries
@@ -407,11 +404,10 @@ and pasting, attempt to create the view using a template and code completion.
 The view `Z_I_Rating` includes all fields of the underlying database table and defines
 a 1:1 association to the view `Z_I_Product`. Each entry in the Rating view is related
 to exactly one Product. Note, that the `Z_I_Rating` is defined by `define view entity` instead
-of `define root view entity`. In any parent-child-relationship specified using the
-`composition` ans `association to parent` keywords, there is only one root entity. All other
+of `define root view entity`. In any parent-child relationship specified using the
+`composition` and `association to parent` keywords, there is only one root entity. All other
 entities are dependent on this root entity.
-The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This
-statement is functioning similarly to the where condition of a database join statement.
+The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This statement is functioning similarly to the where condition of a database join statement.
 
 The `Z_I_Rating` view contains additional semantic information through annotations.
 Annotations like `@Semantics.user.createdBy` and `@Semantics.user.lastChangedBy` identify
@@ -448,7 +444,7 @@ define view entity Z_I_Rating
 }
 ```
 
-After saving both views, activate them using the `Activate inactive ABAP dvelopment objects`
+After saving both views, activate them using the `Activate inactive ABAP development objects`
 button (![Activate inactive ABAP development objects Button](imgs/data_model/activate_all.png)).
 
 The following figure illustrates the relationship between the created development
@@ -456,7 +452,7 @@ objects and the elements of the ABAP RAP. So far, only the data model has been c
 
 ![RAP Components](imgs/data_model/rap_components_datamodel.drawio.png)
 
-## Explore Data using CDS Views
+## Explore Data Using CDS Views
 
 The data preview of the `Z_I_Product` view is similar to that of the `ZPRODUCT` table, with two main differences:
 

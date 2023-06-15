@@ -6,8 +6,7 @@ available. In this unit, we will extend the functionality of the business object
 such as validations, determinations, and actions.
 
 [Validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations) are
-implemented to check the data entered by the user. For example consider the email address of a user. A
-validation can be used to check if a valid email address was entered.
+implemented to check the data entered by the user. For example, consider the email address of a user. Validation can be used to check if a valid email address was entered.
 [Determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
 are used to change the business object data based on trigger conditions. Finally
 [actions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/actions) are added
@@ -80,10 +79,10 @@ Determinations can be executed on `save` or on `modify`.
 According to the [ABAP keyword documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abenbdl_determinations.htm),
 `on modify` specifies that the determination is executed immediately after data changes take place
 in the transactional buffer so that the result is available during the transaction. In contrast,
-`on save` specifies that the determination is executed during the save sequence at the end of a transaction,
+`on save` specifies that the determination is executed during the save sequence at the end of a transaction
 when changes in the transactional buffer are persistent on the database.
 
-In both cases the trigger condition can be one of the CRUD operations `create`, `update` and `delete`. Furthermore, the changes
+In both cases, the trigger condition can be one of the CRUD operations `create`, `update`, and `delete`. Furthermore, the changes
 of a field value can also be used as a trigger condition.
 
 In the behavior definition of `Z_I_Rating`, we have two determinations (cf. the following listing).
@@ -177,7 +176,7 @@ The implementation of the `set_status_new` method performs the following operati
 1. The variable `ratings_for_update` is defined as a `TABLE FOR UPDATE` with the structure `Z_I_Rating`.
    A `TABLE FOR UPDATE` is a table type with a special structure for working with ABAP RAP objects. The main features off
    these table types are:
-   - Enabled for of data in RAP
+   - Enabled for data in RAP
    - Containing [special components](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abapderived_types_comp.htm) like
      %tky.
      Details on these special components can be found in the
@@ -188,7 +187,7 @@ The implementation of the `set_status_new` method performs the following operati
    operations are always operations on multiple objects. Working with just one object is a special case. The result of the
    `READ ENTITIES` EML statement is stored in the variable `ratings`.
 1. All ratings that already have a `Status` value are deleted from the internal table `ratings`. This is done to ensure no values are overwritten with the
-   default value. The `CHECK` statement ensure that the processing only continues if the are still entries in the variable `ratings`.
+   default value. The `CHECK` statement ensures that the processing only continues if the are still entries in the variable `ratings`.
 1. In the `LOOP`, a new entry is added to `ratings_for_update`. This entry contains the values of the special component `%tky` and
    the default value `rating_status-new` for the status. Setting the default value uses the following constant defined in the header of
    `lhc_rating`.
@@ -204,7 +203,7 @@ The implementation of the `set_status_new` method performs the following operati
    ```
 1. The `MODIFY ENTITIES` statement updated the transactional buffer for all changed ratings, i.e. the entries in
    `ratings_for_update`. Any error messages occurring during the modification of the entities will be returned in the
-   `REPORTED` parameter. In this example these errors are returned form the method.
+   `REPORTED` parameter. In this example, these errors are returned from the method.
 
 The implementation for the determination `determination setStatusCustomerFeedback` is still missing. Create it using the quick fix
 of the behavior and rename the generated method to `set_status_customer_feedback`. The implementation of the method
@@ -233,13 +232,13 @@ should be as follows:
   ENDMETHOD.
 ```
 
-This implementation uses a different approach to the implementation of `set_status_new`. Instead of creating a auxiliary variables
-for the changed entities, the necessary table is created implicitly using a `VALUE` statements. Below is a explanation of the code.
+This implementation uses a different approach to the implementation of `set_status_new`. Instead of creating auxiliary variables
+for the changed entities, the necessary table is created implicitly using a `VALUE` statement. Below is an explanation of the code.
 
 1. The `READ ENTITIES` EML statement is used to read the value of the `Status` and `Rating` fields for all elements in the importing parameter `keys`.
    The result of the `READ ENTITIES` EML statement is stored in the variable `ratings`. Note that all EML operations are always executed
-   for multiple object.
-1. All entities with an initial value of `0`in the `Ratings` field are deleted form the `ratings` table. The methods continues only
+   for multiple objects.
+1. All entities with an initial value of `0`in the `Ratings` field are deleted from the `ratings` table. The method continues only
    if still entries are left in the `ratings` table.
 1. The value of the `Status` field of the remaining entities is set to `rating_status-customer_feedback`. A `#VALUE` statement together with
    a [`FOR` expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenfor.htm) is used to build
@@ -271,7 +270,7 @@ The following code snippet can be used to add two validations, `checkEmail` and 
 
 The validations are executed when the business object is saved. A validation when the business object is changed is not possible.
 Trigger conditions can be specified on the CRUD operation
-`create`, `update` and `delete`, or the modification of a field. In the code snippet above, both conditions are triggered by the modification of a field value.
+`create`, `update`, and `delete`, or the modification of a field. In the code snippet above, both conditions are triggered by the modification of a field value.
 
 To create the implementation of the validations in the class `ZBP_I_Product`, we can use a quick fix again.
 Once generated, we can rename the generated methods to `check_email` and `check_rating` respectively.
@@ -287,7 +286,7 @@ The implementation performs the following steps:
    regular expression. When the email conforms to the regular expression `match( )` returns `abap_true`
    (i.e., the result is `NOT INITIAL`).
 1. If the email does not conform to the regular expression the key of the entity is appended to the
-   `failed-rating` table and a error message is added to the `reported-rating` table. The error
+   `failed-rating` table and an error message is added to the `reported-rating` table. The error
    message is created using the message class `ZM_RATING_M`. The message with the number `001`
    contains the following text `&1 is not an email address. Please enter a valid email address.`.
 
@@ -444,10 +443,10 @@ how to extend the behavior `Z_I_Rating` to enable dynamic feature control for th
 
 After adding `(features : instance)` to the operations, you can use a quick fix
 to generate an implementation of the feature control in `ZBP_I_Product`.
-The following listing show the feature control implementation for this case.
-First, the entities are read first using the keys table. For each operation the status of
+The following listing shows the feature control implementation for this case.
+First, the entities are read first using the keys table. For each operation, the status of
 the entity is checked. If the status is `30` (i.e., completed) the operations are disabled
-using the constant `if_abap_behv=>fc-o-disabled`. Otherwise the status is set to `if_abap_behv=>fc-o-enabled`.
+using the constant `if_abap_behv=>fc-o-disabled`. Otherwise, the status is set to `if_abap_behv=>fc-o-enabled`.
 
 ```abap
   METHOD get_instance_features.
@@ -582,7 +581,7 @@ the elements comprising the rating after the last step.
 
 ![Components of a Managed Transaction App](./imgs/adding_behavior/rap_components_managed.drawio.png)
 
-This concludes the unit. In the next unit a outlook to possible next steps is given.
+This concludes the unit. In the next unit, an outlook on possible next steps is given.
 
 ---
 

@@ -58,7 +58,7 @@ in the rating table. Therefore, multiple ratings can be stored for each product.
 
 ### Exercise 2
 
-1. Discuss which fields are necessary in the tables of the Rating App to provide the described functionality.
+1. Discuss which fields are necessary for the tables of the Rating App to provide the described functionality.
 1. Analyze the fields of different tables in an SAP S/4HANA system. What fields are
    present there? Would you add additional fields to the tables after the analysis?
 
