@@ -6,11 +6,11 @@ regarding SAP RAP.
 
 ## Improving the Rating App
 
-With the knowledge from this curriculum there are still many improvements possible for the rating app.
+With the knowledge from this curriculum, there are still many improvements possible for the rating app.
 The following list contains just a few of them.
 
 - **Implement the customer part of the Rating App**:
-  Currently only the app to manage products ratings is implemented. The app for customers to
+  Currently, only the app to manage product ratings is implemented. The app for customers to
   add ratings is still missing. This app should allow customers to provide a rating. Possible by
   only allowing changes to the rating and review fields. This functionality could be achieved by:
 
@@ -23,25 +23,25 @@ The following list contains just a few of them.
 
 ## Deploying the Rating App
 
-So far we did not implement the Fiori part of the app. Instead, only the preview feature of the
+So far we did not implement the SAP Fiori part of the app. Instead, only the preview feature of the
 service binding was used. In order to deploy the app into e.g. a [Fiori Launchpad](https://experience.sap.com/fiori-design-web/launchpad/)
-it would be necessary to implement a _real_ Fiori app on the basis of the developed services. The
+it would be necessary to implement a _real_ SAP Fiori app on the basis of the developed services. The
 necessary steps to create a Fiori app on the basis of the SAP ABAP RAP service are
 described in [this tutorial](https://developers.sap.com/tutorials/fiori-tools-rap-create-application.html).
 
 Besides that, the app currently misses any authorization and authentication. Adding an authorization model
-to a SAP ABAP RAP application is described in [this tutorial](https://developers.sap.com/group.abap-env-authorizations.html).
+to an SAP ABAP RAP application is described in [this tutorial](https://developers.sap.com/group.abap-env-authorizations.html).
 
-## Advanced RAP topic
+## Advanced RAP Topic
 
 The tutorial in the [SAP BTP ABAP Environment: Intermediate Topics](https://developers.sap.com/mission.abap-env-intermediate.html)
-cover a wide variety of more advanced topics. For example, there are tutorial on writing unit tests for SAP ABAP RAP
+cover a wide variety of more advanced topics. For example, there are tutorials on writing unit tests for SAP ABAP RAP
 development objects.
 
-Another interesting tool is the [RAP generator](https://github.com/SAP-samples/cloud-abap-rap). This open source tool
-can be used to quickly generate a SAP ABAP RAP application. The idea underlying the RAP generator is:
+Another interesting tool is the [RAP generator](https://github.com/SAP-samples/cloud-abap-rap). This open-source tool
+can be used to quickly generate an SAP ABAP RAP application. The idea underlying the RAP generator is:
 
-> to ease the life of the developer since it helps you to create most of the boiler plate coding that
+> to ease the life of the developer since it helps you to create most of the boilerplate coding that
 > is needed to implement a RAP business object using the ABAP RESTful Application Programming Model (RAP)
 > so that you as a developer can start more quickly to implement the business logic.
 
