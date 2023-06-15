@@ -1,21 +1,21 @@
 # ABAP Hello World
 
-The goal of this lecture is set up the necessary development environment for ABAP development.
+The goal of this lecture is to set up the necessary development environment for ABAP development.
 This development environment consists of several components. The following sections provide links
-to documents describing the installation or set-up of theses components.
+to documents describing the installation or set-up of these components.
 
 The aim of this unit is to set up the necessary development environment for ABAP
 development. This environment consists of several components, which are described
 in the following sections. In particular, the development environment for the rest
 of the lecture includes:
 
-- a local installation of the [Eclipse IDE](https://www.eclipse.org/ide/) including the
+- A local installation of the [Eclipse IDE](https://www.eclipse.org/ide/) including the
   [ABAP Development Tools](https://tools.hana.ondemand.com/#abap) for ABAP development
-- either one of the following three options
-  - a S/4HANA 2020 System with development rights
-  - an instance of the [SAP Business Technology Platform](https://www.sap.com/products/technology-platform/)
+- Either one of the following three options
+  - A SAP S/4HANA 2020 system with development rights
+  - An instance of the [SAP Business Technology Platform](https://www.sap.com/products/technology-platform/)
     free tier with an instance of the [SAP BTP ABAP environment](https://discovery-center.cloud.sap/serviceCatalog/abap-environment?region=all&tab=feature&commercialModel=payg)
-  - a SAP Business Technology Platform trial account with access to the SAP BTP ABAP Trial environment
+  - A SAP Business Technology Platform trial account with access to the SAP BTP ABAP Trial environment
 
 At the end of this unit you will create the usual [Hello World](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program)
 program to ensure the development environment is ready.
@@ -29,7 +29,7 @@ IDE. There are several possible options to do this: you can download the
 and Linux, you can also use a package manager like [Homebrew](https://brew.sh/) or
 [APT](<https://en.wikipedia.org/wiki/APT_(software)>). 
 
-Once the Eclipse IDE is installed, you need to add the ABAP Developer Tools plug-ins. Follow these steps:
+Once the Eclipse IDE is installed, you need to add the ABAP Developer Tools (ADT) plug-ins. Follow these steps:
 
 1. Inside the Eclipse IDE open the `Help` menu and select `Install New Software...`
 1. Enter the following URL `https://tools.hana.ondemand.com/latest` and press `<Enter>`
@@ -49,8 +49,8 @@ to the [DSAG ADT Leitfaden](https://1dsag.github.io/ADT-Leitfaden/), which provi
 
 ## SAP BTP Free Tier and SAP BTP Trial
 
-To deploy the SAP Business Technology Platform ABAP Environment in the next step,
-you need an account in the SAP Business Technology Platform (BTP).
+To deploy the SAP Business Technology Platform ABAP environment in the next step,
+you need an account in the SAP Business Technology Platform (SAP BTP).
 Currently, the SAP BTP offers two possibilities to get a free account:
 
 - SAP BTP Free Tier
@@ -65,7 +65,7 @@ table lists some of the advantages and disadvantages of the different environmen
 | Credit Card required                   |    Yes    |      No       |
 | All services available                 |    Yes    |      No       |
 | Shared ABAP Environment                |    No     |      Yes      |
-| Production ready environment           |    Yes    |      No       |
+| Production-ready environment           |    Yes    |      No       |
 | Risk of activating chargeable services |    Yes    |      No       |
 | Limited availability (90 days)         |    No     |      Yes      |
 
@@ -80,9 +80,9 @@ No credit card is required for this process.
 ### Deploying the SAP BTP ABAP Environment in SAP BTP Free Tier
 
 Deploying the SAP BTP ABAP environment is similar for both, the SAP BTP free tier and
-the SAP BTP trial. In both cases a _Booster_ is available to deploy the ABAP
+the SAP BTP trial. In both cases, a _Booster_ is available to deploy the ABAP
 environment. A Booster is simply a wizard or script that executes the necessary
-set up steps in the SAP BTP.
+setup steps in the SAP BTP.
 
 The respective Booster can be accessed from the SAP BTP Cockpit. The SAP BTP
 Cockpit is available at the following URLs:
@@ -91,12 +91,12 @@ Cockpit is available at the following URLs:
 - SAP BTP Trial: https://account.hanatrial.ondemand.com/trial/
 
 In the SAP BTP free tier the Booster is named _Prepare an Account for ABAP
-Development (Free-Tier)_ (cf. the following screen shot).
+Development (Free-Tier)_ (cf. the following screenshot).
 
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_free_tier_abap_booster.png)
 
-In the SAP BTP trial the Booster is named _Prepare an Account for ABAP Trial_
-(cf. the following screen shot).
+In the SAP BTP trial, the Booster is named _Prepare an Account for ABAP Trial_
+(cf. the following screenshot).
 
 ![SAP ABAP Free Tier Booster](./imgs/hello_world/btp_trial_abap_booster.png)
 
@@ -104,7 +104,7 @@ Select the suitable ABAP Booster and execute it. After the booster is finished t
 SAP BTP account is prepared for ABAP development. The booster created a new
 subaccount in the global account. The instances and subscriptions in this
 subaccount should look similar to the following screenshot. Note, that the
-names of the subaccount, the instance and the environment might differ
+names of the subaccount, the instance, and the environment might differ
 depending on the parameters used in the booster.
 
 ![Subaccount created by Booster](./imgs/hello_world/booster_result.png)
@@ -139,7 +139,7 @@ default user (CB_ADMIN) of the ABAP instance. The necessary steps are described
 Once the ABAP environment is ready, the next step is to write the "Hello World" program.
 To do this, the first step is to connect the ABAP Development to Eclipse to the ABAP
 environment. Depending on the type of environment (SAP S/4HANA or SAP BTP) different options exist.
-In case of the SAP BTP ABAP environment the easiest way is
+In case of the SAP BTP ABAP environment, the easiest way is
 to use the service key of ABAP environment.
 
 To find the service key in the sub-account, go to the ABAP environment instance.
@@ -184,15 +184,15 @@ World program. To create a new package, right-click on the `ZLOCAL` package and 
 `New > ABAP Package`. This opens a dialog box to create a new package.
 
 In this dialogue enter `Z_HELLO_WORLD` as the package name and `ABAP Hello World` as the description. Click on `Next`.
-This open the _Select Transport Request_ view. Chose _Create Transport Request_, enter `ABAP Hello World` as the
+This opens the _Select Transport Request_ view. Chose _Create Transport Request_, enter `ABAP Hello World` as the
 _Request Description_ and click `Finish`. This creates the package `Z_HELLO_WORLD` as a sub-package of `Z_LOCAL`.
 
 ![Create Package](./imgs/hello_world/new_package.png)
 
 > **Note on SAP BTP Trial**
 > As mentioned above the SAP BTP Trial offers a shared ABAP environment. In a shared environment the
-> names used for different development artefacts might not be available any more.
-> In this cases it is necessary to use and individual prefix for all development artefacts to
+> names used for different development artefacts might not be available anymore.
+>, In this case, it is necessary to use an individual prefix for all development artefacts to
 > naming conflicts. For example, instead of `Z_HELLO_WORLD` and `ZCL_HELLO_WORLD` you could use
 > your initials as prefixes. My initials are CD. The objects would therefore be named `Z_CD_HELLO_WORLD` and `ZCL_CD_HELLO_WORLD`.
 
@@ -201,7 +201,7 @@ the `Z_HELLO_WORLD` package and select `New > ABAP Class`. This again opens a di
 a new class.
 
 In this dialogue enter `ZCL_HELLO_WORLD` as the class name and `ABAP Hello World` as the description.
-In order for a ABAP class to be executable in the SAP BTP, the class needs to
+In order for an ABAP class to be executable in the SAP BTP, the class needs to
 implement the [`IF_OO_ADT_CLASSRUN`](https://help.sap.com/docs/SAP_S4HANA_CLOUD/6aa39f1ac05441e5a23f484f31e477e7/6f0e26492b854627ac19a9a34205a546.html?locale=en-US) interface.
 This interface can be added either in the source code later on or in the current dialogue using the `Add` button.
 
@@ -211,7 +211,7 @@ Click on `Next` and assign the class to the transport request created in the pre
 
 ![Assign Class to Transport Request](./imgs/hello_world/new_abap_class_2.png)
 
-After the creation the class should automagically be opened in the source code editor.
+After the creation, the class should automatically be opened in the source code editor.
 Add the following code to the `if_oo_adt_classrun~main` method:
 
 ```ABAP
