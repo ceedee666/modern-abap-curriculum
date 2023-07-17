@@ -12,7 +12,7 @@ them together. For the data model, the following package structure is created wi
 the `ZLOCAL` package:
 
 - `Z_RATING`: The package containing all development artifacts for the Rating App.
-  - `Z_RATING_DB`: The database model of the Rating App. It should be created inside the `Z_RATING` package.
+- `Z_RATING_DB`: The database model of the Rating App. It should be created inside the `Z_RATING` package.
 
 After creating these packages and adding `ZLOCAL` to the favorite packages, the package structure should resemble the following screenshot:
 
@@ -97,7 +97,7 @@ The previous program code consists of the following elements:
 
 - The define table statement defines the `ZPRODUCT` table.
 - The `key` keyword specifies the primary key of the database table, comprising two fields: `client` and `product_id`.
-  The `client` is a unique identifier of a client in the SAP S/4HANA system and is typically added as a primary keys
+  The `client` is a unique identifier of a client in the SAP S/4HANA system and is typically added as a primary key
   to any table, except when the table should not be client-dependent.
 - The `not null` keyword indicates that the primary key cannot be null.
 - The data type of the `client` field is set to the built-in type `abap.clnt`.
@@ -378,9 +378,9 @@ Next, add relationship information to the view with the code snippet below.
 The line starting with `composition` defines a 0:n relationship between the entries
 of the view `Z_I_Product` and the view `Z_I_Rating`. This relationship is named `_Rating`
 and is also added to the view. The composition relation specifies also, that every rating is always related to exactly one
-condition of the association. This information is used by the SAP RAP framework to e.g. enable or disable certain features for an entity.
+condition of the association. This information is used by the SAP RAP framework to, e.g. enable or disable certain features for an entity.
 
-Please note that the view `Z_I_Rating` has not been defined yet, so it is not possible
+Note, that the view `Z_I_Rating` has not been defined yet, so it is not possible
 to activate the `Z_I_Product` view at this time.
 
 ```abap

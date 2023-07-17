@@ -36,7 +36,7 @@ these technologies. What are the advantages and disadvantages of the different a
 ## Extension Architecture
 
 OER Bike has decided to implement the functionality described above using a custom
-application in the SAP BTP ABAP environment, utilizing the SAP ABAP RAP framework.
+application in the SAP BTP ABAP environment, utilizing the RAP framework.
 Within OER Bike, the entire project and developed applications are simply referred
 to as the _Rating App_.
 
@@ -53,7 +53,7 @@ There is a one-to-many relationship between entries in the product table and ent
 in the rating table. Therefore, multiple ratings can be stored for each product.
 
 > Note that the data model of the Rating App is very simplistic. Its sole purpose
-> is to provide a solid foundation for introducing the SAP ABAP RAP framework. In reality,
+> is to provide a solid foundation for introducing the RAP framework. In reality,
 > the data model of a Rating App would probably be far more complex.
 
 ### Exercise 2
