@@ -402,7 +402,7 @@ define root view entity Z_I_Product
 ```
 
 To enable the RAP framework, to save and update the database tables, the mapping information needs to be added to the behavior as well. Note, that
-mapping is only necessary for the field where the name was changed by, for exapmle, removing an underscore. Renaming `email` to `Email` does not require a mapping.
+mapping is only necessary for the field where the name was changed by, for example, removing an underscore. Renaming `email` to `Email` does not require a mapping.
 The source code below shows the behavior definition including the necessary mappings information.
 The `corresponding` keyword defines, that components with the name (except in some case changes like in the example above) are mapped automatically.
 
