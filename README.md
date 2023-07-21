@@ -3,7 +3,7 @@
 This repository contains the documentation and source code for an ABAP
 curriculum developed as part of the [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project,
 with a focus on modern ABAP programming in the context of [SAP S/4HANA](https://en.wikipedia.org/wiki/SAP_S/4HANA)
-and the SAP Business Technology Platform (BTP).
+and the SAP Business Technology Platform (SAP BTP).
 
 ## Overview
 
@@ -21,16 +21,16 @@ The curriculum aims to achieve the following learning objectives:
 
 1. Enable students to compare the advantages and disadvantages of different extension
    technologies for a given requirement based on a thorough understanding of the SAP S/4HANA architecture.
-1. Enable students to implement extensions to a SAP S/4HANA system using state-of-the-art
+1. Enable students to implement extensions to an SAP S/4HANA system using state-of-the-art
    ABAP to automate business processes not implemented in the SAP S/4HANA standard.
-1. Enable students to implement extensions using the ABAP RAP framework and Fiori
+1. Enable students to implement extensions using the ABAP RAP framework and SAP Fiori
    Elements to enhance SAP S/4HANA using the SAP best practices.
 
 ## Prerequisites
 
 ### ABAP Development Environment
 
-For students and lecturers at universities different options exist for getting access to an ABAP development environment.
+For students and lecturers at universities, different options exist for getting access to an ABAP development environment.
 The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the
 [product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)).
 Another option is to use the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)

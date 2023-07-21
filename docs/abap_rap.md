@@ -5,13 +5,13 @@ ABAP is a proprietary programming language developed by SAP SE. Its first releas
 the corresponding programming models changed significantly during this time. This section introduces
 the latest programming model for the ABAP language: the ABAP RESTful Application Programming Model (RAP).
 
-The goal of RAP is to provide a programming model to enable the creation of [OData](https://www.odata.org/) service.
-These OData services can be used to implement SAP Fiori Applications or to provide Web APIs. RAP consists of the
+The goal of RAP is to provide a programming model to enable the creation of [OData](https://www.odata.org/) services.
+These OData services can be used to implement SAP Fiori applications or to provide Web APIs. RAP consists of the
 components shown in the following image.
 
 ![ABAP RAP Components](imgs/abap_rap/rap_components.drawio.png)
 
-The data model of the application is the basis of the RAP. The data model is created using the Core Data Services (CDS).
+The data model of the application is the basis of RAP. The data model is created using the Core Data Services (CDS).
 According to the SAP Help CDS
 
 > ... provides an infrastructure for defining and consuming semantically rich data models in SAP HANA.
@@ -25,12 +25,11 @@ The sales order consists of a header and several items. The header contains gene
 The items contain, for example, the ordered products, the ordered quantities and the price. Furthermore, the sales order is
 related to other business objects. The product or the sold-to party are business objects themself.
 Both, a hierarchical structure and relations to other Business Objects, are common qualities of Business Objects. Therefore,
-RAP provides concepts for modelling the structure and the relations of Business Objects.
+RAP provides concepts for modeling the structure and the relations of Business Objects.
 
 Besides the structure, a Business Object also has a behaviour. The behaviour defines which operations are possible for a
-business object. A sales order could, for example, be created. After the creation, it might be changed until it is released. Once it
-is released it is only possible to cancel the whole sales order or to create a delivery for the sales order. RAP also provides
-functionality for modelling and implementing the behaviour of Business Objects.
+business object. A sales order could, for example, be created. After the creation, it might be changed until it is released. Once it is released, it is only possible to cancel the whole sales order or to create a delivery for the sales order. RAP also provides
+functionality for modeling and implementing the behaviour of Business Objects.
 
 In contrast to the Business Object, a Query provides read-only access to the underlying data model. This access is used
 for the creation of analytical reports.

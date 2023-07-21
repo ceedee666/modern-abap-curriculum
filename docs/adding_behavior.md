@@ -8,7 +8,7 @@ such as validations, determinations, and actions.
 [Validations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/validations) are
 implemented to check the data entered by the user. For example, consider the email address of a user. Validation can be used to check if a valid email address was entered.
 [Determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
-are used to change the business object data based on trigger conditions. Finally
+are used to change the business object data based on trigger conditions. Finally, 
 [actions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/actions) are added
 to allow the user to trigger an operation on the business object.
 
@@ -21,7 +21,7 @@ Before adding additional behavior to the business object, we need to extend its 
 To implement additional behaviors a status field is added to the rating business object. This field
 is used to indicate the processing status of a rating.
 First, a rating is in the status _New_. Once the customer provided a rating, i.e. rating value and an
-optional review, the status is _Customer Review_. If the review was checked by a product manager the status
+optional review, the status is _Customer Review_. If the review was checked by a product manager, the status
 is changed to _Completed_.
 
 #### Exercise 1
@@ -71,7 +71,7 @@ snippet shows the necessary additions to the metadata extension `Z_C_Rating_M`.
 ## Adding Determinations
 
 In this step, we will add functionality to automatically update the value of the status field
-In SAP RAP, we use
+In RAP, we use
 [determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
 to change the value of fields based on trigger conditions.
 
@@ -183,7 +183,7 @@ The implementation of the `set_status_new` method performs the following operati
      [ABAP documentation](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=abapderived_types_comp.htm)
      or in the [EML cheat sheet](https://github.com/SAP-samples/abap-cheat-sheets/blob/main/08_EML_ABAP_for_RAP.md).
 1. The `READ ENTITIES` EML statement is used to read the value of the `Status` field for all elements in the importing parameter `keys`.
-   This parameter contains the primary key of all created entities. Note that the design of ABAP RAP and EML focuses on mass data. Therefore all
+   This parameter contains the primary key of all created entities. Note that the design of ABAP RAP and EML focuses on mass data. Therefore, all
    operations are always operations on multiple objects. Working with just one object is a special case. The result of the
    `READ ENTITIES` EML statement is stored in the variable `ratings`.
 1. All ratings that already have a `Status` value are deleted from the internal table `ratings`. This is done to ensure no values are overwritten with the
@@ -248,9 +248,9 @@ for the changed entities, the necessary table is created implicitly using a `VAL
 ### Exercise 2
 
 To test the effect of the new behaviors on the app, create a new rating and check the status after the creation. Next, change the
-value of the Rating filed and check the status again. Also, verify the data that is stored in the database table `ZRATING`.
+value of the `Rating` field and check the status again. Also, verify the data that is stored in the database table `ZRATING`.
 
-In order to understand how the behavior implementations work, debug the code. When are the behaviors triggered? How many entities are passed via the `keys` parameter?
+To understand how the behavior implementations work, debug the code. When are the behaviors triggered? How many entities are passed via the `keys` parameter?
 
 ## Adding Validations
 
@@ -282,10 +282,10 @@ The implementation performs the following steps:
 
 1. Read the `Email` field for all `Rating` entities with a primary key in `keys` using the EML `READ ENTITIES` statement.
 1. Create an instance of `cl_abap_matcher` using one of the methods of `cl_abap_regex`.
-1. Loop through all `Rating` entities in `rating`. For each `Rating` entity check the `Email` field using the
+1. Loop through all `Rating` entities in `rating`. For each `Rating` entity, check the `Email` field using the
    regular expression. When the email conforms to the regular expression `match( )` returns `abap_true`
    (i.e., the result is `NOT INITIAL`).
-1. If the email does not conform to the regular expression the key of the entity is appended to the
+1. If the email does not conform to the regular expression, the key of the entity is appended to the
    `failed-rating` table and an error message is added to the `reported-rating` table. The error
    message is created using the message class `ZM_RATING_M`. The message with the number `001`
    contains the following text `&1 is not an email address. Please enter a valid email address.`.
@@ -322,14 +322,14 @@ METHOD check_email.
 ### Exercise 3
 
 Implement the `check_rating` method. The method should check if the rating value is between 0 and 5.
-If the rating value is outside the range, a suitable error message should be raised. After implementing the method test the app and make
+If the rating value is outside the range, a suitable error message should be raised. After implementing the method test, the app and make
 sure that the validations work as expected.
 
 ## Adding Operations and Feature Control
 
-To complete the behavior of the business object `Z_I_Rating` the following features are missing. First, it should be possible to set
+To complete the behavior of the business object `Z_I_Rating`, the following features are missing. First, it should be possible to set
 the status of one or several Ratings to `completed`. Currently, this is only possible by editing the status field of the individual Rating entities.
-Furthermore, once the status of a Rating has been set to completed no change or deletion of the Rating entity should be allowed.
+Furthermore, once the status of a Rating has been set to `completed`, no change or deletion of the Rating entity should be allowed.
 
 To achieve this behavior custom operations and feature controls are required.
 
@@ -345,7 +345,7 @@ operations: [actions](https://help.sap.com/docs/btp/sap-abap-restful-application
 [functions](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/functions). While actions enable the modification of
 the business object, functions provide custom read operations.
 
-To enable changing the status of a Rating entity using an action the following steps are necessary:
+To enable changing the status of a `Rating` entity using an action, the following steps are necessary:
 
 1. Define the action in the behavior.
 1. Implement the action.
@@ -371,7 +371,7 @@ use action setStatusToCompleted;
 Next, the quick fix of the action can be used to generate an initial implementation of the action in `ZBP_I_Product`. Again, the definition
 of the method should be renamed to `set_status_to_completed`. The following listing shows the implementation of the action. Most of the code
 should look familiar by now. First, the rating entities are read using the `keys` table. Next, the status for each entity is set to
-`rating_status-completed`. Finally, the changed entities are read again an returned for the method.
+`rating_status-completed`. Finally, the changed entities are read again and returned for the method.
 
 ```abap
 METHOD set_status_to_completed.
@@ -400,7 +400,7 @@ METHOD set_status_to_completed.
 ```
 
 To use the action in the app, it also needs to be added to the UI. There are different options for triggering the action. To add the action
-to the table of ratings the following annotations can be used. This annotation adds a `Set Completed` action.
+to the table of ratings, the following annotations can be used. This annotation adds a `Set Completed` action.
 
 ```abap
 @UI.lineItem: [{ position: 44 },
@@ -423,12 +423,12 @@ page of a rating.
 
 ### Adding Feature Control
 
-To prevent changes to a rating entity once its status is set to `completed`
+To prevent changes to a rating entity once its status is set to `completed`, 
 we can implement [feature control](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/feature-control)
 to the business object.
 
 Dynamic feature control can be enabled for standard as well as nonstandard operations. The following example demonstrates
-how to extend the behavior `Z_I_Rating` to enable dynamic feature control for the `update`, `delete` and
+how to extend the behavior `Z_I_Rating` to enable dynamic feature control for the `update`, `delete`, and
 `setStatusToCompleted` actions.
 
 ```abap
@@ -474,7 +474,7 @@ using the constant `if_abap_behv=>fc-o-disabled`. Otherwise, the status is set t
   ENDMETHOD.
 ```
 
-After implementing the feature control the actions to change a rating are only available if the status of the rating is not `30`.
+After implementing the feature control, the actions to change a rating are only available if the status of the rating is not `30`.
 Verify this by testing the app again.
 
 ## Adding Virtual Elements
