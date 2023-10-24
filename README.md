@@ -97,3 +97,6 @@ The work on this curriculum has been supported by [WiLMo](https://www.dh.nrw/koo
 
 Additionally I want to thank [Sören Schlegel](https://people.sap.com/sschlegel) for patiently answering all my questions
 around RAP!
+
+
+
