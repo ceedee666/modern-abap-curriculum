@@ -80,8 +80,8 @@ The curriculum consists of the following units:
 
 ## References
 
-- [Extend SAP S/4HANA in the cloud and on premise with ABAP based extensions](https://www.sap.com/documents/2022/10/52e0cd9b-497e-0010-bca6-c68f7e60039b.html)
-- Building Extensions for SAP S/4HANA Cloud using APIs and Events
+- [Extend SAP S/4HANA in the cloud and on premise with ABAP-based extensions](https://www.sap.com/documents/2022/10/52e0cd9b-497e-0010-bca6-c68f7e60039b.html)
+- Building extensions for SAP S/4HANA Cloud using APIs and Events
   - [Blog post](https://blogs.sap.com/2019/10/22/building-extensions-for-the-intelligent-enterprise-on-sap-cloud-platform/)
   - [YouTube Playlist](https://www.youtube.com/playlist?list=PLkzo92owKnVxiagp35AcwoxOlX0J4hLyY)
 - SAP ABAP RESTful Application Programming Model
@@ -95,5 +95,8 @@ The curriculum consists of the following units:
 
 The work on this curriculum has been supported by [WiLMo](https://www.dh.nrw/kooperationen/OERContent.nrw%202021-95) project.
 
-Additionally I want to thank [Sören Schlegel](https://people.sap.com/sschlegel) for patiently answering all my questions
+Additionally, I want to thank [Sören Schlegel](https://people.sap.com/sschlegel) for patiently answering all my questions
 around RAP!
+
+
+

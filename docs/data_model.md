@@ -1,6 +1,6 @@
 # Data Model of the Rating App
 
-To begin the development of the Rating App, the data model must be created. This model consists of two parts: table definitions and CDS views based on those tables.
+To begin the development of the Rating App, a data model must be created. This model consists of two parts: table definitions and CDS views based on those tables.
 CDS views provide additional semantic information on top of the database tables,
 such as explicitly defining the relationship between tables (e.g. the 1:N relationship
 between products and ratings, cf. [scenario description](./scenario.md)).
@@ -35,7 +35,7 @@ Repository Object`. In the dialog window, select _Data Element_ and click `Next`
 Finally, select a transport request and click `Finish`.
 
 This opens an editor to define the details of the data element. Define `ZE_PRODUCT_ID` as a
-character field with a length of 10 characters as shown in the following screenshot.
+character field with a length of 10 characters, as shown in the following screenshot.
 Finally, save and activate the changes.
 
 ![Data Element ZE_PRODUCT_ID](imgs/data_model/data_element_product_id.png)
@@ -58,7 +58,7 @@ This opens an editor for creating domains. In this editor perform the following 
 ![Domain ZD_RATING](imgs/data_model/domain_rating.png)
 
 Next, create a data element named `ZE_RATING` with the description `Customer Rating`.
-To use the domain created in the previous step the category `Domain` needs to be selected.
+To use the domain created in the previous step, the category `Domain` needs to be selected.
 The type name `ZD_RATING`.
 Finally, save and activate the changes again.
 
@@ -108,7 +108,7 @@ Additionally, some annotations (starting with the `@` symbol) are added to the t
 definition. The `@EndUserText.label` defines the short text label of the table, which
 is displayed in the IDE, for example. The `@ABAPCatalog.deliveryClass` annotation identifies
 the table as one containing application data (as opposed to customizing data). The
-ABAP documentation offers a detailed description of each used annotation.
+ABAP documentation offers a detailed description of each annotation used.
 
 The Rating table stores the product rating, review text, customer name, and customer
 address. The product is a foreign key relation to the primary key `PRODUCT_ID` of the
@@ -318,7 +318,7 @@ After executing the class, the data preview of the `ZRATING` table should look s
 
 ![Data Preview of the `ZRATING` Table](imgs/data_model/data_preview.png)
 
-Note that is possible to open a SQL console from the data preview. This SQL console enables the execution of
+Note that it is possible to open a SQL console from the data preview. This SQL console enables the execution of
 complex `SELECT` statements on the tables in the database.
 
 ![SQL Console](imgs/data_model/sql_console.png)
@@ -370,17 +370,17 @@ define root view entity Z_I_Product
 }
 ```
 
-Note, that the `client` field is not added to the view. The ABAP runtime takes care of handling the `client` field, i.e.
+Note that the `client` field is not added to the view. The ABAP runtime takes care of handling the `client` field, i.e.
 allowing only access to the data of the current client. Therefore, this field is not needed in the view. Besides this simplification,
 the view is the same as the table `Z_RATING`. Furthermore, the field names have been remanded to more user-friendly names. These names are only a suggestion and can be changed if needed.
 
 Next, add relationship information to the view with the code snippet below.
 The line starting with `composition` defines a 0:n relationship between the entries
 of the view `Z_I_Product` and the view `Z_I_Rating`. This relationship is named `_Rating`
-and is also added to the view. The composition relation specifies also, that every rating is always related to exactly one
+and is also added to the view. The composition relation also specifies, that every rating is always related to exactly one
 condition of the association. This information is used by the SAP RAP framework to, e.g. enable or disable certain features for an entity.
 
-Note, that the view `Z_I_Rating` has not been defined yet, so it is not possible
+Note that the view `Z_I_Rating` has not been defined yet, so it is not possible
 to activate the `Z_I_Product` view at this time.
 
 ```abap
@@ -407,7 +407,7 @@ to exactly one Product. Note, that the `Z_I_Rating` is defined by `define view e
 of `define root view entity`. In any parent-child relationship specified using the
 `composition` and `association to parent` keywords, there is only one root entity. All other
 entities are dependent on this root entity.
-The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This statement is functioning similarly to the where condition of a database join statement.
+The `$projection.ProductId = _Rating.Product` sets the condition of the 1:1 association. This statement functions similarly to the where condition of a database join statement.
 
 The `Z_I_Rating` view contains additional semantic information through annotations.
 Annotations like `@Semantics.user.createdBy` and `@Semantics.user.lastChangedBy` identify
@@ -469,7 +469,7 @@ analyze the SQL statement employed to select the associated entries.
 
 ![Follow Associations in Data Preview](imgs/data_model/data_preview_association.png)
 
-Navigation in the opposite direction is also feasible: from any rating, it is possible
+Navigation in the opposite direction is also feasible from any rating, it is possible
 to navigate to the rated product.
 
 This functionality is enabled by the association information added to the view. In

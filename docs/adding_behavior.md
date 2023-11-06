@@ -18,7 +18,7 @@ Before adding additional behavior to the business object, we need to extend its 
 
 ### Adding a Status Field
 
-To implement additional behaviors a status field is added to the rating business object. This field
+To implement additional behaviors, a status field is added to the rating business object. This field
 is used to indicate the processing status of a rating.
 First, a rating is in the status _New_. Once the customer provided a rating, i.e. rating value and an
 optional review, the status is _Customer Review_. If the review was checked by a product manager, the status
@@ -36,7 +36,7 @@ To add a status field to the business object, perform the following steps:
    | 20 | Customer Review |
    | 30 | Completed |
 1. Create a data element `ZE_STATUS` in the package `Z_RATING_DB`. The data element should use the domain `ZD_STATUS`.
-1. Add a `status` field to the `ZRATING` table after the `review` field. The field should by of type `ZE_STATUS`
+1. Add a `status` field to the `ZRATING` table after the `review` field. The field should be of type `ZE_STATUS`
 1. Add the `status` field to the `Z_I_Rating` view after the `Review` field and rename it to `Status`.
 1. Add the `Status` field to the `Z_C_Rating_M` view and the `Z_C_Rating_M` metadata extension. The `Status` should be
    displayed in the ratings list on a product's object page.
@@ -70,7 +70,7 @@ snippet shows the necessary additions to the metadata extension `Z_C_Rating_M`.
 
 ## Adding Determinations
 
-In this step, we will add functionality to automatically update the value of the status field
+In this step, we will add functionality to automatically update the value of the status field.
 In RAP, we use
 [determinations](https://help.sap.com/docs/btp/sap-abap-restful-application-programming-model/determinations)
 to change the value of fields based on trigger conditions.
@@ -187,7 +187,7 @@ The implementation of the `set_status_new` method performs the following operati
    operations are always operations on multiple objects. Working with just one object is a special case. The result of the
    `READ ENTITIES` EML statement is stored in the variable `ratings`.
 1. All ratings that already have a `Status` value are deleted from the internal table `ratings`. This is done to ensure no values are overwritten with the
-   default value. The `CHECK` statement ensures that the processing only continues if the are still entries in the variable `ratings`.
+   default value. The `CHECK` statement ensures that the processing only continues if there are still entries in the variable `ratings`.
 1. In the `LOOP`, a new entry is added to `ratings_for_update`. This entry contains the values of the special component `%tky` and
    the default value `rating_status-new` for the status. Setting the default value uses the following constant defined in the header of
    `lhc_rating`.
@@ -239,7 +239,7 @@ for the changed entities, the necessary table is created implicitly using a `VAL
    The result of the `READ ENTITIES` EML statement is stored in the variable `ratings`. Note that all EML operations are always executed
    for multiple objects.
 1. All entities with an initial value of `0`in the `Ratings` field are deleted from the `ratings` table. The method continues only
-   if still entries are left in the `ratings` table.
+   if there are still entries left in the `ratings` table.
 1. The value of the `Status` field of the remaining entities is set to `rating_status-customer_feedback`. A `#VALUE` statement together with
    a [`FOR` expression](https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm?file=abenfor.htm) is used to build
    the necessary update table (cf. table `ratings_for_update` in the previous listing). Any errors occurring during the update are reported and returned
@@ -331,7 +331,7 @@ To complete the behavior of the business object `Z_I_Rating`, the following feat
 the status of one or several Ratings to `completed`. Currently, this is only possible by editing the status field of the individual Rating entities.
 Furthermore, once the status of a Rating has been set to `completed`, no change or deletion of the Rating entity should be allowed.
 
-To achieve this behavior custom operations and feature controls are required.
+To achieve this behavior, custom operations and feature controls are required.
 
 ### Adding Operations
 
@@ -510,7 +510,7 @@ define root view entity Z_C_Product_M
 The implementation of the method `if_sadl_exit_calc_element_read~calculate` is presented in the listing below.
 The familiar `READ ENTITIES` statement is used to read the Ratings of a Product. Note that the association
 `_Rating` is utilized to read all ratings of a product. Additionally,
-the input parameter `it_original_data` of `if_sadl_exit_calc_element_read~calculate` does not posses the right structure for the
+the input parameter `it_original_data` of `if_sadl_exit_calc_element_read~calculate` does not possess the right structure for the
 `READ ENTITIES` statement. Consequently, a mapping to the type `Z_C_Product_M` is performed at the beginning of the method.
 
 After reading the Ratings for a Product, a `SELECT` statement on the internal table `ratings`, combined with

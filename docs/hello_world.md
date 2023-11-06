@@ -2,12 +2,12 @@
 
 The goal of this unit is to set up the necessary development environment for ABAP development.
 This development environment consists of several components. The following sections provide links
-to documents describing the installation or how to set-up these components.
+to documents describing the installation or how to set up these components.
 
 In particular, the development environment for the rest
 of the lecture includes:
 
-- A local installation of the [Eclipse IDE](https://www.eclipse.org/ide/) including the
+- A local installation of the [Eclipse IDE](https://www.eclipse.org/ide/), including the
   [ABAP Development Tools](https://tools.hana.ondemand.com/#abap) for ABAP development
 - Either one of the following three options:
   - An SAP S/4HANA 2020 system with development rights
@@ -48,7 +48,7 @@ to the [DSAG ADT Leitfaden](https://1dsag.github.io/ADT-Leitfaden/), which provi
 ## SAP BTP Free Tier and SAP BTP Trial
 
 To deploy the SAP Business Technology Platform ABAP environment in the next step,
-you need an account in the SAP Business Technology Platform (SAP BTP).
+you need an account on the SAP Business Technology Platform (SAP BTP).
 Currently, the SAP BTP offers two possibilities to get a free account:
 
 - SAP BTP Free Tier
@@ -101,7 +101,7 @@ In the SAP BTP trial, the Booster is named _Prepare an Account for ABAP Trial_
 Select the suitable ABAP Booster and execute it. After the booster is finished, the
 SAP BTP account is prepared for ABAP development. The booster created a new
 subaccount in the global account. The instances and subscriptions in this
-subaccount should look similar to the following screenshot. Note, that the
+subaccount should look similar to the following screenshot. Note that the
 names of the subaccount, the instance, and the environment might differ
 depending on the parameters used in the booster.
 
@@ -109,19 +109,19 @@ depending on the parameters used in the booster.
 
 #### Possible Errors
 
-**Error creating service instance**
+**Error creating a service instance**
 
 In some cases, the creation of the service instance may fail, resulting in either
 an empty instance or an error message displayed in the subaccount.
 
 ![Erroneous instance](./imgs/hello_world/instance_error.png)
 
-If this happens the erroneous environment can be deleted and created again using the _Create_ button.
+If this happens, the erroneous environment can be deleted and created again using the _Create_ button.
 In the instance creation dialogue, select _ABAP environment_ as Service and _free_ as the used Plan and
-choose a name for the instance. In the second step of the dialogue add the email address of the user.
+choose a name for the instance. In the second step of the dialogue, add the email address of the user.
 Finally, click _Create_ to create the service.
 
-If this occurs, the erroneous environment can be deleted and re-created by clicking
+If this occurs, the erroneous environment can be deleted and recreated by clicking
 on the `Create` button. In the instance creation dialog box, select _ABAP environment_
 as the service, _free_ as the plan used, and choose a name for the instance. In the
 second step of the dialog box, add the email address of the user and click on _Create_
@@ -139,7 +139,7 @@ Once the ABAP environment is ready, the next step is to write the "Hello World" 
 To do this, the first step is to connect the ABAP Development to Eclipse to the ABAP
 environment. Depending on the type of environment (SAP S/4HANA or SAP BTP), different options exist.
 In case of the SAP BTP ABAP environment, the easiest way is
-to use the service key of ABAP environment.
+to use the service key of the ABAP environment.
 
 To find the service key in the subaccount, go to the ABAP environment instance.
 If there is no service key available, create one by clicking on the `Create` button.
@@ -157,7 +157,7 @@ _New ABAP Cloud Project_ window, select _SAP BTP ABAP Environment_ and _Using a 
 Key_ and click on `Next`. Paste the service key into the text field _Service Key in
 JSON Format_ and click on `Next`. To log in, click on `Open Logon Page in Browser`. After
 the login is successful, click on `Finish` to complete the connection. The ABAP perspective
-should look similar to the following screenshot.
+should look similar to the following screenshot:
 
 ![Eclipse Cloud Project](./imgs/hello_world/eclipse_cloud_project.png)
 
@@ -173,7 +173,7 @@ According to the SAP documentation, a structure package:
 > Structure packages cannot contain any development objects except their own package interfaces and sub-packages.
 
 As a structure package can not contain any development objects except other packages, the first step
-is to create a package for the Hello World program. To create a new package right, click on
+is to create a package for the Hello World program. To create a new package, right-click on
 the `ZLOCAL` package and select _New > ABAP Package_. This opens a dialogue to create
 a new package.
 
@@ -190,13 +190,13 @@ _Request Description_ and click `Finish`. This creates the package `Z_HELLO_WORL
 
 > **Note on SAP BTP Trial**
 
-> As mentioned above the SAP BTP Trial offers a shared ABAP environment. In a shared environment, the
+> As mentioned above, the SAP BTP Trial offers a shared ABAP environment. In a shared environment, the
 > names used for different development artefacts might not be available anymore.
->, In this case, it is necessary to use an individual prefix for all development artefacts to
+> In this case, it is necessary to use an individual prefix for all development artefacts to avoid
 > naming conflicts. For example, instead of `Z_HELLO_WORLD` and `ZCL_HELLO_WORLD` you could use
 > your initials as prefixes. My initials are CD. The objects would therefore be named `Z_CD_HELLO_WORLD` and `ZCL_CD_HELLO_WORLD`.
 
-Now a class needs to be created in this package. To create the class right, click on
+Now a class needs to be created in this package. To create the class, right-click on
 the `Z_HELLO_WORLD` package and select `New > ABAP Class`. This again opens a dialogue to create
 a new class.
 
@@ -218,7 +218,7 @@ Add the following code to the `if_oo_adt_classrun~main` method:
 out->write( |Hello ABAP running in SAP BTP| ).
 ```
 
-This code uses the `write` method of the `out` interface to set the output of the program. The complete source code of the `zcl_hello_world` is shown below.
+This code uses the `write` method of the `out` interface to set the output of the program. The complete source code of `zcl_hello_world` is shown below.
 
 ```abap
 CLASS zcl_hello_world DEFINITION
@@ -247,7 +247,7 @@ the screenshot below.
 
 ![Execute ABAP Hello World](./imgs/hello_world/hello_world_final.png)
 
-Congratulations! You have now created and successfully executed an ABAP Hello World program.
+Congratulations! You have now successfully created and executed an ABAP Hello World program.
 
 ## References
 
