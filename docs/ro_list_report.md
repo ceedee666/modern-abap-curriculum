@@ -2,28 +2,28 @@
 
 With the data model established, the next step involves creating a read-only list
 report. This report allows the data of the business objects to be displayed using
-an SAP Fiori app. To create a read-only list report two steps are necessary.
+an SAP Fiori app. To create a read-only list report, two steps are necessary.
 First, _consumption views_ are created for the existing CDS views `Z_I_Product` and `Z_I_Rating`.
-On the basis of the consumption views a business service is created. Finally, the read-only list report
+On the basis of the consumption views, a business service is created. Finally, the read-only list report
 is created as an SAP Fiori app implemented using the
 [SAP Fiori elements](https://experience.sap.com/fiori-design-web/smart-templates/) framework.
 
 ## Creating Consumption View
 
 We will see later in this curriculum, that CDS views are the basis of business objects in RAP.
-To enable flexibility the business objects are not created on the basis of the interface views `Z_I_Product` and
+To enable flexibility, the business objects are not created on the basis of the interface views `Z_I_Product` and
 `Z_I_Rating`. Instead, _consumption views_ are used to only expose the parts of the data model relevant in a
 certain scenario.
 
 While the _interface views_ provide a stable interface to the data model, the _consumption views_ provide
-a use case-specific projection of the data model.
+a use-case-specific projection of the data model.
 
 The artifacts of the read-only list report from the data model will be stored in the package `Z_RATING_READONLY`.
 Create this package as a sub-package of `Z_RATING`. Inside this package, the two consumption views
 `Z_C_Product_ReadOnly` and `Z_C_Rating_ReadOnly` will be created. To create the consumption view
 `Z_C_Product_ReadOnly`, create a new data definition. Provide `Z_C_Product_ReadOnly` as the name and
 `Product View for the RO UI` as the description. Select `Z_I_Product` as the referenced object.
-In the subsequent screen select `Data Projection View` as the template and click `Finish`. This creates an
+In the subsequent screen, select `Data Projection View` as the template and click `Finish`. This creates an
 initial version of the consumption view. Use code completion (i.e. `<ctrl> - <space>`) to add all elements
 of the interface view to the consumption view. The resulting source code of the view `Z_C_Product_ReadOnly` is
 shown in the following listing.
@@ -43,7 +43,7 @@ define root view entity Z_C_Product_ReadOnly
 }
 ```
 
-The consumption view is defined as a `projection on Z_I_Product`. The projection specifies, which parts of the interface view
+The consumption view is defined as a `projection on Z_I_Product`. The projection specifies which parts of the interface view
 `Z_I_Product` should be available in the consumption view. In this example, all elements of the interface view are
 added to the consumption view.
 
@@ -77,7 +77,7 @@ of RAP.
 ## The Business Service Provisioning Layer
 
 As shown in the RAP components diagram, the _Business Service Provisioning_ layer
-separates the business objects from service consumption. The business service provisioning layer contains two types of entities:
+separates business objects from service consumption. The business service provisioning layer contains two types of entities:
 
 1. Service Definition
 1. Service Binding.
@@ -99,7 +99,7 @@ right-click on the entity and select `New Service Definition`.
 
 In the dialogue, enter `Z_S_Rating_ReadOnly` as the name of the service definition and
 `Service for Read-Only UI` as the description. In the next screen, select a transport request and
-click `Next>`. In the templates screen select the `Define Service` template and click `Finish`.
+click `Next>`. In the templates screen, select the `Define Service` template and click `Finish`.
 
 Below is the code of the service definition.
 
@@ -116,7 +116,7 @@ two entities from the data model: `Z_C_Rating_ReadOnly` and `Z_C_Product_ReadOnl
 
 To create a service binding for the service definition, right-click on the `Z_S_RATING_READONLY` service and
 select `New Service Binding`.
-In the dialogue enter `Z_B_RATING_READONLY_V2` as the name of the service definition and
+In the dialogue, enter `Z_B_RATING_READONLY_V2` as the name of the service definition and
 `Rating Service - UI V2` as the description. For the binding type select `OData V2 UI`. In the next screen select a transport request and
 click `Finish` and activate the binding.
 
@@ -124,9 +124,9 @@ The resulting binding is shown in the following screenshot.
 
 ![Service Binding](./imgs/ro_list_report/service_binding.png)
 
-Note that after creating a service binding, the service is not published, yet. This means that the
+Note that after creating a service binding, the service is not yet published. This means that the
 service can not be accessed. To publish the service, click on the `Publish local service endpoint` link. This
-generates the necessary artefacts for the service to be accessible. Once the publishing has been completed active
+generates the necessary artefacts for the service to be accessible. Once the publishing has been completed, activate
 the service again.
 
 Publishing the service results in two changes in the service binging:
@@ -179,10 +179,10 @@ The screenshot below displays the result of executing the preview for `Z_C_Ratin
 
 ![Previewing the service](./imgs/ro_list_report/preview.png)
 
-The preview does not show any data. The reason is, that currently, no definition exists on which data of the
+The preview does not show any data. The reason is, that currently, no definition exists for which data of the
 entity should be displayed and which not. In one of the subsequent steps, this information is added to the CDS view
 defining the entity. Until then, it is possible to manually select the data to be displayed. This is done by clicking on the
-gear icon. This opens the `View Settings` dialog. Here the columns to display can be selected.
+gear icon. This opens the `View Settings` dialog. Here, the columns to display can be selected.
 
 The preview does not show any data because there is currently no definition specifying
 which data of the entity should be displayed. This information will be added to the
@@ -318,7 +318,7 @@ define view entity Z_C_Rating_ReadOnly
 
 ```
 
-With those annotations, the preview of the read-only list report looks like shown in the following screenshot.
+With those annotations, the preview of the read-only list report looks as shown in the following screenshot.
 
 ![Preview with UI.lineItem annotations](./imgs/ro_list_report/preview_with_annotations_01.png)
 
@@ -674,7 +674,7 @@ element as the basis for possible values.
 One issue with the current implementation of the CDS entity `Z_C_Rating_ReadOnly` is
 that the definition of the business object and annotations specifying the presentation
 of the data on the UI are mixed. This contradicts the [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) principle.
-Metadata extensions offer the possibility to extract the UI annotations into a
+Metadata extensions offer the possibility of extracting the UI annotations into a
 separate artifact.
 
 To create a metadata extension, right-click the source code of the `Z_C_Rating_ReadOnly`

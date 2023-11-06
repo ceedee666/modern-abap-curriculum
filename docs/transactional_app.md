@@ -10,15 +10,15 @@ approach is used.
 
 To separate the transaction app nicely from the read-only list report, a little bit of preparation is required.
 On the basis of the interface views in the package `Z_RATING_DB`, new consumption views and corresponding service
-definitions and binding are created. Those are the basis of the transactional app developed in this unit.
-The following steps are necessary as preparation:
+definitions and bindings are created. Those are the basis of the transactional app developed in this unit.
+The following steps are necessary for preparation:
 
 1. Create a package for the transactional app
 1. Create two new consumption views and the corresponding metadata extensions
 1. Create a service definition and service binding for the transactional app.
 
-Steps 2 and 3 are basically a repetition of the previous unit. Technically, this would not be necessary.
-The approach is used in this curriculum to preserve results from previous units for later reference.
+Steps 2 and 3 are basically repetitions of the previous unit. Technically, this would not be necessary.
+This approach is used in this curriculum to preserve results from previous units for later reference.
 
 First, create a package with the name `Z_RATING_MANAGED` as a sub-package of the existing `Z_RATING` package.
 
@@ -27,10 +27,10 @@ First, create a package with the name `Z_RATING_MANAGED` as a sub-package of the
 Inside the new package, create the consumption view `Z_C_Product_M` for the root entity `Z_I_Product`. The source
 code of the consumption view is shown below. Most parts of this view are similar to what was discussed in the
 previous unit. The main difference is the `_Rating : redirected to composition child Z_C_Rating_M` statement.
-This statement specifies, that the association `_Rating` should not use the entity `Z_I_Rating` specified in the
+This statement specifies that the association `_Rating` should not use the entity `Z_I_Rating` specified in the
 `Z_I_Product` entity. Instead, the association should be mapped to an entity named `Z_C_Rating_M`, which is created next.
 
-The reason for this redirection is, that different consumption views could use different projections in the associations to
+The reason for this redirection is that different consumption views could use different projections in the associations to
 cater for different usage scenarios.
 
 ```abap
@@ -83,7 +83,7 @@ define view entity Z_C_Rating_M
 
 ### Create New Metadata Extensions
 
-Next new metadata extensions are created for the two consumption views. Again, the
+Next, new metadata extensions are created for the two consumption views. Again, the
 metadata extension should be named like the consumption view. Below is the code for the
 metadata extension for the `Z_C_Rating_M`.
 This code does not contain any new features. Everything should be understandable from
@@ -235,7 +235,7 @@ the screenshot below.
 
 ![Product Manager App Review](./imgs/transactional_app/product_manager_list_v1.png)
 
-The selection of the product navigates to the object page of this product. This shows now also the
+The selection of the product navigates to the object page of this product. This also shows the
 ratings for this product. This is the result of the `type: #LINEITEM_REFERENCE` annotation mentioned before.
 
 ![Product Manager App Review - Object Page](./imgs/transactional_app/product_manager_details_v1.png)
@@ -244,7 +244,7 @@ ratings for this product. This is the result of the `type: #LINEITEM_REFERENCE` 
 
 The result of the preparation steps is basically a new read-only list report.
 Below is again the ABAP RAP components diagram. So far, the implementation of
-the business objects in the components diagram was not discussed in detail.
+the business objects in the components diagram has not been discussed in detail.
 
 ![ABAP RAP Components](imgs/abap_rap/rap_components.drawio.png)
 
@@ -255,16 +255,16 @@ a business object consists of three elements:
 > - a behavior and
 > - the corresponding runtime implementation.
 
-Unit this unit defining just the structure of the business object was enough. We did this by defining
+This unit, defining just the structure of the business object, was enough. We did this by defining
 database tables and CDS views on top of these tables. To create a transactional app, 
 the behavior of a business object needs to be specified as well.
-The following figure shows the relation between the structure and the behavior of a business object.
+The following figure shows the relationship between the structure and the behavior of a business object.
 
 ![Relation of structure and behavior](./imgs/transactional_app/rap_bo.drawio.png)
 
 The structure of a business object is defined using CDS. A Business object consists of
 exactly one root entity and optional child entities. It is also possible for a business object to consist of
-more than two levels. Child entities can again have child entities. As an example considers a purchase order. A purchase order
+more than two levels. Child entities can again have child entities. As an example, consider a purchase order. A purchase order
 consists of the purchase order head, which is modeled as the root entity. The purchase order items could be modeled as
 child entities of the root node. For each item, there could be multiple schedule lines. These would be modeled as
 child entities of the item node.
@@ -277,7 +277,7 @@ A behavior implementation is an ABAP class that implements the necessary functio
 ### Creating Behaviour Definitions
 
 To create the necessary behavior definitions, right-click on the interface view of the root entity, i.e. `Z_I_PRODUCT`, and select `New Behavior Definition`.
-Chang the package to `Z_RATING_MANAGES` and the description to `Behavior definition for Z_I_Product`. Make sure that _Root Entity_ contains the name of the
+Change the package to `Z_RATING_MANAGES` and the description to `Behavior definition for Z_I_Product`. Make sure that _Root Entity_ contains the name of the
 root entity, i.e. `Z_I_Product`in this example. Furthermore, the _Implementation Type_ needs to be `Managed`. Click `Next >` to select a transport request and
 click `Finish` to create the behavior definition.
 
@@ -313,10 +313,10 @@ authorization dependent by _Product
 ```
 
 Let's analyze the behavior definition.
-The first line states that the behavior is implemented in the ABAP class `ZBP_I_PRODUCT`. Note, that we did not create this class so far. Use the
-available quick fix (i.e. the little light bulb; it can also be invoked by pressing `<ctrl>-1`) to create this class. Activate is afterward.
+The first line states that the behavior is implemented in the ABAP class `ZBP_I_PRODUCT`. Note that we have not created this class so far. Use the
+available quick fix (i.e. the little light bulb; it can also be invoked by pressing `<ctrl>-1`) to create this class. Activate it afterward.
 
-The lines starting with `persistent table` define the database tables, in which the data is stored. This is needed for the create, update, and delete operations.
+The lines starting with `persistent table` define the database tables in which the data is stored. This is needed for the create, update, and delete operations.
 The lines starting with `lock` define the strategies for concurrency control. ABAP RAP supports optimistic and pessimistic concurrency control.
 Details of the different approaches are described in the
 [documentation](https://help.sap.com/docs/ABAP_PLATFORM_NEW/fc4c71aa50014fd1b43721701471913d/d315c13677d94a6891beb3418e3e02ed.html). In this example, 
@@ -343,13 +343,13 @@ The available operations for each entity are defined within the curly braces. Th
 In contrast, only update and delete operations are available for the `Z_I_Rating` entity.
 Furthermore, the foreign key `Product` is marked as read-only.
 
-Executing the app preview currently does not show the effect of creating the behavior definition. The reason is, that the service definition
+Executing the app preview currently does not show the effect of creating the behavior definition. The reason is that the service definition
 publishes the `Z_C_Product_M` entity, a projection of the underlying `Z_I_Product` entity.
 The RAP framework allows having different behavior definitions for different projections. Again, the reason is to cater to different usage
-scenarios. In our example, there might a projection that just allows viewing the ratings of a product, for example, for a prospective customer. A
+scenarios. In our example, there might be a projection that just allows viewing the ratings of a product, for example, for a prospective customer. A
 second projection might allow changing and updating ratings, for example, to cater to the needs of a product manager.
 
-To create the necessary projection of the behaviour definition right-click on the `Z_C_Product_M` entity and select `New Behavior Definition`.
+To create the necessary projection of the behaviour definition, right-click on the `Z_C_Product_M` entity and select `New Behavior Definition`.
 Make sure that the correct package is selected and that the _Implementation Definition_ is `Projection`. Again, add the aliases and activate the behavior definition.
 The following listing shows the resulting behavior definition. The projection defines which of the available operations are used.
 
@@ -382,11 +382,11 @@ What do you notice? Is new functionality available? Does everything work as expe
 
 ### Adding a Mapping to the Behavior Definition
 
-With the current behavior implementation, the app has a number of problems. Certain operations like deleting a rating
+With the current behavior implementation, the app has a number of problems. Certain operations, like deleting a rating,
 lead to error messages. The most severe error is that the creation of new entries results in corrupted data.
 When creating a new product, the product Id is not stored. As the product ID is the primary key, only one new product can be created.
 
-The reason for this error is, that a mapping of the field name of the database tables was added to CDS entities.
+The reason for this error is that a mapping of the field names of the database tables was added to CDS entities.
 Consider, for example, the entity `Z_I_Product`. The field `product_id` is renamed to `ProductId`, and the field `product_desc` to `ProductDescription`.
 
 ```abap
@@ -401,10 +401,10 @@ define root view entity Z_I_Product
 
 ```
 
-To enable the RAP framework, to save and update the database tables, the mapping information needs to be added to the behavior as well. Note, that
+To enable the RAP framework to save and update the database tables, the mapping information needs to be added to the behavior as well. Note that
 mapping is only necessary for the field where the name was changed by, for example, removing an underscore. Renaming `email` to `Email` does not require a mapping.
-The source code below shows the behavior definition including the necessary mappings information.
-The `corresponding` keyword defines, that components with the name (except in some case changes like in the example above) are mapped automatically.
+The source code below shows the behavior definition, including the necessary mappings information.
+The `corresponding` keyword defines that components with the name (except in some cases, changes like in the example above) are mapped automatically.
 
 ```abap
 managed implementation in class zbp_i_product unique;
@@ -445,14 +445,13 @@ lock dependent
 
 #### Exercise 2
 
-Test the resulting app again in the preview. Does creating and deleting record work now?
+Test the resulting app again in the preview. Does creating and deleting records work now?
 Are there still any problems with the app?
 
 ### Adding Automatic Numbering and Additional Field Controls
 
-One possible issue with the app is currently, that the `ProductId` can be changed after
-the creation. The `ProductId` is the primary key in the `ZPRODUCT` table and should therefore never be changed after
-the initial creation. This can be achieved in RAP using
+One possible issue with the app is currently that the `ProductId` can be changed after
+the creation. The `ProductId` is the primary key in the `ZPRODUCT` table and should therefore never be changed after its initial creation. This can be achieved in RAP using
 [field characteristics](https://help.sap.com/doc/abapdocu_cp_index_htm/CLOUD/en-US/index.htm?file=ABENBDL_FIELD_PROJECTION.htm).
 One field characteristic is already present in the current behavior definition. The field `Product` of the `Z_I_Rating`
 entity is marked as read-only.
@@ -481,7 +480,7 @@ The automatic creation of UUIDs requires the database field has the type `raw(16
 for the `rating_uuid` field of table `ZRATING`.
 
 Finally, the field `CreatedBy`, `CreatedAt`, `LastChangedBy`, and `LastChangedAt` should not be editable by the user. The field should be
-filled automatically to always contain the correct information. The necessary annotations were added earlier to the `Z_I_Raring` entity. To disable manual editing of these fields, they should be set to read only.
+filled automatically to always contain the correct information. The necessary annotations were added earlier to the `Z_I_Raring` entity. To disable manual editing of these fields, they should be set to read-only.
 
 The resulting behavior definition is shown below.
 
@@ -528,15 +527,15 @@ lock dependent
 ```
 
 With this behavior definition, the app should not be working as expected. The following figure details
-the elements comprising the rating app so far. In the next unit additional behaviour is added to the app.
+the elements comprising the rating app so far. In the next unit, additional behaviour is added to the app.
 
 ![Components of a Managed Transaction App](./imgs/transactional_app/rap_components_managed.drawio.png)
 
 #### Exercise 3
 
 One possible improvement to the current functionality of the app is to add mandatory fields. When creating a
-rating the fields `Name` and `Email`should be mandatory. Furthermore, these fields should not be changeable
-after a rating was created. The rationale of this functionality is, that a rating is created automatically once
+rating, the fields `Name` and `Email`should be mandatory. Furthermore, these fields should not be changeable
+after a rating is created. The rationale of this functionality is that a rating is created automatically once
 an order is completed and sent to the customer. The customer only needs to provide the rating and an optional review.
 
 With the knowledge from the previous sections, you should be able to implement this requirement now. The necessary information

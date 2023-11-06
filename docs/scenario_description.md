@@ -5,13 +5,13 @@ for this curriculum.
 
 ## Customer Rating for Products
 
-OER Bike aims to provide its customers with the opportunity to offer feedback on
+OER Bike aims to provide its customers with the opportunity to offer feedback on its
 products. The feedback should consist of a rating of the product on a scale of 0
 to 5, as well as an optional description of the rating. This approach to feedback
 is typical of many well-known e-commerce websites. Customers should only be able
 to rate products they have ordered.
 
-The following image depicts a possible user interface mockup for customers.
+The following image depicts a possible user interface mockup for customers:
 
 ![Customer User Interface](imgs/scenario/customer_feedback_mock.drawio.png)
 
@@ -46,7 +46,7 @@ The data model shown in the following diagram serves as the foundation for the R
 
 The data model comprises two tables:
 
-- Product: containing the basic information of OER Bike's products
+- Product: containing the basic information about OER Bike's products
 - Rating: containing the customer ratings of the products.
 
 There is a one-to-many relationship between entries in the product table and entries
@@ -60,7 +60,7 @@ in the rating table. Therefore, multiple ratings can be stored for each product.
 
 1. Discuss which fields are necessary for the tables of the Rating App to provide the described functionality.
 1. Analyze the fields of different tables in an SAP S/4HANA system. What fields are
-   present there? Would you add additional fields to the tables after the analysis?
+   there? Would you add additional fields to the tables after the analysis?
 
 ---
 
