@@ -71,7 +71,8 @@
       </item>
      </SERVICES>
     </CONTENT>
-    <PUBLISHED>true</PUBLISHED>
+    <CONTRACT>C1</CONTRACT>
+    <RELEASE_SUPPORTED>true</RELEASE_SUPPORTED>
     <BINDING_CREATED>true</BINDING_CREATED>
    </SRVB>
   </asx:values>
