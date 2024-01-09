@@ -33,7 +33,7 @@ The curriculum aims to achieve the following learning objectives:
 For students and lecturers at universities, different options exist for getting access to an ABAP development environment.
 The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the
 [product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)).
-Another option is to use the [trail or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
+Another option is to use the [trial or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
 of the SAP Business Technology Platform (SAP BTP).
 
 ### ABAP Programming Language
