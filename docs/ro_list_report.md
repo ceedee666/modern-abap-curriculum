@@ -442,19 +442,19 @@ object page.
 Using `@UI.facet` sub-sections for the object page can be defined. The following code snippet shows the creation of a header and a standard facet.
 
 ```abap
- @UI.facet: [ { targetQualifier: 'fRating',
-                           purpose:  #HEADER,
-                           type:     #IDENTIFICATION_REFERENCE,
-                           label:    'Rating',
-                           position: 10 },
+@UI.facet: [
+  { targetQualifier: 'fRating',
+    purpose:  #HEADER,
+    type:     #IDENTIFICATION_REFERENCE,
+    label:    'Rating',
+    position: 10 },
 
-                           { targetQualifier: 'fCustomer',
-                           purpose:  #STANDARD,
-                           type:     #IDENTIFICATION_REFERENCE,
-                           label:    'Customer',
-                           position: 20 }
-              }
-            ]
+  { targetQualifier: 'fCustomer',
+    purpose:  #STANDARD,
+    type:     #IDENTIFICATION_REFERENCE,
+    label:    'Customer',
+    position: 20 }
+]
 ```
 
 Using `@UI.identification` annotations, data can be added to these facets. For example, the following snippet shows how the `name` field
@@ -680,8 +680,8 @@ separate artifact.
 To create a metadata extension, right-click the source code of the `Z_C_Rating_ReadOnly`
 entity and select `Source Code > Extract Metadata Extension`. Give the extension the
 same name as the CDS entity (i.e., `Z_C_Rating_ReadOnly`) and add `Metadata extension 
-for `Z_C_Rating_ReadOnly` as the description. On the subsequent screen of the dialog,
-select all elements to extract the annotations for all of them, and click `Finish`.
+for `Z_C_Rating_ReadOnly`as the description. On the subsequent screen of the dialog,
+select all elements to extract the annotations for all of them, and click`Finish`.
 The annotations are automatically extracted into the new metadata extension. Note
 that not all annotations are extracted. Only the annotations on the element level
 are extracted; the ones on the entity level (for example, `@Search.searchable`) are not extracted.

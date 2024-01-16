@@ -45,8 +45,8 @@ create a domain with a data range. Second, define a data element using this doma
 To define a domain, right-click on the `Z_RATING_DB` package again and select `New
 
 > Other ABAP Repository Object`. In the dialog window, select _Domain_ and click `Next`.
-Enter `ZD_RATING` as the name and `Domain for Product Ratings` as the description of 
-the domain. Finally, select a transport request and click `Finish`.
+Enter `ZD_RATING`as the name and`Domain for Product Ratings`as the description of 
+the domain. Finally, select a transport request and click`Finish`.
 
 This opens an editor for creating domains. In this editor perform the following steps:
 
@@ -424,7 +424,7 @@ object is created based on this view.
 
 define view entity Z_I_Rating
   as select from zrating
-  association [1..1] to parent Z_I_Product as _Product on $projection.Product = _Product.ProductId
+  association to parent Z_I_Product as _Product on $projection.Product = _Product.ProductId
 {
   key rating_uuid     as RatingUUID,
       product         as Product,
