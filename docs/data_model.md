@@ -42,9 +42,7 @@ Finally, save and activate the changes.
 
 Restricting the possible values for a product's rating requires two steps. First,
 create a domain with a data range. Second, define a data element using this domain.
-To define a domain, right-click on the `Z_RATING_DB` package again and select `New
-
-> Other ABAP Repository Object`. In the dialog window, select _Domain_ and click `Next`.
+To define a domain, right-click on the `Z_RATING_DB` package again and select `New > Other ABAP Repository Object`. In the dialog window, select _Domain_ and click `Next`.
 Enter `ZD_RATING`as the name and`Domain for Product Ratings`as the description of 
 the domain. Finally, select a transport request and click`Finish`.
 
