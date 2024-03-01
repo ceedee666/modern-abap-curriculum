@@ -350,7 +350,7 @@ Product,
 ...
 ```
 
-Finally, the it is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation.
+Finally, it is possible to add a dedicated selection field using the `@UI.selectionField.position` annotation.
 The resulting CDS entity, including the annotations, is shown in the following listing.
 
 ```abap
@@ -679,7 +679,7 @@ separate artifact.
 
 To create a metadata extension, right-click the source code of the `Z_C_Rating_ReadOnly`
 entity and select `Source Code > Extract Metadata Extension`. Give the extension the
-same name as the CDS entity (i.e., `Z_C_Rating_ReadOnly`) and add `Metadata extension 
+same name as the CDS entity (i.e., `Z_C_Rating_ReadOnly`) and add `Metadata extension`
 for `Z_C_Rating_ReadOnly`as the description. On the subsequent screen of the dialog,
 select all elements to extract the annotations for all of them, and click`Finish`.
 The annotations are automatically extracted into the new metadata extension. Note
