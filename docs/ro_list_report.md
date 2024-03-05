@@ -680,7 +680,7 @@ separate artifact.
 To create a metadata extension, right-click the source code of the `Z_C_Rating_ReadOnly`
 entity and select `Source Code > Extract Metadata Extension`. Give the extension the
 same name as the CDS entity (i.e., `Z_C_Rating_ReadOnly`) and add `Metadata extension`
-for `Z_C_Rating_ReadOnly`as the description. On the subsequent screen of the dialog,
+for `Z_C_Rating_ReadOnly` as the description. On the subsequent screen of the dialog,
 select all elements to extract the annotations for all of them, and click`Finish`.
 The annotations are automatically extracted into the new metadata extension. Note
 that not all annotations are extracted. Only the annotations on the element level
