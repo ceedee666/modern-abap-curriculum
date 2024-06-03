@@ -101,7 +101,7 @@ CLASS ZCL_GENERATE_DATA IMPLEMENTATION.
 
     INSERT zrating FROM TABLE @ratings.
 
-    RETURN sy-dbcnt.
+    r_number_of_entries = sy-dbcnt.
 
   ENDMETHOD.
 
@@ -119,6 +119,6 @@ CLASS ZCL_GENERATE_DATA IMPLEMENTATION.
     ).
 
     INSERT zproduct FROM TABLE @products.
-    RETURN sy-dbcnt.
+    r_number_of_entries = sy-dbcnt.
   ENDMETHOD.
 ENDCLASS.
