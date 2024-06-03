@@ -34,7 +34,8 @@ For students and lecturers at universities, different options exist for getting 
 The [SAP University Competence Centers](https://www.sap-ucc.com/) offer ABAP development system to universities (cf. the
 [product list](https://portal.ucc.ovgu.de/services-produkte_rv/produktliste/) of the [SAP UCC Magdeburg](https://portal.ucc.ovgu.de/)).
 Another option is to use the [trial or free tier offerings](https://www.sap.com/products/technology-platform/trial.html)
-of the SAP Business Technology Platform (SAP BTP).
+of the SAP Business Technology Platform (SAP BTP). Finally, it is also possible to self-host the
+[ABAP Developer Trial](https://hub.docker.com/r/sapse/abap-cloud-developer-trial).
 
 ### ABAP Programming Language
 
