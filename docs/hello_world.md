@@ -65,11 +65,13 @@ table lists some of the advantages and disadvantages of the different environmen
 | Shared ABAP Environment                |    No     |      Yes      |
 | Production-ready environment           |    Yes    |      No       |
 | Risk of activating chargeable services |    Yes    |      No       |
-| Limited availability (90 days)         |    No     |      Yes      |
+| Limited availability (90 days)         |    Yes    |      Yes      |
+| Only available for companies           |    Yes    |      No       |
 
 To sign up for the SAP BTP free tier, follow the steps in this 
 [tutorial](https://developers.sap.com/tutorials/btp-free-tier-account.html).
-Note that signing up requires a credit card for authentication.
+Note that signing up for the SAP BTP free tier requires a credit card for 
+authentication and a VAT number.
 
 To sign up for an SAP BTP trial account, follow the steps in this 
 [tutorial](https://developers.sap.com/tutorials/hcp-create-trial-account.html).
